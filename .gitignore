@@ -3,5 +3,18 @@ dist
 .DS_Store
 .env
 
-# Ignore the output video from Git but not videos you import into src/.
+# Rendered artifacts (videos, exported slides, etc.) — not committed
+output
 out
+
+# Vite per-app dep caches (regenerated on demand)
+apps/**/node_modules
+
+# Whisper.cpp models (large binary cache)
+.whisper
+
+# User-provided raw material — not shared publicly by default
+curriculum/books
+videos/recordings
+videos/transcripts
+videos/source-clips

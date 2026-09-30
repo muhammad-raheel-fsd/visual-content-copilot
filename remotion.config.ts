@@ -7,6 +7,14 @@ Config.setRspack(true);
 Config.setVideoImageFormat('jpeg');
 Config.setOverwriteOutput(true);
 
+// Post-restructure paths:
+//   Entry: apps/remotion/index.ts (was src/index.ts)
+//   Public dir: library/ (was public/)
+//   Output dir: output/ (was out/)
+Config.setEntryPoint('./apps/remotion/index.ts');
+Config.setPublicDir('./library');
+Config.setOutputLocation('./output');
+
 Config.overrideRspackConfig((config) => {
 	return {
 		...config,

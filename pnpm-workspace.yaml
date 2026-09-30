@@ -1,0 +1,4 @@
+allowBuilds:
+  esbuild: false
+  msedge-tts: false
+  puppeteer: false

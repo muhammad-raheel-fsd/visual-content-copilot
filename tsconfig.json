@@ -12,5 +12,14 @@
     "forceConsistentCasingInFileNames": true,
     "noUnusedLocals": true
   },
-  "exclude": ["public", "remotion.config.ts"]
+  "include": ["apps/remotion/**/*"],
+  "exclude": [
+    "library",
+    "remotion.config.ts",
+    "apps/slides",
+    "apps/excalidraw-editor",
+    "content",
+    "output",
+    "node_modules"
+  ]
 }
