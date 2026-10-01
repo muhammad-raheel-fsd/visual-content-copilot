@@ -7,24 +7,93 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
     <style>
+      /* ─────────────────────────────────────────────────────────────
+         BASE / DEFAULT THEME
+         Used by non-curriculum decks (event-loop, generic explainers).
+         GitHub-dark palette, kept for backwards compatibility.
+      ───────────────────────────────────────────────────────────── */
       :root {
         --bg: #0d1117;
+        --bg-gradient-stop: transparent;
         --panel: #161b22;
+        --panel-elevated: #1c232d;
         --panel-border: #30363d;
         --text: #c9d1d9;
+        --text-strong: #ffffff;
         --muted: #8b949e;
         --accent: #58a6ff;
+        --accent-soft: rgba(88, 166, 255, 0.12);
+        --accent-strong: #388bfd;
         --sync: #3fb950;
         --microtask: #d2a8ff;
         --task: #f0883e;
         --api: #f778ba;
         --loop: #58a6ff;
         --warn: #f0883e;
+
+        /* Type system */
+        --font-sans: Inter, system-ui, -apple-system, sans-serif;
+        --font-display: Inter, system-ui, sans-serif;
+        --font-mono: "Roboto Mono", ui-monospace, monospace;
       }
+
+      /* ─────────────────────────────────────────────────────────────
+         CLASS 10 THEME · "HORIZON"
+         Electric cyan primary + warm amber secondary over a deep
+         navy base. Energetic, modern, foundational. For Grade 10 CS.
+      ───────────────────────────────────────────────────────────── */
+      [data-theme="class-10"] {
+        --bg: #0a1020;
+        --bg-gradient-stop: rgba(76, 201, 255, 0.06);
+        --panel: #121a2e;
+        --panel-elevated: #1a2340;
+        --panel-border: #273255;
+        --text: #eaf0fb;
+        --text-strong: #ffffff;
+        --muted: #8c9ab9;
+        --accent: #4cc9ff;
+        --accent-soft: rgba(76, 201, 255, 0.14);
+        --accent-strong: #22b8f0;
+        --sync: #4ade80;
+        --microtask: #ffc14d;
+        --task: #f472b6;
+        --api: #a78bfa;
+        --loop: #4cc9ff;
+        --warn: #fb7185;
+
+        --font-display: "Space Grotesk", Inter, system-ui, sans-serif;
+      }
+
+      /* ─────────────────────────────────────────────────────────────
+         CLASS 12 THEME · "MERIDIAN" (stub, refine before class-12 ships)
+         Deep plum + muted gold. Mature, professional. For Grade 12 CS.
+      ───────────────────────────────────────────────────────────── */
+      [data-theme="class-12"] {
+        --bg: #0d0a1c;
+        --bg-gradient-stop: rgba(201, 166, 107, 0.06);
+        --panel: #171428;
+        --panel-elevated: #221c3a;
+        --panel-border: #2d2748;
+        --text: #f0ebff;
+        --text-strong: #ffffff;
+        --muted: #9087a8;
+        --accent: #c9a66b;
+        --accent-soft: rgba(201, 166, 107, 0.14);
+        --accent-strong: #b88f52;
+        --sync: #67d8c4;
+        --microtask: #e4b7ff;
+        --task: #ff8da1;
+        --api: #ffd166;
+        --loop: #c9a66b;
+        --warn: #ff8787;
+
+        --font-display: "Space Grotesk", Inter, system-ui, sans-serif;
+      }
+
       * {
         box-sizing: border-box;
       }
@@ -36,13 +105,34 @@
         height: 100%;
         background: var(--bg);
         color: var(--text);
-        font-family: Inter, system-ui, sans-serif;
+        font-family: var(--font-sans);
         overflow: hidden;
       }
+
+      /* Subtle horizon gradient at top of every slide stage — a soft wash of the
+         theme accent that fades out quickly. Gives the "handsome" lift without
+         distracting from content. Opt-out by setting --bg-gradient-stop: transparent. */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background: radial-gradient(ellipse 90% 50% at 50% 0%, var(--bg-gradient-stop), transparent 65%);
+        z-index: 0;
+      }
+
       code,
       pre,
       .mono {
-        font-family: "Roboto Mono", monospace;
+        font-family: var(--font-mono);
+      }
+
+      h1,
+      h2,
+      h3,
+      .display {
+        font-family: var(--font-display);
+        font-feature-settings: "ss01" on, "ss02" on;
       }
     </style>
   </head>

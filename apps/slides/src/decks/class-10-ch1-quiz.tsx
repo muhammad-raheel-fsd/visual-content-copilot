@@ -375,6 +375,7 @@ export const class10Ch1QuizDeck: Deck = {
   topic: "Ch 1 · Quick Quiz",
   topicCode: "QUIZ",
   topicTitle: "Chapter 1 Quick Quiz · 8 questions",
+  theme: "class-10",
   accent: ACCENT,
   slides: [
     // 1. Hero

@@ -828,6 +828,7 @@ export const class10Ch1T13ProcessManagementDeck: Deck = {
   topic: "1.3 · Process Management",
   topicCode: "1.3",
   topicTitle: "Process Management in Operating System (OS)",
+  theme: "class-10",
   accent: ACCENT,
   slides: [
     // 1. Hero

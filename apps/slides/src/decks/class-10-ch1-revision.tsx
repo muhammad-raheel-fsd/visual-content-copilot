@@ -342,6 +342,7 @@ export const class10Ch1RevisionDeck: Deck = {
   topic: "Ch 1 · Revision",
   topicCode: "REV",
   topicTitle: "Chapter 1 Revision · Operating Systems",
+  theme: "class-10",
   accent: ACCENT,
   slides: [
     // 1. Hero

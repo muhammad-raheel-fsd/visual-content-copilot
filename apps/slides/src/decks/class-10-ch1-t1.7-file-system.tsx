@@ -506,6 +506,7 @@ export const class10Ch1T17FileSystemDeck: Deck = {
   topic: "1.7 · File System",
   topicCode: "1.7",
   topicTitle: "File System Structure and Management",
+  theme: "class-10",
   accent: ACCENT,
   slides: [
     // 1. Hero

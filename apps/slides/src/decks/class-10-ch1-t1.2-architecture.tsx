@@ -862,6 +862,7 @@ export const class10Ch1T12ArchitectureDeck: Deck = {
   topic: "1.2 · Architecture of an OS",
   topicCode: "1.2",
   topicTitle: "Architecture of an Operating System",
+  theme: "class-10",
   accent: ACCENT,
   slides: [
     // 1. Hero

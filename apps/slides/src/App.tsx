@@ -11,6 +11,15 @@ import { class10Ch1T17FileSystemDeck } from "./decks/class-10-ch1-t1.7-file-syst
 import { class10Ch1T18TypesOfOsDeck } from "./decks/class-10-ch1-t1.8-types-of-os";
 import { class10Ch1RevisionDeck } from "./decks/class-10-ch1-revision";
 import { class10Ch1QuizDeck } from "./decks/class-10-ch1-quiz";
+import { class12Ch4T41aTkinterIntroDeck } from "./decks/class-12-ch4-t4.1a-tkinter-intro";
+import { class12Ch4T41bWidgetsFramesDeck } from "./decks/class-12-ch4-t4.1b-widgets-frames";
+import { class12Ch4T41cLayoutManagementDeck } from "./decks/class-12-ch4-t4.1c-layout-management";
+import { class12Ch4T41dEventHandlingDeck } from "./decks/class-12-ch4-t4.1d-event-handling";
+import { class12Ch4T42aDatabaseConceptsDeck } from "./decks/class-12-ch4-t4.2a-database-concepts";
+import { class12Ch4T42bPythonDbConnectionDeck } from "./decks/class-12-ch4-t4.2b-python-db-connection";
+import { class12Ch4T42cCrudOperationsDeck } from "./decks/class-12-ch4-t4.2c-crud-operations";
+import { class12Ch4RevisionDeck } from "./decks/class-12-ch4-revision";
+import { class12Ch4QuizDeck } from "./decks/class-12-ch4-quiz";
 import { useIsFullscreen } from "./hooks/useIsFullscreen";
 
 const DECKS = {
@@ -25,6 +34,15 @@ const DECKS = {
   "class-10-ch1-t1.8-types-of-os": class10Ch1T18TypesOfOsDeck,
   "class-10-ch1-revision": class10Ch1RevisionDeck,
   "class-10-ch1-quiz": class10Ch1QuizDeck,
+  "class-12-ch4-t4.1a-tkinter-intro": class12Ch4T41aTkinterIntroDeck,
+  "class-12-ch4-t4.1b-widgets-frames": class12Ch4T41bWidgetsFramesDeck,
+  "class-12-ch4-t4.1c-layout-management": class12Ch4T41cLayoutManagementDeck,
+  "class-12-ch4-t4.1d-event-handling": class12Ch4T41dEventHandlingDeck,
+  "class-12-ch4-t4.2a-database-concepts": class12Ch4T42aDatabaseConceptsDeck,
+  "class-12-ch4-t4.2b-python-db-connection": class12Ch4T42bPythonDbConnectionDeck,
+  "class-12-ch4-t4.2c-crud-operations": class12Ch4T42cCrudOperationsDeck,
+  "class-12-ch4-revision": class12Ch4RevisionDeck,
+  "class-12-ch4-quiz": class12Ch4QuizDeck,
 } as const;
 
 type DeckId = keyof typeof DECKS;

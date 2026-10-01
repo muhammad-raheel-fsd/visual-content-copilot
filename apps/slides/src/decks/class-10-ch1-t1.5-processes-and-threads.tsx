@@ -519,6 +519,7 @@ export const class10Ch1T15ProcessesAndThreadsDeck: Deck = {
   topic: "1.5 · Processes and Threads",
   topicCode: "1.5",
   topicTitle: "Processes and Threads",
+  theme: "class-10",
   accent: ACCENT,
   slides: [
     // 1. Hero

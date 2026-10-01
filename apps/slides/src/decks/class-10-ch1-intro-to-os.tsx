@@ -500,6 +500,7 @@ export const class10Ch1IntroToOsDeck: Deck = {
   topic: "1.1 · Introduction to OS",
   topicCode: "1.1",
   topicTitle: "Introduction to Operating System (OS)",
+  theme: "class-10",
   accent: ACCENT,
   slides: [
     // 1. Hero

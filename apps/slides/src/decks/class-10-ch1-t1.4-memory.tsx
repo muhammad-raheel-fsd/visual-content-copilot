@@ -595,6 +595,7 @@ export const class10Ch1T14MemoryDeck: Deck = {
   topic: "1.4 · Memory",
   topicCode: "1.4",
   topicTitle: "Memory",
+  theme: "class-10",
   accent: ACCENT,
   slides: [
     // 1. Hero

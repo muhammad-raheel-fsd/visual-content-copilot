@@ -440,6 +440,7 @@ export const class10Ch1T18TypesOfOsDeck: Deck = {
   topic: "1.8 · Types of Operating Systems",
   topicCode: "1.8",
   topicTitle: "Types of Operating Systems",
+  theme: "class-10",
   accent: ACCENT,
   slides: [
     // 1. Hero

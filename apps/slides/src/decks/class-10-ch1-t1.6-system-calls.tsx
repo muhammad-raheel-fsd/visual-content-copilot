@@ -514,6 +514,7 @@ export const class10Ch1T16SystemCallsDeck: Deck = {
   topic: "1.6 · System Calls",
   topicCode: "1.6",
   topicTitle: "System Calls",
+  theme: "class-10",
   accent: ACCENT,
   slides: [
     // 1. Hero

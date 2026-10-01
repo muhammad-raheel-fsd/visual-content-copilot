@@ -40,10 +40,11 @@ export const SlideLayout: React.FC<{
             style={{
               margin: 0,
               fontSize: 64,
-              fontWeight: 800,
+              fontWeight: 700,
               letterSpacing: -1.5,
               lineHeight: 1.1,
-              color: "var(--text)",
+              color: "var(--text-strong, var(--text))",
+              fontFamily: "var(--font-display)",
             }}
           >
             {title}
@@ -81,7 +82,16 @@ export const HeroSlide: React.FC<{
       }}
     >
       <PresenterByline accent={accent} />
-      <div style={{ fontSize: 96, fontWeight: 800, letterSpacing: -2, lineHeight: 1.05 }}>
+      <div
+        style={{
+          fontSize: 96,
+          fontWeight: 700,
+          letterSpacing: -2.5,
+          lineHeight: 1.05,
+          fontFamily: "var(--font-display)",
+          color: "var(--text-strong, var(--text))",
+        }}
+      >
         {title}
       </div>
       {subtitle ? (

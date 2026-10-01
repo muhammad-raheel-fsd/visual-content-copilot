@@ -29,6 +29,12 @@ export type Deck = {
   /** exact book topic identifier + title for the top-left TopicBadge, e.g. "1.1" + "Introduction to Operating System (OS)" */
   topicCode?: string;
   topicTitle?: string;
+  /**
+   * Visual theme to apply to this deck. Switches CSS custom-properties
+   * via [data-theme="..."] on the <html> element. See index.html for palettes.
+   * Omit for default (GitHub-dark-ish base theme).
+   */
+  theme?: "class-10" | "class-12" | "default";
 };
 
 type Props = {
@@ -61,6 +67,21 @@ export const SlideDeck: React.FC<Props> = ({ deck, aspect, chromeless = false })
 
   const canvas = CANVAS[aspect];
   const slide = deck.slides[index]!;
+
+  // Apply the deck's theme as [data-theme="..."] on <html>, so CSS custom-properties
+  // in index.html cascade through everything. Default theme is the no-attribute base.
+  useEffect(() => {
+    const theme = deck.theme && deck.theme !== "default" ? deck.theme : null;
+    const html = document.documentElement;
+    if (theme) {
+      html.setAttribute("data-theme", theme);
+    } else {
+      html.removeAttribute("data-theme");
+    }
+    return () => {
+      html.removeAttribute("data-theme");
+    };
+  }, [deck.theme]);
 
   const goNext = () => {
     if (index >= deck.slides.length - 1) return;
