@@ -14,7 +14,7 @@ status: SHIPPED_ALL_7_SUBTOPICS_AND_ALL_CHAPTER_END_DELIVERABLES
 sub_topics_total_planned: 7
 sub_topics_shipped: 7
 theme: class-12
-last_updated: 2026-10-02
+last_updated: 2026-10-03
 maintained_by: Claude Code + Muhammad Raheel
 ---
 
@@ -34,7 +34,7 @@ The "brain" for Class 12 CS Chapter 4. When Muhammad says "topic 4.1a" or "next 
 - Design interactive GUI-based programs using the Tkinter library.
 - Connect Python applications to databases and perform CRUD operations.
 
-**Chapter theme:** `class-12` (Meridian  ·  deep plum + muted gold, defined in `apps/slides/index.html`). Every deck in this chapter MUST set `theme: "class-12"` in its exported Deck object.
+**Chapter theme:** `github-dark` (near-black canvas, grey panels, blue accent), set once for the whole chapter in `CHAPTER_THEMES` in `apps/slides/src/themes.ts` (decks do NOT carry a `theme` field). Replaced the Meridian plum + gold theme on 2026-10-05. Preview other themes with `?theme=<id>` or the Themes tab in the slide library.
 
 **Deck ID convention:** `class-12-ch4-t4.<N><letter>-<slug>` (e.g. `class-12-ch4-t4.1a-tkinter-intro`).
 
@@ -47,7 +47,7 @@ The "brain" for Class 12 CS Chapter 4. When Muhammad says "topic 4.1a" or "next 
 - [ ] I have re-read `curriculum/RUNBOOK.md` (question file format, all R-A through R-I rules) and `FOLDER-STRUCTURE.md` at repo root.
 - [ ] I have re-read the durable rules: verbatim wording, no em dashes, Muhammad Raheel byline (never "bytemotion"), never "Tit Bytes", every slide has a visual, simple English, short sentences.
 - [ ] I know which sub-topic is NEXT so the deck's final slide can preview it (section 3 lists every next-topic pointer).
-- [ ] Deck will set `theme: "class-12"`.
+- [ ] Deck has NO `theme` field (the chapter theme comes from `CHAPTER_THEMES` in `apps/slides/src/themes.ts`), and uses only `var(--...)` colours, never hex/rgba theme colours.
 
 ### The 10-step process per sub-topic
 
@@ -55,7 +55,7 @@ Step 1. **Confirm scope.** Muhammad says "topic 4.1a" or similar. Look up the pe
 
 Step 2. **Ensure the parsed source file exists.** Path: `source/t4.<N><letter>-<slug>.md`. If missing, extract the pages listed in section 3 for that sub-topic. Vision Read tool with `pages: "N-M"`. Copy every heading, definition, DO YOU KNOW box, CLASS ACTIVITY box, TIDBIT, code example VERBATIM, including the book's grammar quirks.
 
-Step 3. **Build the slide deck** at `apps/slides/src/decks/class-12-ch4-t4.<N><letter>-<slug>.tsx`. Use `SlideLayout`, `HeroSlide`, `SplitSlide`, `Card`. Every slide includes at least one visual (icon, illustration, animated SVG, or hand-drawn diagram image). Follow the slide outline in section 3. **MUST set `theme: "class-12"`** in the Deck export.
+Step 3. **Build the slide deck** at `apps/slides/src/decks/class-12-ch4-t4.<N><letter>-<slug>.tsx`. Use `SlideLayout`, `HeroSlide`, `SplitSlide`, `Card`. Every slide includes at least one visual (icon, illustration, animated SVG, or hand-drawn diagram image). Follow the slide outline in section 3. Do NOT add a `theme` field; use `var(--...)` tokens (or `color-mix(in srgb, var(--accent) 10%, transparent)` for tints), never hardcoded theme colours (RUNBOOK R-L).
 
 Step 4. **Last content slide = next-topic preview.** Pull the next-topic pointer (code + title + one-liner hook) from section 3. Final sub-topic of the chapter (4.2c) previews chapter 5 (Code Testing and Debugging) or the chapter-end revision session.
 
@@ -84,7 +84,7 @@ From `/CLAUDE.md` session policy (rules 1-17), `curriculum/RUNBOOK.md` (rules R-
 7. **Deck's last slide = next-topic preview** (R-C).
 8. **Every sub-topic = 5 artefacts:** deck + MCQs + short + long + registration (R-I, rule 16).
 9. **No vertical empty space** (R-A). Add bridge captions between paragraphs and visuals. Avoid `marginTop: auto` on slide-level containers.
-10. **Theme must be `"class-12"`.** This is the first chapter to use the Meridian theme; verify it looks "handsome" on the first deck before building the rest.
+10. **Theme is `github-dark`**, set once for the whole chapter in `CHAPTER_THEMES` in `apps/slides/src/themes.ts` (decks do NOT carry a `theme` field) (since 2026-10-05; the earlier Meridian plum + gold theme was rejected as too AI-looking).
 11. **Code slides deserve syntax highlighting.** The book has many Python code examples; use `<pre>` with monospace font + colour the keywords/strings so students can read them easily. Use `@remotion/code-hike` style syntax tokens or a simple inline highlighter.
 12. **One source of truth per chapter** (R-I). Everything in this folder. Never scatter.
 
@@ -99,14 +99,14 @@ From `/CLAUDE.md` session policy (rules 1-17), `curriculum/RUNBOOK.md` (rules R-
 | 4.2a | Database Concepts + SQL Structure | 52-54 | done | done (15 slides) | done (15) | done (8) | done (2) | Figure 4.3 (rendered) | SHIPPED |
 | 4.2b | Connecting Python to a Database | 54-55 | done | done (13 slides) | done (12) | done (6) | done (2) | inline flow (no handdrawn) | SHIPPED |
 | 4.2c | CRUD Operations | 55-56 | done | done (16 slides) | done (13) | done (7) | done (3) | Figure 4.4 (rendered) | SHIPPED |
-| --- | Chapter Summary (page 57 verbatim) | 57 | TODO | n/a | n/a | n/a | n/a | n/a | not started |
-| --- | Board Exercise (pages 58-59 verbatim) | 58-59 | TODO | n/a | n/a | n/a | n/a | n/a | not started |
+| --- | Chapter Summary (page 57 verbatim) | 57 | done (`source/summary.md`) | in revision deck | n/a | n/a | n/a | n/a | SHIPPED |
+| --- | Board Exercise (pages 58-59 verbatim) | 58-59 | done (`source/board-exercise.md`) | in revision deck | 10 | 10 | 8 | n/a | SHIPPED (`questions/board-exercise.md`) |
 
 **Update after every shipped sub-topic:** change `pending` → `done`, overall status → `SHIPPED`.
 
 ## 3. Per-sub-topic research
 
-### 4.1a  ·  GUI Basics + Tkinter Introduction  [not started]
+### 4.1a  ·  GUI Basics + Tkinter Introduction  [SHIPPED]
 
 **Extraction plan:** Vision Read `curriculum/books/class-12-cs.pdf` pages 45-46. Save to `source/t4.1a-tkinter-intro.md`.
 
@@ -148,7 +148,7 @@ window.mainloop()
 ```
 
 **Suggested slide outline (12 slides):**
-1. **Hero**  ·  "Where GUIs come from"  ·  Meridian-themed hero, maybe a mock desktop with window + buttons + text field.
+1. **Hero**  ·  "Where GUIs come from"  ·  class-12-themed hero, maybe a mock desktop with window + buttons + text field.
 2. **Chapter intro** (verbatim)  ·  SLOs + "In this chapter..." paragraph. Visual: 2-pill SLO summary.
 3. **4.1 Opening** (verbatim)  ·  GUI development with Tkinter paragraph + Figure 4.1 recreated as animated SVG window mock.
 4. **What is a GUI?** (verbatim)  ·  definition + why important + 4 benefits visual (visual feedback, less memorisation, usability, works everywhere).
@@ -161,7 +161,7 @@ window.mainloop()
 11. **Important Concepts** (6 verbatim definitions: GUI, Tkinter, Window, Label, Entry, Button, mainloop).
 12. **Coming up next:** 4.1b Widgets + Frames.
 
-**Diagram opportunity:** Figure 4.1 recreated as an animated SVG window mock-up for slide 3 (not necessarily hand-drawn  ·  a clean geometric version may fit the Meridian theme better).
+**Diagram opportunity:** Figure 4.1 recreated as an animated SVG window mock-up for slide 3 (not necessarily hand-drawn  ·  a clean geometric version may fit the class-12 theme better).
 
 **Real-world extensions (BEYOND THE BOOK):** IDLE (Python's built-in IDE) is written in Tkinter. Thonny (student-friendly Python IDE), DBeaver (database GUI), pgAdmin  ·  all Tkinter / wxPython / Qt based. Tkinter under the hood uses the Tcl/Tk cross-platform widget library (Tcl was invented at Berkeley in 1988).
 
@@ -186,7 +186,7 @@ window.mainloop()
 
 ---
 
-### 4.1b  ·  Tkinter Widgets + Frames  [not started]
+### 4.1b  ·  Tkinter Widgets + Frames  [SHIPPED]
 
 **Extraction plan:** Vision Read pages 47-48. Save to `source/t4.1b-widgets-frames.md`.
 
@@ -226,7 +226,7 @@ window.mainloop()
 
 ---
 
-### 4.1c  ·  Layout Management: pack(), grid(), place()  [not started]
+### 4.1c  ·  Layout Management: pack(), grid(), place()  [SHIPPED]
 
 **Extraction plan:** Vision Read pages 48-50. Save to `source/t4.1c-layout-management.md`.
 
@@ -272,7 +272,7 @@ window.mainloop()
 
 ---
 
-### 4.1d  ·  Event Handling + Login Form  [not started]
+### 4.1d  ·  Event Handling + Login Form  [SHIPPED]
 
 **Extraction plan:** Vision Read pages 50-52. Save to `source/t4.1d-event-handling.md`.
 
@@ -352,7 +352,7 @@ window.mainloop()
 
 ---
 
-### 4.2a  ·  Database Concepts + SQL Structure  [not started]
+### 4.2a  ·  Database Concepts + SQL Structure  [SHIPPED]
 
 **Extraction plan:** Vision Read pages 52-54. Save to `source/t4.2a-database-concepts.md`.
 
@@ -404,7 +404,7 @@ window.mainloop()
 
 ---
 
-### 4.2b  ·  Connecting Python to a Database  [not started]
+### 4.2b  ·  Connecting Python to a Database  [SHIPPED]
 
 **Extraction plan:** Vision Read page 54. Save to `source/t4.2b-python-db-connection.md`.
 
@@ -475,7 +475,7 @@ connection.close()
 
 ---
 
-### 4.2c  ·  CRUD Operations  [not started]
+### 4.2c  ·  CRUD Operations  [SHIPPED]
 
 **Extraction plan:** Vision Read pages 55-56. Save to `source/t4.2c-crud-operations.md`.
 
@@ -538,7 +538,7 @@ connection.close()
 
 **Next-topic preview:** End of Chapter 4. Preview Chapter 5 (Code Testing and Debugging). OR invite student to the Revision deck + Board Exercise.
 
-## 4. Chapter-end deliverables (plan)
+## 4. Chapter-end deliverables  [ALL SHIPPED]
 
 After all 7 sub-topics ship, produce in order:
 
@@ -552,24 +552,27 @@ After all 7 sub-topics ship, produce in order:
 
 5. **Mixed MCQ bank** (`questions/mixed-mcqs.md`)  ·  30 MCQs sampled across all 7 sub-topics (4-5 per sub-topic).
 
-6. **Chapter Revision deck** (`apps/slides/src/decks/class-12-ch4-revision.tsx`)  ·  ~14 slides following class-10 pattern: hero → mind-map → 7 per-sub-topic recap cards → exam-ready checklist → Book Summary slide (page 57 verbatim) → Board Exercise overview + curveball callout → Practice Pyramid final slide. **theme: "class-12"**.
+6. **Chapter Revision deck** (`apps/slides/src/decks/class-12-ch4-revision.tsx`)  ·  ~14 slides following class-10 pattern: hero → mind-map → 7 per-sub-topic recap cards → exam-ready checklist → Book Summary slide (page 57 verbatim) → Board Exercise overview + curveball callout → Practice Pyramid final slide. Chapter theme applies automatically.
 
-7. **Quick Quiz deck** (`apps/slides/src/decks/class-12-ch4-quiz.tsx`)  ·  7 Q+Reveal pairs (one per sub-topic) + hero + how-to + score card = ~17 slides. **theme: "class-12"**.
+7. **Quick Quiz deck** (`apps/slides/src/decks/class-12-ch4-quiz.tsx`)  ·  7 Q+Reveal pairs (one per sub-topic) + hero + how-to + score card = ~17 slides. Chapter theme applies automatically.
 
-## 5. Theme reminder: class-12 "Meridian"
+## 5. Theme reminder: class-12 "GitHub Dark"
 
-Defined in `apps/slides/index.html` under `[data-theme="class-12"]`:
-- `--bg`: `#0d0a1c` (deep plum)
-- `--panel`: `#171428`
-- `--accent`: `#c9a66b` (muted gold  ·  primary brand for ALL class-12 decks)
-- `--sync`: `#67d8c4` (teal  ·  success / correct answers)
-- `--microtask`: `#e4b7ff` (soft violet  ·  BEYOND THE BOOK, Tid-Bytes)
-- `--task`: `#ff8da1` (soft pink  ·  emphasis / warnings)
-- `--api`: `#ffd166` (bright gold  ·  secondary)
-- `--warn`: `#ff8787` (soft red)
-- Display font: Space Grotesk (same as class-10)
+Theme id `github-dark`, defined in `apps/slides/src/themes.ts` and assigned to this chapter in `CHAPTER_THEMES`. GitHub's own dark UI palette, flat (no glow wash):
+- `--bg`: `#0d1117` (GitHub canvas)
+- `--panel`: `#161b22`, `--panel-elevated`: `#21262d`, `--panel-border`: `#30363d`
+- `--text`: `#e6edf3`, `--muted`: `#8b949e`
+- `--accent`: `#58a6ff` (blue · primary brand for ALL class-12 decks)
+- `--sync`: `#3fb950` (green · success / correct answers)
+- `--microtask`: `#ffa657` (orange · BEYOND THE BOOK, Tid-Bytes)
+- `--task`: `#f778ba` (pink · emphasis)
+- `--api`: `#d29922` (yellow · secondary, DO YOU KNOW)
+- `--warn`: `#ff7b72` (red)
+- Display font: Inter (GitHub-style system sans)
+- Python code blocks use GitHub Dark syntax colours: keyword `#ff7b72`, string `#a5d6ff`, function `#d2a8ff`, builtin/number `#79c0ff`, comment `#8b949e`.
+- Diagrams: background `#0d1117`, concept strokes from the tokens above.
 
-**First time this theme ships live!** On the first deck (4.1a) I should visually verify in the browser that the Meridian theme feels "handsome" per Muhammad's standard. Adjust any token if contrast is off.
+~~Original theme "Meridian": deep plum `#0d0a1c` + muted gold `#c9a66b` + teal + violet.~~ Replaced 2026-10-05: Muhammad found it purplish and AI-looking, asked for a GitHub Dark style.
 
 ## 6. Notes on this doc
 

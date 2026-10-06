@@ -7,13 +7,18 @@
 export const CANVAS = { w: 1920, h: 1080 } as const;
 
 /**
- * Safe zone reserved for Muhammad's OBS webcam overlay in the bottom-right
- * corner. NOTHING (Panel, Region, TitleCard, Reveal, arrow, chip) may extend
- * into this zone. All LAYOUT presets stop at x = CANVAS.w - SAFE_ZONE_RIGHT
- * (= 1728 on landscape 1920). The safe zone is 10% of canvas width.
+ * OBS webcam safe zone on the right edge of the canvas.
+ *
+ * DISABLED 2026-10-04: Muhammad now places the webcam himself in his OBS
+ * window, so videos use the full 1920 width. While it was on, nothing
+ * (Panel, Region, TitleCard, Reveal, arrow, chip) could pass x = 1728.
+ * To bring it back: swap the two SAFE_ZONE_RIGHT lines below, restore the
+ * commented "webcam-safe" LAYOUT presets, and set SAFE_ZONE_RIGHT = 192 in
+ * library/scripts/remotion/check-layout.mjs.
  */
-export const SAFE_ZONE_RIGHT = 192;
-export const CONTENT_MAX_X = CANVAS.w - SAFE_ZONE_RIGHT; // 1728
+// export const SAFE_ZONE_RIGHT = 192;
+export const SAFE_ZONE_RIGHT = 0;
+export const CONTENT_MAX_X = CANVAS.w - SAFE_ZONE_RIGHT; // 1920 now (was 1728)
 
 export const COLORS = {
   bg: "#0d1117",
@@ -58,17 +63,22 @@ export const LAYOUT = {
   contentBottom: 970,
 
   // Two-column layout (used by Beats 1, 2). 40px gap between columns.
-  // All rects respect SAFE_ZONE_RIGHT — right column ends at x=1720 (≤ 1728).
+  // Full width: 80px margin on both sides, right column ends at x=1840.
+  // Webcam-safe version (right column ended at x=1720):
+  //   left: { x: 80, y: 200, w: 800, h: 760 },  right: { x: 920, y: 200, w: 800, h: 760 },
   twoCol: {
-    left: { x: 80, y: 200, w: 800, h: 760 },
-    right: { x: 920, y: 200, w: 800, h: 760 },
+    left: { x: 80, y: 200, w: 860, h: 760 },
+    right: { x: 980, y: 200, w: 860, h: 760 },
   },
 
   // Two-column with right side split vertically (used by Beat 3).
+  // Webcam-safe version:
+  //   left: { x: 80, y: 200, w: 800, h: 760 },
+  //   rightTop: { x: 920, y: 200, w: 800, h: 400 },  rightBottom: { x: 920, y: 620, w: 800, h: 340 },
   twoColSplitRight: {
-    left: { x: 80, y: 200, w: 800, h: 760 },
-    rightTop: { x: 920, y: 200, w: 800, h: 400 },
-    rightBottom: { x: 920, y: 620, w: 800, h: 340 },
+    left: { x: 80, y: 200, w: 860, h: 760 },
+    rightTop: { x: 980, y: 200, w: 860, h: 400 },
+    rightBottom: { x: 980, y: 620, w: 860, h: 340 },
   },
 
   // Event-loop scene layout (Beats 4, 5).
@@ -78,8 +88,9 @@ export const LAYOUT = {
     webApi: { x: 460, y: 200, w: 260, h: 200 },
     loop: { x: 460, y: 460, w: 260, h: 280 },
     console: { x: 460, y: 800, w: 260, h: 160 },
-    microtaskQueue: { x: 760, y: 200, w: 960, h: 350 },
-    taskQueue: { x: 760, y: 590, w: 960, h: 370 },
+    // Queues take the freed width: end at x=1840 (webcam-safe version had w: 960, ending at 1720).
+    microtaskQueue: { x: 760, y: 200, w: 1080, h: 350 },
+    taskQueue: { x: 760, y: 590, w: 1080, h: 370 },
   },
 } as const;
 

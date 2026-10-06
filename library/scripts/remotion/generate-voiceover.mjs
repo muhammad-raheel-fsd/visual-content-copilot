@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 const HERE = dirname(fileURLToPath(import.meta.url));
 // library/scripts/remotion/*.mjs → repo root is ../../..
 const REPO_ROOT = join(HERE, "..", "..", "..");
-const CONTENT_DIR = join(REPO_ROOT, "content", "scripts");
+const CONTENT_DIR = join(REPO_ROOT, "videos", "scripts");
 const OUT_ROOT = join(HERE, "..", "..", "voiceover");
 
 const VOICE = process.env.VOICE || "en-US-AriaNeural";

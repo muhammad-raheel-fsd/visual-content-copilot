@@ -13,7 +13,8 @@ bytemotion/
 ├── apps/                        Code that builds (Vite apps + Remotion)
 │   ├── remotion/                Remotion source (Root.tsx, videos/<topic>/beats/)
 │   ├── slides/                  Vite + React slides app (port 3030). All deck .tsx files under src/decks/.
-│   └── excalidraw-editor/       Vite + React Excalidraw editor (port 3040)
+│   ├── excalidraw-editor/       Vite + React Excalidraw editor (port 3040)
+│   └── bytemotion-web-app/      Next.js 16 student website (own git repo; see its README.md + GUIDE.md, notes in its thoughts/)
 │
 ├── curriculum/                  School curriculum content, one folder per chapter
 │   ├── README.md
@@ -102,7 +103,9 @@ Commands (see also `pnpm run dev:all` for the one-command dev environment below)
 
 Keyboard: `→` / `Space` / `PgDn` next · `←` / `PgUp` prev · `Home` / `End` jump · `F` fullscreen
 
-URL params: `?deck=<id>&aspect=portrait|landscape` — bookmark for OBS setups.
+URL params: `?deck=<id>&aspect=portrait|landscape`: bookmark for OBS setups. `&theme=<id>` previews the deck in another theme (not saved).
+
+**Library + themes:** the **Library** button (or `L`) opens a folder browser (Class > Chapter > decks) built automatically from the `DECKS` map in `App.tsx`, plus a **Themes** tab that previews every palette. Themes live in `apps/slides/src/themes.ts` (`THEMES`); each chapter's theme is ONE line in `CHAPTER_THEMES`. Decks never set a theme or hardcode theme colours, they use `var(--...)` tokens. **Before starting a new chapter, ask Muhammad which theme to use** (RUNBOOK R-L).
 
 Aspect ratios rendered at fixed canvas (1920×1080 landscape, 1080×1920 portrait), scaled to fit viewport. Slides are pixel-perfect regardless of window size — same trick Remotion uses.
 
@@ -198,7 +201,7 @@ Every Claude Code session in this repo MUST follow these rules. Skipping any one
 **12. Simple English, short sentences.** Audience is 15-year-olds in Pakistan reading English as a second language. Prefer common words over jargon (say "runs" not "executes" unless the book uses "executes"). Keep sentences under 15 words. Active voice, not passive. When a technical term appears, define it inline on first use.
 
 **13. VERBATIM BOOK WORDING for curriculum content (STRICT).** For any deck/video/diagram based on a book:
-   - First parse the chapter's exact text to per-topic files under `curriculum/books/parsed/<book-slug>/ch<M>-<slug>/t<T>-<slug>.md` (one file per topic; vision-based Read tool with `pages: "N-M"`, NOT `pdftotext` — Pakistan board PDFs have watermarks that break it). Chapter-wide material (SLOs, Introduction) goes in `overview.md`; a `README.md` tracks per-topic extraction status.
+   - First parse the chapter's exact text to per-topic files under `curriculum/<board>/class-<N>/<subject>/ch<M>-<slug>/source/t<T>-<slug>.md` (one file per topic; vision-based Read tool with `pages: "N-M"`, NOT `pdftotext`, because Pakistan board PDFs have watermarks that break it). Chapter-wide material (SLOs, Introduction) goes in `source/overview.md`; the chapter `README.md` tracks per-topic extraction status.
    - Then generate slides from the parsed markdown. Copy topic titles, headings, definitions, Do-You-Know boxes, Activity boxes, and key point sentences EXACTLY. Not one word changed.
    - What you MAY add: layouts, colours, icons, animations, real-world examples (Tesla/ATM/Mars), Tid-Bytes fact boxes. Frame these as clearly-labelled extensions.
    - What you MUST NOT change: any wording inside the book's own headings, definitions, or examples. Even the book's grammar quirks stay (students see the same book).
@@ -210,16 +213,17 @@ Every Claude Code session in this repo MUST follow these rules. Skipping any one
 
 **15. Never use "Tit Byte" / "Tit Bytes".** The word `tit` is offensive slang. Use `Tid-Bytes` (proper English "tidbits" + byte pun), `Did You Know`, `Fun Facts`, or `Quick Bytes`. `grep -ri 'tit byte'` the repo before shipping any content.
 
-**16. Every curriculum topic = five artefacts, not one.** When Muhammad says "cover topic X.Y" or "make slides for chapter X topic Y", produce ALL of:
+**16. Every curriculum topic = six artefacts, not one.** When Muhammad says "cover topic X.Y" or "make slides for chapter X topic Y", produce ALL of:
    1. Slide deck at `apps/slides/src/decks/class-<N>-ch<M>-t<T>-<slug>.tsx`
-   2. MCQs (10 to 15) at `curriculum/multan-board/class-<N>/questions/ch<M>-t<T>-mcqs.md`
-   3. Short questions (5 to 8) at `.../ch<M>-t<T>-short.md`
-   4. Long questions (2 to 3, if the topic is exam-worthy at long length) at `.../ch<M>-t<T>-long.md`
-   5. Deck registration in `apps/slides/src/App.tsx` DECKS map + topic manifest at `videos/topics/<slug>.md`
+   2. MCQs (10 to 15) at `curriculum/<board>/class-<N>/<subject>/ch<M>-<slug>/questions/t<T>-mcqs.md`
+   3. Short questions (5 to 8) at `.../questions/t<T>-short.md`
+   4. Long questions (2 to 3, if the topic is exam-worthy at long length) at `.../questions/t<T>-long.md`
+   5. Deck registration in `apps/slides/src/App.tsx` DECKS map + update the chapter's `README.md`, `slides/README.md`, and `research.md` tracker (these replace the old `videos/topics/` manifest for curriculum topics)
+   6. Website article at `.../web/t<T>-<slug>.md` (own words, `web-article-writer` agent), imported with `pnpm content:import` in `apps/bytemotion-web-app`
 
-   Question files use the strict YAML frontmatter + `## Q<N>` heading format defined in `curriculum/RUNBOOK.md`. The format is Postgres-import ready — a small Node script will lift MD → JSON → DB for a future student practice website. Never invent facts; every answer traceable to the per-topic parsed source file `curriculum/books/parsed/<book-slug>/ch<M>-<slug>/t<T>-<slug>.md` or verified web research. Consult the runbook before generating.
+   Question files use the strict YAML frontmatter + `## Q<N>` heading format defined in `curriculum/RUNBOOK.md`. The format is Postgres-import ready: a small Node script will lift MD → JSON → DB for a future student practice website. Never invent facts; every answer traceable to the per-topic source file `curriculum/<board>/class-<N>/<subject>/ch<M>-<slug>/source/t<T>-<slug>.md` or verified web research. Consult the runbook before generating.
 
-**17. Chapter research doc is the source of truth for slide plans.** For every chapter, a `thoughts/research/<book-slug>/ch<M>-<slug>/chapter-research.md` file holds:
+**17. Chapter research doc is the source of truth for slide plans.** For every chapter, a `curriculum/<board>/class-<N>/<subject>/ch<M>-<slug>/research.md` file holds (see [FOLDER-STRUCTURE.md](FOLDER-STRUCTURE.md); never create per-chapter research under `thoughts/`):
    - The 10-step per-topic workflow (prerequisites, extraction, deck, questions, diagrams, verify, report)
    - A status tracker (which topic is shipped, ready-to-build, or needs PDF extract)
    - Per-topic plans: book coverage, slide outline, diagram opportunities, real-world extensions, MCQ/short/long topic coverage, next-topic preview
@@ -232,7 +236,7 @@ Every Claude Code session in this repo MUST follow these rules. Skipping any one
 
 **Videos** live under `apps/remotion/videos/<topic-slug>/` with one `<Composition>` per topic registered in `apps/remotion/Root.tsx`. Each composition breaks into per-beat components under `beats/`, using the existing `PlaceholderBeat` primitive as a starting template. Iterate live with `npm run dev` (Remotion Studio). Render with `npx remotion render <CompositionId>`.
 
-**Scripts** live at `content/<topic-slug>.md` in the format enforced by the `video-script` agent. Always write the script first, get it approved, then run `remotion-composer` to scaffold TSX.
+**Scripts** live at `videos/scripts/<topic-slug>.md` in the format enforced by the `video-script` agent. Always write the script first, get it approved, then run `remotion-composer` to scaffold TSX.
 
 **Static social assets** (IG, LinkedIn, thumbnails) go under `library/thumbnails/` or `library/social/<platform>/`. Prefer Figma-first via the Figma MCP when a template exists. Fall back to Remotion stills (`npx remotion still`) when no Figma template is available.
 
@@ -247,6 +251,7 @@ Every Claude Code session in this repo MUST follow these rules. Skipping any one
 - **`thumbnail-generator`** — Topic → 3 thumbnail variants (Figma or code-first)
 - **`social-post-designer`** — Topic → IG/LinkedIn posts, carousels, banners
 - **`sfx-icon-curator`** — Beat/concept → sound + icon + illustration picks (with gap flags)
+- **`web-article-writer`** - Topic source + deck → website article `curriculum/<...>/web/t<T>-<slug>.md` (own words, book definitions quoted) in the format `pnpm content:import` reads
 
 ## Skills (project-local, at `.claude/skills/`)
 
@@ -263,7 +268,7 @@ Every Claude Code session in this repo MUST follow these rules. Skipping any one
 | Icons | `lucide-react` | Default. ISC license, tree-shakable. Fall back to `@iconify/react` only when lucide lacks the concept. |
 | Illustrations | unDraw first | CC0-ish, no attribution. Humaaans (CC-BY) second, track in `library/illustrations/CREDITS.md`. |
 | Sounds | Synthesized locally, no downloads | Run `npm run gen:sfx` to (re)generate the 7 WAV files in `library/sfx/`. Add new synthesis functions to `library/scripts/shared/generate-sfx.mjs`, never commit downloaded audio. |
-| Voiceover | Edge TTS via `msedge-tts` (free, no key) | Run `npm run gen:voice` to synthesise voiceover MP3s from `content/<topic>.md` voiceover lines into `library/voiceover/<topic>/beat-N.mp3`. Voice defaults to `en-US-AriaNeural`; override with `VOICE=en-US-GuyNeural npm run gen:voice`. |
+| Voiceover | Edge TTS via `msedge-tts` (free, no key) | Run `npm run gen:voice` to synthesise voiceover MP3s from `videos/scripts/<topic>.md` voiceover lines into `library/voiceover/<topic>/beat-N.mp3`. Voice defaults to `en-US-AriaNeural`; override with `VOICE=en-US-GuyNeural npm run gen:voice`. |
 | Diagrams | Excalidraw or tldraw, local file workflow | Author in excalidraw.com or tldraw.com. Save source to `library/diagrams/source/`. Export SVG from the UI to `library/diagrams/<name>.svg`. Run `npm run check:diagrams` to verify pairs. Consume in Remotion via `<Img src={staticFile('diagrams/<name>.svg')} />`. |
 | Fonts | `@remotion/google-fonts` | Reuse `apps/remotion/font.ts` (RobotoMono) for code. Add a display font per composition if the script requests. |
 | Motion | `useCurrentFrame()` + `interpolate()` + `spring()` | Native Remotion only. **Never** `framer-motion` or `react-spring` inside compositions — they use wall-clock time and desync during render. `remotion-animated` (Stefan Wittwer) is OK for declarative presets (`<Move>`, `<Scale>`, `<Rotate>`, `<Fade>`). |
@@ -480,7 +485,7 @@ For turning recorded speech (including Urdu) into scripts:
 
 1. `pnpm add @remotion/install-whisper-cpp` (first-time only)
 2. Drop your recording at `videos/recordings/<name>.mp4` (folder gitignored)
-3. `npm run transcribe recordings/<name>.mp4 --language ur --translate --model small`
+3. `npm run transcribe videos/recordings/<name>.mp4 --language ur --translate --model small`
 4. Outputs `videos/transcripts/<name>.json` (word-level timestamps) and `videos/transcripts/<name>.txt` (plain text).
 
 Flags:
@@ -573,7 +578,7 @@ Combine iconify icons with `<Arrow>` (from `primitives/`) and `<RoughShape>` for
 - `npm run dev` — Remotion Studio
 - `npm run lint` — tsc + eslint (must pass before returning any TSX-writing task)
 - `npm run gen:sfx` — regenerate the UI sound library
-- `npm run gen:voice` — synthesise voiceover MP3s from `content/<topic>.md` (env: `VOICE`, `RATE`)
+- `npm run gen:voice` - synthesise voiceover MP3s from `videos/scripts/<topic>.md` (env: `VOICE`, `RATE`)
 - `npm run check:diagrams` — verify every `library/diagrams/source/*.excalidraw|tldraw` has a matching `<name>.svg`
 - `npm run check:assets` — verify every asset referenced by a beat exists under `library/`
 - `npm run check:layout` — verify no rect overlaps within a `LAYOUT` preset
@@ -590,5 +595,5 @@ Use `pnpm` (not `npm`) for installs. There's an npm@11.6.0 arborist bug on this 
 
 - Don't animate with `framer-motion` inside compositions.
 - Don't play sound with `use-sound` / `howler` inside compositions.
-- Don't inline text as an image without also recording the raw copy in `content/`.
+- Don't inline text as an image without also recording the raw copy as markdown (`videos/scripts/` for video copy, the chapter folder for curriculum copy).
 - Don't invent asset paths in a script; flag missing assets so `sfx-icon-curator` can be run.

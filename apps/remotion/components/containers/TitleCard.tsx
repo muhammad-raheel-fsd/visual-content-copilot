@@ -23,8 +23,8 @@ export const TitleCard: React.FC<{
         position: "absolute",
         top: LAYOUT.title.y,
         left: 0,
-        // Right offset by SAFE_ZONE_RIGHT so text is centered in the content
-        // area, not the full canvas — otherwise it sits under the OBS webcam.
+        // Right offset by SAFE_ZONE_RIGHT keeps text centred in the content area.
+        // SAFE_ZONE_RIGHT is 0 now (webcam zone disabled), so this centres on the full canvas.
         right: SAFE_ZONE_RIGHT,
         textAlign: "center",
         transform: `translateY(${(1 - spr) * -24}px)`,

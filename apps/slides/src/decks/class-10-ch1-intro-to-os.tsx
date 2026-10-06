@@ -119,8 +119,8 @@ const DoYouKnow: React.FC<{ children: ReactNode }> = ({ children }) => (
     style={{
       marginTop: 16,
       padding: "18px 22px",
-      backgroundColor: "rgba(88, 166, 255, 0.08)",
-      border: "1px solid rgba(88, 166, 255, 0.35)",
+      backgroundColor: "color-mix(in srgb, var(--accent) 8%, transparent)",
+      border: "1px solid color-mix(in srgb, var(--accent) 35%, transparent)",
       borderRadius: 12,
       display: "flex",
       alignItems: "flex-start",
@@ -175,7 +175,7 @@ const TrafficHub: React.FC = () => {
             left: CENTER - RING / 2,
             top: CENTER - RING / 2,
             borderRadius: "50%",
-            border: "2px dashed rgba(88, 166, 255, 0.35)",
+            border: "2px dashed color-mix(in srgb, var(--accent) 35%, transparent)",
           }}
         />
         <div
@@ -193,7 +193,7 @@ const TrafficHub: React.FC = () => {
             alignItems: "center",
             justifyContent: "center",
             gap: 4,
-            boxShadow: "0 0 60px 10px rgba(88, 166, 255, 0.25)",
+            boxShadow: "0 0 60px 10px color-mix(in srgb, var(--accent) 25%, transparent)",
           }}
         >
           <Icon icon="mdi:cog-sync-outline" width={60} height={60} color="var(--accent)" />
@@ -500,7 +500,6 @@ export const class10Ch1IntroToOsDeck: Deck = {
   topic: "1.1 · Introduction to OS",
   topicCode: "1.1",
   topicTitle: "Introduction to Operating System (OS)",
-  theme: "class-10",
   accent: ACCENT,
   slides: [
     // 1. Hero

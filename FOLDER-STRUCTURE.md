@@ -1,7 +1,7 @@
 ---
 title: bytemotion folder structure guide
 status: canonical
-last_updated: 2026-09-30
+last_updated: 2026-10-03
 maintained_by: Muhammad Raheel + Claude Code
 ---
 
@@ -55,6 +55,9 @@ curriculum/
                 │   ├── summary.md
                 │   ├── board-exercise.md
                 │   └── t<T>-<slug>.md
+                ├── web/                (website articles in own words, imported by `pnpm content:import`)
+                │   ├── overview.md     (chapter title, URL slug, short intro)
+                │   └── t<T>-<slug>.md  (one article per topic; format: .claude/agents/web-article-writer.md)
                 ├── questions/          (Postgres-ready practice sets)
                 │   ├── board-exercise.md
                 │   ├── mock-test.md
@@ -71,9 +74,10 @@ curriculum/
 
 - **One folder per chapter.** Everything about that chapter (source, questions, diagrams, slides pointer, research) sits under it.
 - **Never create a parallel path** for a chapter's content (no `content/books/parsed/...`, no `thoughts/research/...` per chapter). Everything is under the chapter folder.
-- **Every chapter folder MUST have:** `README.md`, `research.md`, `source/`, `questions/`, `diagrams/`, `slides/`.
+- **Every chapter folder MUST have:** `README.md`, `research.md`, `source/`, `questions/`, `diagrams/`, `slides/`, and (for the website) `web/`.
+- **`web/` articles are written in our own words** (book definitions quoted with their source): the website never reproduces the textbook. They are imported into the web app with `pnpm content:import` (run inside `apps/bytemotion-web-app`).
 - **Slide .tsx source files stay in `apps/slides/src/decks/`** because Vite needs them there. The chapter's `slides/README.md` acts as the index + preview URL list. Never put .tsx files in the chapter folder.
-- **Rendered SVGs live in the chapter's `diagrams/rendered/`** as the master. Symlinks in `library/diagrams/class-<N>-ch<M>-<name>.svg` point to them so the Vite slides app can serve them via `/diagrams/class-<N>-ch<M>-<name>.svg`.
+- **Rendered SVGs live in the chapter's `diagrams/rendered/`** as the master. Symlinks in `library/diagrams/class-<N>-ch<M>-<name>.svg` point to them so the Vite slides app can serve them via `/diagrams/class-<N>-ch<M>-<name>.svg`. Symlinks MUST be relative and carry the `class-<N>-ch<M>-` prefix, including the matching `library/diagrams/source/class-<N>-ch<M>-<name>.excalidraw` link that `npm run render:diagrams` reads (RUNBOOK R-J).
 - **Source PDFs live in `curriculum/books/`.** Naming: `class-<N>-<subject-short>.pdf` (e.g. `class-10-cs.pdf`, `class-12-cs.pdf`). Do NOT store PDFs in the chapter folder.
 
 ### The chapter research doc (`research.md`)
@@ -135,14 +139,19 @@ library/
 
 ## apps/ · Code
 
-Three independent apps + one Remotion setup:
+Three independent apps, one Remotion setup, and the student web app:
 
 ```
 apps/
-├── remotion/           (Remotion video source: Root.tsx + videos/<topic>/beats/)
-├── slides/             (Vite + React slides app on port 3030; source of all .tsx decks)
-└── excalidraw-editor/  (Vite + React Excalidraw editor on port 3040)
+├── remotion/            (Remotion video source: Root.tsx + videos/<topic>/beats/)
+├── slides/              (Vite + React slides app on port 3030; source of all .tsx decks)
+├── excalidraw-editor/   (Vite + React Excalidraw editor on port 3040)
+└── bytemotion-web-app/  (Next.js 16 student website; SEPARATE git repo, a submodule)
 ```
+
+`apps/bytemotion-web-app/` has its own `package.json`, lockfile, `CLAUDE.md` and git history. Its
+full reference is `apps/bytemotion-web-app/README.md` (FSD layers, wrappers, Prisma, auth, Docker), its
+short rules are `apps/bytemotion-web-app/GUIDE.md`, and its plans / research live in its own `thoughts/`. Run its commands from inside that folder, not from the bytemotion root.
 
 ### Rules for apps
 
@@ -184,6 +193,7 @@ This doc replaces the previous scattered structure:
 ## When adding a new chapter, follow this order
 
 1. Create the chapter folder: `curriculum/<board>/class-<N>/<subject>/ch<M>-<slug>/` with all 4 subfolders + `README.md` + `research.md`.
+   - **Ask Muhammad which slide theme this chapter uses** (RUNBOOK R-L), then add one line to `CHAPTER_THEMES` in `apps/slides/src/themes.ts`.
 2. Add the source PDF to `curriculum/books/` if not already there.
 3. Extract the chapter to `source/` files (one per topic + overview + summary + board-exercise), verbatim.
 4. Author the deck `.tsx` at `apps/slides/src/decks/class-<N>-ch<M>-t<T>-<slug>.tsx` and register in the DECKS map.

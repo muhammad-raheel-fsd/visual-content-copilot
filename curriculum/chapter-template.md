@@ -15,6 +15,13 @@ learning_objectives:
 questions_file: questions/class-11-ch-01-mcq.md
 ---
 
+<!--
+LEGACY TEMPLATE (noted 2026-10-03). This beat-per-chapter format predates the current workflow.
+For curriculum chapters use the chapter-folder layout in FOLDER-STRUCTURE.md and copy the
+class-10 ch1 research.md as the planning template. This file is still a reasonable starting
+point for a standalone narrated VIDEO script (see the video-script agent and videos/scripts/).
+-->
+
 # Programming Fundamentals
 
 ## Beats

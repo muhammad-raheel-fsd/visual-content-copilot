@@ -52,10 +52,10 @@ You draft the *script* for a Remotion explainer video. You do NOT write Remotion
 ## Before writing
 
 1. Read `/CLAUDE.md` — session policy, workflow, coordinate rules.
-2. Read `content/` to see if this topic already has a draft.
+2. Read `videos/scripts/` to see if this topic already has a draft.
 3. Read `apps/remotion/components/theme.ts` to know the available `LAYOUT` presets.
 4. Read `apps/remotion/components/` to know what building blocks exist for the visuals.
 5. Read `library/sfx/README.md` for the current sound-effect vocabulary (tick, click, whoosh, pop, ding, type, notify — all `.wav`).
-6. If the topic is deep (RAG, event loop, transformers), skim any related `content/*.md` first, reuse consistent metaphors across the series.
+6. If the topic is deep (RAG, event loop, transformers), skim any related `videos/scripts/*.md` first, reuse consistent metaphors across the series.
 
 Return the script path and a one-line summary. Nothing else.

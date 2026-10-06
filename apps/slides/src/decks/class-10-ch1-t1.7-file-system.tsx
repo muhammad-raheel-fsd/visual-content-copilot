@@ -101,7 +101,7 @@ const HeroFolderTree: React.FC = () => (
         backgroundColor: "var(--panel)",
         border: "2px solid var(--accent)",
         borderRadius: 12,
-        boxShadow: "0 0 40px rgba(88, 166, 255, 0.35)",
+        boxShadow: "0 0 40px color-mix(in srgb, var(--accent) 35%, transparent)",
       }}
     >
       <Icon icon="mdi:folder-outline" width={40} height={40} color="var(--accent)" />
@@ -261,7 +261,7 @@ const MetadataPanel: React.FC = () => {
         backgroundColor: "var(--panel)",
         border: "1.5px solid var(--microtask)",
         borderRadius: 12,
-        boxShadow: "0 0 28px rgba(255, 179, 71, 0.25)",
+        boxShadow: "0 0 28px color-mix(in srgb, var(--microtask) 25%, transparent)",
         display: "flex",
         flexDirection: "column",
         gap: 10,
@@ -289,7 +289,7 @@ const MetadataPanel: React.FC = () => {
             gridTemplateColumns: "1fr 1.3fr",
             gap: 10,
             padding: "8px 12px",
-            backgroundColor: "rgba(255, 179, 71, 0.06)",
+            backgroundColor: "color-mix(in srgb, var(--microtask) 6%, transparent)",
             borderRadius: 6,
           }}
         >
@@ -352,8 +352,8 @@ const ActivityBox: React.FC = () => (
   <div
     style={{
       padding: "22px 26px",
-      backgroundColor: "rgba(255, 179, 71, 0.08)",
-      border: "1.5px solid rgba(255, 179, 71, 0.45)",
+      backgroundColor: "color-mix(in srgb, var(--microtask) 8%, transparent)",
+      border: "1.5px solid color-mix(in srgb, var(--microtask) 45%, transparent)",
       borderRadius: 14,
     }}
   >
@@ -448,7 +448,7 @@ const NextTopicHero: React.FC = () => (
       backgroundColor: "var(--panel)",
       border: "2px solid var(--microtask)",
       borderRadius: 20,
-      boxShadow: "0 0 60px rgba(255, 179, 71, 0.28)",
+      boxShadow: "0 0 60px color-mix(in srgb, var(--microtask) 28%, transparent)",
     }}
   >
     <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
@@ -456,7 +456,7 @@ const NextTopicHero: React.FC = () => (
         style={{
           padding: "6px 16px",
           backgroundColor: "var(--microtask)",
-          color: "#0a0e14",
+          color: "var(--on-accent)",
           borderRadius: 999,
           fontSize: 18,
           fontWeight: 800,
@@ -484,8 +484,8 @@ const NextTopicHero: React.FC = () => (
             alignItems: "center",
             gap: 10,
             padding: "10px 16px",
-            backgroundColor: "rgba(255, 179, 71, 0.12)",
-            border: "1px solid rgba(255, 179, 71, 0.45)",
+            backgroundColor: "color-mix(in srgb, var(--microtask) 12%, transparent)",
+            border: "1px solid color-mix(in srgb, var(--microtask) 45%, transparent)",
             borderRadius: 999,
           }}
         >
@@ -506,7 +506,6 @@ export const class10Ch1T17FileSystemDeck: Deck = {
   topic: "1.7 · File System",
   topicCode: "1.7",
   topicTitle: "File System Structure and Management",
-  theme: "class-10",
   accent: ACCENT,
   slides: [
     // 1. Hero
@@ -698,7 +697,7 @@ export const class10Ch1T17FileSystemDeck: Deck = {
                 maxWidth: "100%",
                 maxHeight: "100%",
                 objectFit: "contain",
-                filter: "drop-shadow(0 0 40px rgba(88, 166, 255, 0.15))",
+                filter: "drop-shadow(0 0 40px color-mix(in srgb, var(--accent) 15%, transparent))",
               }}
             />
           </div>
@@ -765,7 +764,7 @@ export const class10Ch1T17FileSystemDeck: Deck = {
             <div
               style={{
                 padding: "14px 18px",
-                backgroundColor: "rgba(88, 166, 255, 0.08)",
+                backgroundColor: "color-mix(in srgb, var(--accent) 8%, transparent)",
                 border: "1px dashed var(--accent)",
                 borderRadius: 10,
                 fontSize: 16,
@@ -801,7 +800,7 @@ export const class10Ch1T17FileSystemDeck: Deck = {
                   backgroundColor: "var(--panel)",
                   border: "1.5px solid var(--microtask)",
                   borderRadius: 14,
-                  boxShadow: "0 0 30px rgba(255, 179, 71, 0.28)",
+                  boxShadow: "0 0 30px color-mix(in srgb, var(--microtask) 28%, transparent)",
                   display: "flex",
                   alignItems: "center",
                   gap: 16,
@@ -835,7 +834,7 @@ export const class10Ch1T17FileSystemDeck: Deck = {
                   backgroundColor: "var(--panel)",
                   border: "1.5px solid var(--accent)",
                   borderRadius: 14,
-                  boxShadow: "0 0 30px rgba(88, 166, 255, 0.28)",
+                  boxShadow: "0 0 30px color-mix(in srgb, var(--accent) 28%, transparent)",
                   display: "flex",
                   alignItems: "center",
                   gap: 16,
@@ -945,8 +944,8 @@ export const class10Ch1T17FileSystemDeck: Deck = {
             style={{
               marginTop: 14,
               padding: "12px 16px",
-              backgroundColor: "rgba(255, 179, 71, 0.08)",
-              border: "1px solid rgba(255, 179, 71, 0.4)",
+              backgroundColor: "color-mix(in srgb, var(--microtask) 8%, transparent)",
+              border: "1px solid color-mix(in srgb, var(--microtask) 40%, transparent)",
               borderRadius: 10,
               fontSize: 13,
               color: "var(--muted)",

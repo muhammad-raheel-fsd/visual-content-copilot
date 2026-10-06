@@ -14,7 +14,7 @@
       /* ─────────────────────────────────────────────────────────────
          BASE / DEFAULT THEME
          Used by non-curriculum decks (event-loop, generic explainers).
-         GitHub-dark palette, kept for backwards compatibility.
+         GitHub-dark palette. Mirrors THEMES.default in src/themes.ts.
       ───────────────────────────────────────────────────────────── */
       :root {
         --bg: #0d1117;
@@ -34,6 +34,14 @@
         --api: #f778ba;
         --loop: #58a6ff;
         --warn: #f0883e;
+        --on-accent: #0d1117;
+        --code-bg: #0d1117;
+        --syn-keyword: #ff7b72;
+        --syn-string: #a5d6ff;
+        --syn-function: #d2a8ff;
+        --syn-number: #79c0ff;
+        --syn-builtin: #79c0ff;
+        --syn-comment: #8b949e;
 
         /* Type system */
         --font-sans: Inter, system-ui, -apple-system, sans-serif;
@@ -41,58 +49,11 @@
         --font-mono: "Roboto Mono", ui-monospace, monospace;
       }
 
-      /* ─────────────────────────────────────────────────────────────
-         CLASS 10 THEME · "HORIZON"
-         Electric cyan primary + warm amber secondary over a deep
-         navy base. Energetic, modern, foundational. For Grade 10 CS.
-      ───────────────────────────────────────────────────────────── */
-      [data-theme="class-10"] {
-        --bg: #0a1020;
-        --bg-gradient-stop: rgba(76, 201, 255, 0.06);
-        --panel: #121a2e;
-        --panel-elevated: #1a2340;
-        --panel-border: #273255;
-        --text: #eaf0fb;
-        --text-strong: #ffffff;
-        --muted: #8c9ab9;
-        --accent: #4cc9ff;
-        --accent-soft: rgba(76, 201, 255, 0.14);
-        --accent-strong: #22b8f0;
-        --sync: #4ade80;
-        --microtask: #ffc14d;
-        --task: #f472b6;
-        --api: #a78bfa;
-        --loop: #4cc9ff;
-        --warn: #fb7185;
+      /* Per-chapter themes (Horizon, GitHub Dark, One Dark Pro, Catppuccin,
+         Tokyo Night, Gruvbox, Nord, Everforest) live in src/themes.ts and are
+         applied at runtime as CSS custom properties on <html>. :root above is
+         only the fallback before the app script runs. */
 
-        --font-display: "Space Grotesk", Inter, system-ui, sans-serif;
-      }
-
-      /* ─────────────────────────────────────────────────────────────
-         CLASS 12 THEME · "MERIDIAN" (stub, refine before class-12 ships)
-         Deep plum + muted gold. Mature, professional. For Grade 12 CS.
-      ───────────────────────────────────────────────────────────── */
-      [data-theme="class-12"] {
-        --bg: #0d0a1c;
-        --bg-gradient-stop: rgba(201, 166, 107, 0.06);
-        --panel: #171428;
-        --panel-elevated: #221c3a;
-        --panel-border: #2d2748;
-        --text: #f0ebff;
-        --text-strong: #ffffff;
-        --muted: #9087a8;
-        --accent: #c9a66b;
-        --accent-soft: rgba(201, 166, 107, 0.14);
-        --accent-strong: #b88f52;
-        --sync: #67d8c4;
-        --microtask: #e4b7ff;
-        --task: #ff8da1;
-        --api: #ffd166;
-        --loop: #c9a66b;
-        --warn: #ff8787;
-
-        --font-display: "Space Grotesk", Inter, system-ui, sans-serif;
-      }
 
       * {
         box-sizing: border-box;

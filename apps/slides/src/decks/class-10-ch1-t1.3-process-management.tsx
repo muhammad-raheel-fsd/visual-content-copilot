@@ -120,7 +120,7 @@ const HeroProcessOrbit: React.FC = () => {
             left: CENTER - R - 20,
             top: CENTER - R - 20,
             borderRadius: "50%",
-            border: "2px dashed rgba(88, 166, 255, 0.35)",
+            border: "2px dashed color-mix(in srgb, var(--accent) 35%, transparent)",
           }}
         />
         <div
@@ -138,7 +138,7 @@ const HeroProcessOrbit: React.FC = () => {
             alignItems: "center",
             justifyContent: "center",
             gap: 4,
-            boxShadow: "0 0 70px 12px rgba(88, 166, 255, 0.35)",
+            boxShadow: "0 0 70px 12px color-mix(in srgb, var(--accent) 35%, transparent)",
           }}
         >
           <Icon icon="mdi:chip" width={54} height={54} color="var(--accent)" />
@@ -218,7 +218,7 @@ const LifecycleCard: React.FC<{
           height: 40,
           borderRadius: 12,
           backgroundColor: color,
-          color: "#0a0e14",
+          color: "var(--on-accent)",
           fontWeight: 800,
           display: "flex",
           alignItems: "center",
@@ -269,7 +269,7 @@ const ChromeStageCard: React.FC<{
           height: 36,
           borderRadius: 10,
           backgroundColor: color,
-          color: "#0a0e14",
+          color: "var(--on-accent)",
           fontWeight: 800,
           display: "flex",
           alignItems: "center",
@@ -356,7 +356,7 @@ const ConcurrencyChef: React.FC = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          boxShadow: "0 0 40px rgba(88, 166, 255, 0.4)",
+          boxShadow: "0 0 40px color-mix(in srgb, var(--accent) 40%, transparent)",
         }}
       >
         <Icon icon="mdi:chef-hat" width={60} height={60} color="var(--accent)" />
@@ -501,7 +501,7 @@ const FCFSGantt: React.FC = () => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                color: "#0a0e14",
+                color: "var(--on-accent)",
                 fontSize: 22,
                 fontWeight: 800,
                 letterSpacing: 2,
@@ -626,8 +626,8 @@ const DoYouKnow: React.FC<{ children: ReactNode }> = ({ children }) => (
   <div
     style={{
       padding: "22px 26px",
-      backgroundColor: "rgba(88, 166, 255, 0.08)",
-      border: "1.5px solid rgba(88, 166, 255, 0.4)",
+      backgroundColor: "color-mix(in srgb, var(--accent) 8%, transparent)",
+      border: "1.5px solid color-mix(in srgb, var(--accent) 40%, transparent)",
       borderRadius: 14,
       display: "flex",
       alignItems: "flex-start",
@@ -658,8 +658,8 @@ const ActivityBox: React.FC = () => (
   <div
     style={{
       padding: "22px 26px",
-      backgroundColor: "rgba(255, 179, 71, 0.08)",
-      border: "1.5px solid rgba(255, 179, 71, 0.45)",
+      backgroundColor: "color-mix(in srgb, var(--microtask) 8%, transparent)",
+      border: "1.5px solid color-mix(in srgb, var(--microtask) 45%, transparent)",
       borderRadius: 14,
     }}
   >
@@ -771,7 +771,7 @@ const NextTopicHero: React.FC = () => (
       backgroundColor: "var(--panel)",
       border: "2px solid var(--microtask)",
       borderRadius: 20,
-      boxShadow: "0 0 60px rgba(255, 179, 71, 0.28)",
+      boxShadow: "0 0 60px color-mix(in srgb, var(--microtask) 28%, transparent)",
     }}
   >
     <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
@@ -779,7 +779,7 @@ const NextTopicHero: React.FC = () => (
         style={{
           padding: "6px 16px",
           backgroundColor: "var(--microtask)",
-          color: "#0a0e14",
+          color: "var(--on-accent)",
           borderRadius: 999,
           fontSize: 18,
           fontWeight: 800,
@@ -806,8 +806,8 @@ const NextTopicHero: React.FC = () => (
             alignItems: "center",
             gap: 10,
             padding: "10px 16px",
-            backgroundColor: "rgba(255, 179, 71, 0.12)",
-            border: "1px solid rgba(255, 179, 71, 0.45)",
+            backgroundColor: "color-mix(in srgb, var(--microtask) 12%, transparent)",
+            border: "1px solid color-mix(in srgb, var(--microtask) 45%, transparent)",
             borderRadius: 999,
           }}
         >
@@ -828,7 +828,6 @@ export const class10Ch1T13ProcessManagementDeck: Deck = {
   topic: "1.3 · Process Management",
   topicCode: "1.3",
   topicTitle: "Process Management in Operating System (OS)",
-  theme: "class-10",
   accent: ACCENT,
   slides: [
     // 1. Hero
@@ -878,7 +877,7 @@ export const class10Ch1T13ProcessManagementDeck: Deck = {
             </div>
             <Stagger style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16 }}>
               <StaggerItem>
-                <div style={{ padding: 20, backgroundColor: "var(--panel)", border: "1.5px solid var(--sync)", borderRadius: 12, boxShadow: "0 0 24px rgba(63, 185, 80, 0.22)" }}>
+                <div style={{ padding: 20, backgroundColor: "var(--panel)", border: "1.5px solid var(--sync)", borderRadius: 12, boxShadow: "0 0 24px color-mix(in srgb, var(--sync) 22%, transparent)" }}>
                   <Icon icon="mdi:application-outline" width={40} height={40} color="var(--sync)" />
                   <div style={{ fontSize: 16, fontWeight: 800, color: "var(--sync)", marginTop: 8 }}>Process</div>
                   <div style={{ fontSize: 14, color: "var(--muted)", marginTop: 4, lineHeight: 1.5 }}>
@@ -887,7 +886,7 @@ export const class10Ch1T13ProcessManagementDeck: Deck = {
                 </div>
               </StaggerItem>
               <StaggerItem>
-                <div style={{ padding: 20, backgroundColor: "var(--panel)", border: "1.5px solid var(--microtask)", borderRadius: 12, boxShadow: "0 0 24px rgba(255, 179, 71, 0.22)" }}>
+                <div style={{ padding: 20, backgroundColor: "var(--panel)", border: "1.5px solid var(--microtask)", borderRadius: 12, boxShadow: "0 0 24px color-mix(in srgb, var(--microtask) 22%, transparent)" }}>
                   <Icon icon="mdi:chip" width={40} height={40} color="var(--microtask)" />
                   <div style={{ fontSize: 16, fontWeight: 800, color: "var(--microtask)", marginTop: 8 }}>Resources</div>
                   <div style={{ fontSize: 14, color: "var(--muted)", marginTop: 4, lineHeight: 1.5 }}>
@@ -896,7 +895,7 @@ export const class10Ch1T13ProcessManagementDeck: Deck = {
                 </div>
               </StaggerItem>
               <StaggerItem>
-                <div style={{ padding: 20, backgroundColor: "var(--panel)", border: "1.5px solid var(--task)", borderRadius: 12, boxShadow: "0 0 24px rgba(255, 121, 198, 0.22)" }}>
+                <div style={{ padding: 20, backgroundColor: "var(--panel)", border: "1.5px solid var(--task)", borderRadius: 12, boxShadow: "0 0 24px color-mix(in srgb, var(--task) 22%, transparent)" }}>
                   <Icon icon="mdi:shield-check-outline" width={40} height={40} color="var(--task)" />
                   <div style={{ fontSize: 16, fontWeight: 800, color: "var(--task)", marginTop: 8 }}>No Disturbance</div>
                   <div style={{ fontSize: 14, color: "var(--muted)", marginTop: 4, lineHeight: 1.5 }}>
@@ -1029,7 +1028,7 @@ export const class10Ch1T13ProcessManagementDeck: Deck = {
                 maxWidth: "100%",
                 maxHeight: "100%",
                 objectFit: "contain",
-                filter: "drop-shadow(0 0 40px rgba(88, 166, 255, 0.15))",
+                filter: "drop-shadow(0 0 40px color-mix(in srgb, var(--accent) 15%, transparent))",
               }}
             />
           </div>
@@ -1143,7 +1142,7 @@ export const class10Ch1T13ProcessManagementDeck: Deck = {
                     backgroundColor: "var(--panel)",
                     border: "1.5px solid var(--sync)",
                     borderRadius: 14,
-                    boxShadow: "0 0 24px rgba(63, 185, 80, 0.22)",
+                    boxShadow: "0 0 24px color-mix(in srgb, var(--sync) 22%, transparent)",
                   }}
                 >
                   <Icon icon="mdi:sort-numeric-ascending" width={42} height={42} color="var(--sync)" />
@@ -1162,7 +1161,7 @@ export const class10Ch1T13ProcessManagementDeck: Deck = {
                     backgroundColor: "var(--panel)",
                     border: "1.5px solid var(--microtask)",
                     borderRadius: 14,
-                    boxShadow: "0 0 24px rgba(255, 179, 71, 0.22)",
+                    boxShadow: "0 0 24px color-mix(in srgb, var(--microtask) 22%, transparent)",
                   }}
                 >
                   <Icon icon="mdi:timer-outline" width={42} height={42} color="var(--microtask)" />
@@ -1268,7 +1267,7 @@ export const class10Ch1T13ProcessManagementDeck: Deck = {
                       backgroundColor: "var(--panel)",
                       border: "2px solid var(--accent)",
                       borderRadius: 12,
-                      boxShadow: "0 0 30px rgba(88, 166, 255, 0.4)",
+                      boxShadow: "0 0 30px color-mix(in srgb, var(--accent) 40%, transparent)",
                     }}
                   >
                     <Icon icon="mdi:store-outline" width={40} height={40} color="var(--accent)" />
@@ -1431,7 +1430,7 @@ export const class10Ch1T13ProcessManagementDeck: Deck = {
                 backgroundColor: "var(--panel)",
                 border: "1.5px solid var(--sync)",
                 borderRadius: 16,
-                boxShadow: "0 0 30px rgba(63, 185, 80, 0.25)",
+                boxShadow: "0 0 30px color-mix(in srgb, var(--sync) 25%, transparent)",
                 display: "flex",
                 flexDirection: "column",
                 gap: 14,
@@ -1451,7 +1450,7 @@ export const class10Ch1T13ProcessManagementDeck: Deck = {
                 backgroundColor: "var(--panel)",
                 border: "1.5px solid var(--warn)",
                 borderRadius: 16,
-                boxShadow: "0 0 30px rgba(255, 179, 71, 0.28)",
+                boxShadow: "0 0 30px color-mix(in srgb, var(--microtask) 28%, transparent)",
                 display: "flex",
                 flexDirection: "column",
                 gap: 14,
@@ -1468,8 +1467,8 @@ export const class10Ch1T13ProcessManagementDeck: Deck = {
                 style={{
                   marginTop: "auto",
                   padding: "12px 14px",
-                  backgroundColor: "rgba(255, 179, 71, 0.12)",
-                  border: "1px dashed rgba(255, 179, 71, 0.5)",
+                  backgroundColor: "color-mix(in srgb, var(--microtask) 12%, transparent)",
+                  border: "1px dashed color-mix(in srgb, var(--microtask) 50%, transparent)",
                   borderRadius: 10,
                 }}
               >
@@ -1514,8 +1513,8 @@ export const class10Ch1T13ProcessManagementDeck: Deck = {
                     alignItems: "center",
                     gap: 8,
                     padding: "8px 14px",
-                    backgroundColor: "rgba(88, 166, 255, 0.12)",
-                    border: "1px solid rgba(88, 166, 255, 0.4)",
+                    backgroundColor: "color-mix(in srgb, var(--accent) 12%, transparent)",
+                    border: "1px solid color-mix(in srgb, var(--accent) 40%, transparent)",
                     borderRadius: 999,
                   }}
                 >

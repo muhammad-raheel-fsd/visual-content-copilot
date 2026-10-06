@@ -8,9 +8,9 @@ chapter_title: "Development of Graphical User Interface (GUI)"
 source_pdf: curriculum/books/class-12-cs.pdf
 source_pages: 45-59
 sub_topics_total_planned: 7
-status: not_started
+status: COMPLETE
 theme: class-12
-last_updated: 2026-10-01
+last_updated: 2026-10-03
 ---
 
 # Chapter 4 · Development of Graphical User Interface (GUI)
@@ -60,7 +60,7 @@ Everything about this chapter lives inside this folder. One source of truth.
 **Book pages:** 45-59 (15 pages)
 **Book's own structure:** 2 top-level sections  ·  4.1 Tkinter GUI Development + 4.2 Working with Databases in Python.
 **My pedagogical breakdown:** 7 sub-topics (research.md section 2).
-**Theme:** `class-12` Meridian (deep plum + muted gold).
+**Theme:** `github-dark` (near-black canvas, grey panels, blue accent). Replaced the plum + gold Meridian theme on 2026-10-05.
 
 **Student Learning Outcomes (verbatim):**
 - Design interactive GUI-based programs using the Tkinter library.

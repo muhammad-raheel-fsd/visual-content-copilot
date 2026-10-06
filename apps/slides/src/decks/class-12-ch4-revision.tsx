@@ -1,7 +1,7 @@
 /**
  * Class 12 CS · Chapter 4 · Revision Deck
  *
- * THEME: class-12 (Meridian · deep plum + muted gold).
+ * THEME: class-12 (GitHub Dark: near-black canvas, grey panels, blue accent).
  *
  * Follows class-10 revision pattern: hero → mind-map → 7 per-sub-topic recap
  * cards → exam-ready checklist → Book Summary (page 57 verbatim) → Board
@@ -21,9 +21,9 @@ const ACCENT = "var(--accent)";
 
 // ── style tokens ─────────────────────────────────────────────────────────
 
-const hlGold: CSSProperties = { color: "var(--accent)", fontWeight: 700 };
-const hlTeal: CSSProperties = { color: "var(--sync)", fontWeight: 700 };
-const hlViolet: CSSProperties = { color: "var(--microtask)", fontWeight: 700 };
+const hlBlue: CSSProperties = { color: "var(--accent)", fontWeight: 700 };
+const hlGreen: CSSProperties = { color: "var(--sync)", fontWeight: 700 };
+const hlOrange: CSSProperties = { color: "var(--microtask)", fontWeight: 700 };
 const hlPink: CSSProperties = { color: "var(--task)", fontWeight: 700 };
 
 // ── Stagger primitives ───────────────────────────────────────────────────
@@ -93,7 +93,7 @@ const SubTopicRecap: React.FC<{
         style={{
           padding: "4px 10px",
           backgroundColor: color,
-          color: "#0d0a1c",
+          color: "var(--on-accent)",
           borderRadius: 999,
           fontSize: 13,
           fontWeight: 800,
@@ -245,7 +245,6 @@ export const class12Ch4RevisionDeck: Deck = {
   topic: "Revision",
   topicCode: "Ch 4",
   topicTitle: "Chapter 4 Revision",
-  theme: "class-12",
   accent: ACCENT,
   slides: [
     // 1. Hero
@@ -276,7 +275,7 @@ export const class12Ch4RevisionDeck: Deck = {
                     style={{
                       padding: "8px 14px",
                       borderRadius: 999,
-                      backgroundColor: "rgba(201, 166, 107, 0.14)",
+                      backgroundColor: "color-mix(in srgb, var(--accent) 14%, transparent)",
                       border: "1px solid var(--accent)",
                       color: "var(--accent)",
                       fontFamily: "Roboto Mono, monospace",
@@ -288,7 +287,7 @@ export const class12Ch4RevisionDeck: Deck = {
                   </div>
                 ))}
               </div>
-              Everything you need to recall. <b style={hlGold}>7 sub-topics</b>, the book summary, and the board paper's trickiest MCQ.
+              Everything you need to recall. <b style={hlBlue}>7 sub-topics</b>, the book summary, and the board paper's trickiest MCQ.
             </>
           }
           accent={ACCENT}
@@ -311,7 +310,7 @@ export const class12Ch4RevisionDeck: Deck = {
               <div
                 style={{
                   padding: 16,
-                  backgroundColor: "rgba(201, 166, 107, 0.08)",
+                  backgroundColor: "color-mix(in srgb, var(--accent) 8%, transparent)",
                   border: "1.5px solid var(--accent)",
                   borderRadius: 14,
                   display: "flex",
@@ -361,7 +360,7 @@ export const class12Ch4RevisionDeck: Deck = {
               <div
                 style={{
                   padding: 16,
-                  backgroundColor: "rgba(103, 216, 196, 0.08)",
+                  backgroundColor: "color-mix(in srgb, var(--sync) 8%, transparent)",
                   border: "1.5px solid var(--sync)",
                   borderRadius: 14,
                   display: "flex",
@@ -548,7 +547,7 @@ export const class12Ch4RevisionDeck: Deck = {
             style={{
               marginTop: 18,
               padding: "12px 18px",
-              backgroundColor: "rgba(255, 141, 161, 0.08)",
+              backgroundColor: "color-mix(in srgb, var(--task) 8%, transparent)",
               border: "1px dashed var(--task)",
               borderRadius: 10,
               fontSize: 15,
@@ -894,7 +893,7 @@ export const class12Ch4RevisionDeck: Deck = {
             style={{
               marginTop: 18,
               padding: "12px 18px",
-              backgroundColor: "rgba(201, 166, 107, 0.08)",
+              backgroundColor: "color-mix(in srgb, var(--accent) 8%, transparent)",
               border: "1px dashed var(--accent)",
               borderRadius: 10,
               fontSize: 15,
@@ -1039,7 +1038,7 @@ export const class12Ch4RevisionDeck: Deck = {
             style={{
               marginTop: 20,
               padding: "14px 20px",
-              backgroundColor: "rgba(201, 166, 107, 0.08)",
+              backgroundColor: "color-mix(in srgb, var(--accent) 8%, transparent)",
               border: "1px dashed var(--accent)",
               borderRadius: 10,
               fontSize: 16,
@@ -1047,7 +1046,7 @@ export const class12Ch4RevisionDeck: Deck = {
               textAlign: "center",
             }}
           >
-            Target: hit all 5 layers in <b style={hlGold}>3 study sessions of 60 minutes</b> each. You will walk into the exam calm.
+            Target: hit all 5 layers in <b style={hlBlue}>3 study sessions of 60 minutes</b> each. You will walk into the exam calm.
           </div>
         </SlideLayout>
       ),

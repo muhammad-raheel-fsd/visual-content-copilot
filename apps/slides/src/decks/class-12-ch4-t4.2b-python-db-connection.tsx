@@ -1,7 +1,7 @@
 /**
  * Class 12 CS · Chapter 4 · Sub-topic 4.2b · Connecting Python to a Database
  *
- * THEME: class-12 (Meridian · deep plum + muted gold).
+ * THEME: class-12 (GitHub Dark: near-black canvas, grey panels, blue accent).
  *
  * VERBATIM RULE: Headings, definitions, sqlite3 code, and 5-bullet summary
  * copied EXACTLY from
@@ -28,9 +28,9 @@ const bookQuoteStyle: CSSProperties = {
   color: "var(--text)",
   margin: 0,
 };
-const hlGold: CSSProperties = { color: "var(--accent)", fontWeight: 700 };
-const hlTeal: CSSProperties = { color: "var(--sync)", fontWeight: 700 };
-const hlViolet: CSSProperties = { color: "var(--microtask)", fontWeight: 700 };
+const hlBlue: CSSProperties = { color: "var(--accent)", fontWeight: 700 };
+const hlGreen: CSSProperties = { color: "var(--sync)", fontWeight: 700 };
+const hlOrange: CSSProperties = { color: "var(--microtask)", fontWeight: 700 };
 
 // ── Stagger primitives ───────────────────────────────────────────────────
 
@@ -108,12 +108,13 @@ const PY_KEYWORDS = new Set([
 ]);
 const PY_BUILTINS = new Set(["print", "len", "range", "str", "int", "float", "list", "dict", "tuple"]);
 const PY_COLORS: Record<string, string> = {
-  keyword: "var(--accent)",
-  string: "var(--sync)",
-  comment: "var(--muted)",
-  function: "var(--microtask)",
-  builtin: "var(--api)",
-  number: "var(--task)",
+  // Syntax colours come from the chapter theme (src/themes.ts).
+  keyword: "var(--syn-keyword)",
+  string: "var(--syn-string)",
+  comment: "var(--syn-comment)",
+  function: "var(--syn-function)",
+  builtin: "var(--syn-builtin)",
+  number: "var(--syn-number)",
   punct: "var(--text)",
   identifier: "var(--text)",
   whitespace: "var(--text)",
@@ -186,14 +187,14 @@ const PythonCode: React.FC<{ source: string; fontSize?: number; maxHeight?: numb
       style={{
         margin: 0,
         padding: "20px 26px",
-        backgroundColor: "#0b0820",
+        backgroundColor: "var(--code-bg)",
         border: "1px solid var(--panel-border)",
         borderRadius: 12,
         fontFamily: "Roboto Mono, monospace",
         fontSize,
         lineHeight: 1.45,
         overflow: "auto",
-        boxShadow: "0 0 24px rgba(201, 166, 107, 0.15)",
+        boxShadow: "0 0 24px color-mix(in srgb, var(--accent) 15%, transparent)",
         maxHeight,
       }}
     >
@@ -311,7 +312,7 @@ const StepCard: React.FC<{
           height: 32,
           borderRadius: "50%",
           backgroundColor: color,
-          color: "#0d0a1c",
+          color: "var(--on-accent)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -331,7 +332,7 @@ const StepCard: React.FC<{
         style={{
           marginTop: "auto",
           padding: "6px 10px",
-          backgroundColor: "#0b0820",
+          backgroundColor: "var(--code-bg)",
           borderRadius: 6,
           fontFamily: "Roboto Mono, monospace",
           fontSize: 12,
@@ -462,7 +463,7 @@ const MockOutput: React.FC = () => (
   <div
     style={{
       padding: "14px 18px",
-      backgroundColor: "#0a0612",
+      backgroundColor: "var(--code-bg)",
       border: "1px solid var(--sync)",
       borderRadius: 10,
       fontFamily: "Roboto Mono, monospace",
@@ -495,7 +496,7 @@ const NextTopicHero: React.FC = () => (
       backgroundColor: "var(--panel)",
       border: "2px solid var(--sync)",
       borderRadius: 20,
-      boxShadow: "0 0 60px rgba(103, 216, 196, 0.28)",
+      boxShadow: "0 0 60px color-mix(in srgb, var(--sync) 28%, transparent)",
     }}
   >
     <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
@@ -503,7 +504,7 @@ const NextTopicHero: React.FC = () => (
         style={{
           padding: "6px 16px",
           backgroundColor: "var(--sync)",
-          color: "#0d0a1c",
+          color: "var(--on-accent)",
           borderRadius: 999,
           fontSize: 18,
           fontWeight: 800,
@@ -523,7 +524,7 @@ const NextTopicHero: React.FC = () => (
         lineHeight: 1.55,
       }}
     >
-      You can open a database. Time to do the four basic actions on it: <b style={hlGold}>Create</b>, <b style={hlTeal}>Read</b>, <b style={hlViolet}>Update</b>, and <b style={{ color: "var(--task)", fontWeight: 700 }}>Delete</b>.
+      You can open a database. Time to do the four basic actions on it: <b style={hlBlue}>Create</b>, <b style={hlGreen}>Read</b>, <b style={hlOrange}>Update</b>, and <b style={{ color: "var(--task)", fontWeight: 700 }}>Delete</b>.
     </div>
     <div style={{ display: "flex", gap: 14, marginTop: 4, flexWrap: "wrap", justifyContent: "center" }}>
       {[
@@ -539,8 +540,8 @@ const NextTopicHero: React.FC = () => (
             alignItems: "center",
             gap: 10,
             padding: "10px 16px",
-            backgroundColor: "rgba(103, 216, 196, 0.12)",
-            border: "1px solid rgba(103, 216, 196, 0.4)",
+            backgroundColor: "color-mix(in srgb, var(--sync) 12%, transparent)",
+            border: "1px solid color-mix(in srgb, var(--sync) 40%, transparent)",
             borderRadius: 999,
           }}
         >
@@ -570,7 +571,6 @@ export const class12Ch4T42bPythonDbConnectionDeck: Deck = {
   topic: "4.2b · Python + Database",
   topicCode: "4.2b",
   topicTitle: "Connecting Python to a Database",
-  theme: "class-12",
   accent: ACCENT,
   slides: [
     // 1. Hero
@@ -620,7 +620,7 @@ export const class12Ch4T42bPythonDbConnectionDeck: Deck = {
                   style={{
                     padding: "8px 16px",
                     borderRadius: 999,
-                    backgroundColor: "rgba(201, 166, 107, 0.14)",
+                    backgroundColor: "color-mix(in srgb, var(--accent) 14%, transparent)",
                     border: "1.5px solid var(--accent)",
                     color: "var(--accent)",
                     fontFamily: "Roboto Mono, monospace",
@@ -673,7 +673,7 @@ export const class12Ch4T42bPythonDbConnectionDeck: Deck = {
         >
           <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
             <p style={bookQuoteStyle}>
-              Connecting Python to a database allows programs to <b style={hlGold}>work with stored data</b>. A database connection is <b>required before performing any data operation</b>. Python provides libraries that help establish this connection easily. Once connected, data can be <b>added, retrieved, or modified</b>. Proper connection handling ensures smooth communication between Python and the database.
+              Connecting Python to a database allows programs to <b style={hlBlue}>work with stored data</b>. A database connection is <b>required before performing any data operation</b>. Python provides libraries that help establish this connection easily. Once connected, data can be <b>added, retrieved, or modified</b>. Proper connection handling ensures smooth communication between Python and the database.
             </p>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 4 }}>
               <Icon icon="mdi:connection" width={22} height={22} color={ACCENT} />
@@ -731,7 +731,7 @@ export const class12Ch4T42bPythonDbConnectionDeck: Deck = {
         >
           <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
             <p style={bookQuoteStyle}>
-              The <b style={hlGold}>sqlite3</b> library is <b>built into Python</b> and is used for <b>small databases</b>. It stores data in a <b>single file</b> on the system. <b style={hlTeal}>MySQL</b> is used for <b>larger and more complex database systems</b>. A connection is created by providing database details such as <b>name and credentials</b>. A successful connection allows Python to access the database.
+              The <b style={hlBlue}>sqlite3</b> library is <b>built into Python</b> and is used for <b>small databases</b>. It stores data in a <b>single file</b> on the system. <b style={hlGreen}>MySQL</b> is used for <b>larger and more complex database systems</b>. A connection is created by providing database details such as <b>name and credentials</b>. A successful connection allows Python to access the database.
             </p>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18 }}>
               <div
@@ -743,7 +743,7 @@ export const class12Ch4T42bPythonDbConnectionDeck: Deck = {
                   backgroundColor: "var(--panel)",
                   border: "1.5px solid var(--accent)",
                   borderRadius: 14,
-                  boxShadow: "0 0 24px rgba(201, 166, 107, 0.22)",
+                  boxShadow: "0 0 24px color-mix(in srgb, var(--accent) 22%, transparent)",
                 }}
               >
                 <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
@@ -751,7 +751,7 @@ export const class12Ch4T42bPythonDbConnectionDeck: Deck = {
                   <div style={{ fontSize: 26, fontWeight: 800, color: "var(--accent)" }}>sqlite3</div>
                 </div>
                 <ul style={{ margin: 0, paddingLeft: 20, fontSize: 15, color: "var(--text)", lineHeight: 1.7 }}>
-                  <li><b style={hlGold}>Built into Python</b> · no install needed</li>
+                  <li><b style={hlBlue}>Built into Python</b> · no install needed</li>
                   <li>Single <b>file on disk</b> (school.db)</li>
                   <li>For <b>small databases</b> and personal projects</li>
                   <li>Zero server to run or configure</li>
@@ -759,7 +759,7 @@ export const class12Ch4T42bPythonDbConnectionDeck: Deck = {
                 <code
                   style={{
                     padding: "8px 12px",
-                    backgroundColor: "#0b0820",
+                    backgroundColor: "var(--code-bg)",
                     borderRadius: 6,
                     fontFamily: "Roboto Mono, monospace",
                     fontSize: 13,
@@ -778,7 +778,7 @@ export const class12Ch4T42bPythonDbConnectionDeck: Deck = {
                   backgroundColor: "var(--panel)",
                   border: "1.5px solid var(--sync)",
                   borderRadius: 14,
-                  boxShadow: "0 0 24px rgba(103, 216, 196, 0.22)",
+                  boxShadow: "0 0 24px color-mix(in srgb, var(--sync) 22%, transparent)",
                 }}
               >
                 <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
@@ -786,7 +786,7 @@ export const class12Ch4T42bPythonDbConnectionDeck: Deck = {
                   <div style={{ fontSize: 26, fontWeight: 800, color: "var(--sync)" }}>MySQL</div>
                 </div>
                 <ul style={{ margin: 0, paddingLeft: 20, fontSize: 15, color: "var(--text)", lineHeight: 1.7 }}>
-                  <li>Runs as a <b style={hlTeal}>server</b> on your machine or on a server</li>
+                  <li>Runs as a <b style={hlGreen}>server</b> on your machine or on a server</li>
                   <li>Needs connection details: <b>host, user, password, database name</b></li>
                   <li>For <b>larger and more complex systems</b></li>
                   <li>Multiple users / apps can connect at once</li>
@@ -794,7 +794,7 @@ export const class12Ch4T42bPythonDbConnectionDeck: Deck = {
                 <code
                   style={{
                     padding: "8px 12px",
-                    backgroundColor: "#0b0820",
+                    backgroundColor: "var(--code-bg)",
                     borderRadius: 6,
                     fontFamily: "Roboto Mono, monospace",
                     fontSize: 13,
@@ -877,7 +877,7 @@ export const class12Ch4T42bPythonDbConnectionDeck: Deck = {
             style={{
               marginTop: 20,
               padding: "14px 20px",
-              backgroundColor: "rgba(201, 166, 107, 0.08)",
+              backgroundColor: "color-mix(in srgb, var(--accent) 8%, transparent)",
               border: "1px dashed var(--accent)",
               borderRadius: 10,
               fontSize: 15,
@@ -937,7 +937,7 @@ export const class12Ch4T42bPythonDbConnectionDeck: Deck = {
                   lineHeight: 1.55,
                 }}
               >
-                <b style={hlGold}>sqlite3.connect:</b> opens school.db. If the file does not exist, SQLite creates it for you.
+                <b style={hlBlue}>sqlite3.connect:</b> opens school.db. If the file does not exist, SQLite creates it for you.
               </div>
               <div
                 style={{
@@ -950,7 +950,7 @@ export const class12Ch4T42bPythonDbConnectionDeck: Deck = {
                   lineHeight: 1.55,
                 }}
               >
-                <b style={hlTeal}>connection.cursor():</b> gives you a cursor to send SQL commands with.
+                <b style={hlGreen}>connection.cursor():</b> gives you a cursor to send SQL commands with.
               </div>
               <div
                 style={{
@@ -963,7 +963,7 @@ export const class12Ch4T42bPythonDbConnectionDeck: Deck = {
                   lineHeight: 1.55,
                 }}
               >
-                <b style={hlViolet}>CREATE TABLE IF NOT EXISTS:</b> defines a students table with 4 columns (id, name, age, grade). The IF NOT EXISTS part lets you run the program many times without errors.
+                <b style={hlOrange}>CREATE TABLE IF NOT EXISTS:</b> defines a students table with 4 columns (id, name, age, grade). The IF NOT EXISTS part lets you run the program many times without errors.
               </div>
             </div>
           </div>
@@ -1017,12 +1017,12 @@ export const class12Ch4T42bPythonDbConnectionDeck: Deck = {
                   lineHeight: 1.6,
                 }}
               >
-                <b style={hlTeal}>Write operations stay in memory</b> until you call <code style={{ color: "var(--sync)", fontFamily: "Roboto Mono, monospace" }}>connection.commit()</code>. Without commit(), the two Ali / Sara rows are lost when the program ends.
+                <b style={hlGreen}>Write operations stay in memory</b> until you call <code style={{ color: "var(--sync)", fontFamily: "Roboto Mono, monospace" }}>connection.commit()</code>. Without commit(), the two Ali / Sara rows are lost when the program ends.
               </div>
               <div
                 style={{
                   padding: "16px 18px",
-                  backgroundColor: "rgba(255, 141, 161, 0.08)",
+                  backgroundColor: "color-mix(in srgb, var(--task) 8%, transparent)",
                   border: "1px solid var(--task)",
                   borderRadius: 10,
                   fontSize: 14,
@@ -1091,7 +1091,7 @@ export const class12Ch4T42bPythonDbConnectionDeck: Deck = {
                   lineHeight: 1.55,
                 }}
               >
-                <b style={hlViolet}>fetchall()</b> returns a list of tuples. One tuple per row. Each tuple holds the column values in order (id, name, age, grade).
+                <b style={hlOrange}>fetchall()</b> returns a list of tuples. One tuple per row. Each tuple holds the column values in order (id, name, age, grade).
               </div>
             </div>
           </div>
@@ -1111,7 +1111,7 @@ export const class12Ch4T42bPythonDbConnectionDeck: Deck = {
         >
           <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
             <p style={bookQuoteStyle}>
-              <b style={hlGold}>SQL commands</b> are used to interact with the database from Python. Python sends these commands using a <b style={hlTeal}>database cursor</b>. Commands can be used to <b>create tables or insert data</b>. Data can also be <b>retrieved using select queries</b>. Executing SQL commands allows Python programs to <b>manage database data effectively</b>.
+              <b style={hlBlue}>SQL commands</b> are used to interact with the database from Python. Python sends these commands using a <b style={hlGreen}>database cursor</b>. Commands can be used to <b>create tables or insert data</b>. Data can also be <b>retrieved using select queries</b>. Executing SQL commands allows Python programs to <b>manage database data effectively</b>.
             </p>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 4 }}>
               <Icon icon="mdi:transit-connection-horizontal" width={22} color={ACCENT} />
@@ -1172,7 +1172,7 @@ export const class12Ch4T42bPythonDbConnectionDeck: Deck = {
             <div
               style={{
                 padding: "14px 18px",
-                backgroundColor: "rgba(201, 166, 107, 0.08)",
+                backgroundColor: "color-mix(in srgb, var(--accent) 8%, transparent)",
                 border: "1px dashed var(--accent)",
                 borderRadius: 10,
                 fontSize: 15,
@@ -1181,7 +1181,7 @@ export const class12Ch4T42bPythonDbConnectionDeck: Deck = {
                 textAlign: "center",
               }}
             >
-              Python never talks to the database directly. The <b style={hlTeal}>cursor</b> is always in the middle.
+              Python never talks to the database directly. The <b style={hlGreen}>cursor</b> is always in the middle.
             </div>
           </div>
         </SlideLayout>
@@ -1244,7 +1244,7 @@ export const class12Ch4T42bPythonDbConnectionDeck: Deck = {
             style={{
               marginTop: 18,
               padding: "14px 18px",
-              backgroundColor: "rgba(255, 141, 161, 0.08)",
+              backgroundColor: "color-mix(in srgb, var(--task) 8%, transparent)",
               border: "1px dashed var(--task)",
               borderRadius: 10,
               fontSize: 15,
@@ -1332,7 +1332,7 @@ export const class12Ch4T42bPythonDbConnectionDeck: Deck = {
             style={{
               marginTop: 18,
               padding: "12px 16px",
-              backgroundColor: "rgba(228, 183, 255, 0.08)",
+              backgroundColor: "color-mix(in srgb, var(--microtask) 8%, transparent)",
               border: "1px dashed var(--microtask)",
               borderRadius: 10,
               fontSize: 14,
@@ -1340,7 +1340,7 @@ export const class12Ch4T42bPythonDbConnectionDeck: Deck = {
               lineHeight: 1.55,
             }}
           >
-            <b style={hlViolet}>Workflow tip:</b> run the Python script in a terminal, then click school.db in the SQLite Viewer sidebar to see the new rows appear. No need to type <code style={{ fontFamily: "Roboto Mono, monospace", color: "var(--accent)" }}>SELECT *</code> yourself.
+            <b style={hlOrange}>Workflow tip:</b> run the Python script in a terminal, then click school.db in the SQLite Viewer sidebar to see the new rows appear. No need to type <code style={{ fontFamily: "Roboto Mono, monospace", color: "var(--accent)" }}>SELECT *</code> yourself.
           </div>
         </SlideLayout>
       ),

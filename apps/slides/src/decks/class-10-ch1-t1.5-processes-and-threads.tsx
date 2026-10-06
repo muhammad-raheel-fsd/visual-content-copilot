@@ -104,7 +104,7 @@ const HeroProcessThreads: React.FC = () => (
         display: "flex",
         flexDirection: "column",
         gap: 14,
-        boxShadow: "0 0 50px rgba(88, 166, 255, 0.35)",
+        boxShadow: "0 0 50px color-mix(in srgb, var(--accent) 35%, transparent)",
       }}
     >
       <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
@@ -150,7 +150,7 @@ const HeroProcessThreads: React.FC = () => (
       <div
         style={{
           padding: "8px 14px",
-          backgroundColor: "rgba(88, 166, 255, 0.1)",
+          backgroundColor: "color-mix(in srgb, var(--accent) 10%, transparent)",
           border: "1px dashed var(--accent)",
           borderRadius: 8,
           fontSize: 13,
@@ -226,7 +226,7 @@ const BrowserThreadsVisual: React.FC = () => {
         display: "flex",
         flexDirection: "column",
         gap: 14,
-        boxShadow: "0 0 40px rgba(88, 166, 255, 0.28)",
+        boxShadow: "0 0 40px color-mix(in srgb, var(--accent) 28%, transparent)",
       }}
     >
       <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
@@ -265,7 +265,7 @@ const BrowserThreadsVisual: React.FC = () => {
       <div
         style={{
           padding: "10px 16px",
-          backgroundColor: "rgba(88, 166, 255, 0.08)",
+          backgroundColor: "color-mix(in srgb, var(--accent) 8%, transparent)",
           border: "1px dashed var(--accent)",
           borderRadius: 10,
           fontSize: 14,
@@ -311,7 +311,7 @@ const BenefitCard: React.FC<{
           height: 34,
           borderRadius: 10,
           backgroundColor: color,
-          color: "#0a0e14",
+          color: "var(--on-accent)",
           fontFamily: "Roboto Mono, monospace",
           fontWeight: 800,
           display: "flex",
@@ -459,7 +459,7 @@ const NextTopicHero: React.FC = () => (
       backgroundColor: "var(--panel)",
       border: "2px solid var(--microtask)",
       borderRadius: 20,
-      boxShadow: "0 0 60px rgba(255, 179, 71, 0.28)",
+      boxShadow: "0 0 60px color-mix(in srgb, var(--microtask) 28%, transparent)",
     }}
   >
     <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
@@ -467,7 +467,7 @@ const NextTopicHero: React.FC = () => (
         style={{
           padding: "6px 16px",
           backgroundColor: "var(--microtask)",
-          color: "#0a0e14",
+          color: "var(--on-accent)",
           borderRadius: 999,
           fontSize: 18,
           fontWeight: 800,
@@ -495,8 +495,8 @@ const NextTopicHero: React.FC = () => (
             alignItems: "center",
             gap: 10,
             padding: "10px 16px",
-            backgroundColor: "rgba(255, 179, 71, 0.12)",
-            border: "1px solid rgba(255, 179, 71, 0.45)",
+            backgroundColor: "color-mix(in srgb, var(--microtask) 12%, transparent)",
+            border: "1px solid color-mix(in srgb, var(--microtask) 45%, transparent)",
             borderRadius: 999,
           }}
         >
@@ -519,7 +519,6 @@ export const class10Ch1T15ProcessesAndThreadsDeck: Deck = {
   topic: "1.5 · Processes and Threads",
   topicCode: "1.5",
   topicTitle: "Processes and Threads",
-  theme: "class-10",
   accent: ACCENT,
   slides: [
     // 1. Hero
@@ -628,7 +627,7 @@ export const class10Ch1T15ProcessesAndThreadsDeck: Deck = {
                   backgroundColor: "var(--panel)",
                   border: "1.5px solid var(--sync)",
                   borderRadius: 14,
-                  boxShadow: "0 0 24px rgba(63, 185, 80, 0.25)",
+                  boxShadow: "0 0 24px color-mix(in srgb, var(--sync) 25%, transparent)",
                 }}
               >
                 <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 10 }}>
@@ -662,7 +661,7 @@ export const class10Ch1T15ProcessesAndThreadsDeck: Deck = {
                   backgroundColor: "var(--panel)",
                   border: "1.5px solid var(--task)",
                   borderRadius: 14,
-                  boxShadow: "0 0 24px rgba(255, 121, 198, 0.25)",
+                  boxShadow: "0 0 24px color-mix(in srgb, var(--task) 25%, transparent)",
                 }}
               >
                 <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 10 }}>
@@ -750,7 +749,7 @@ export const class10Ch1T15ProcessesAndThreadsDeck: Deck = {
                 maxWidth: "100%",
                 maxHeight: "100%",
                 objectFit: "contain",
-                filter: "drop-shadow(0 0 40px rgba(88, 166, 255, 0.15))",
+                filter: "drop-shadow(0 0 40px color-mix(in srgb, var(--accent) 15%, transparent))",
               }}
             />
           </div>
@@ -827,21 +826,21 @@ export const class10Ch1T15ProcessesAndThreadsDeck: Deck = {
             </div>
             <Stagger style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16 }}>
               <StaggerItem>
-                <div style={{ padding: 20, backgroundColor: "var(--panel)", border: "1.5px solid var(--sync)", borderRadius: 12, boxShadow: "0 0 22px rgba(63, 185, 80, 0.22)" }}>
+                <div style={{ padding: 20, backgroundColor: "var(--panel)", border: "1.5px solid var(--sync)", borderRadius: 12, boxShadow: "0 0 22px color-mix(in srgb, var(--sync) 22%, transparent)" }}>
                   <Icon icon="mdi:rocket-launch-outline" width={40} height={40} color="var(--sync)" />
                   <div style={{ fontSize: 16, fontWeight: 800, color: "var(--sync)", marginTop: 8 }}>Faster</div>
                   <div style={{ fontSize: 13, color: "var(--muted)", marginTop: 4 }}>Faster execution.</div>
                 </div>
               </StaggerItem>
               <StaggerItem>
-                <div style={{ padding: 20, backgroundColor: "var(--panel)", border: "1.5px solid var(--microtask)", borderRadius: 12, boxShadow: "0 0 22px rgba(255, 179, 71, 0.22)" }}>
+                <div style={{ padding: 20, backgroundColor: "var(--panel)", border: "1.5px solid var(--microtask)", borderRadius: 12, boxShadow: "0 0 22px color-mix(in srgb, var(--microtask) 22%, transparent)" }}>
                   <Icon icon="mdi:cursor-move" width={40} height={40} color="var(--microtask)" />
                   <div style={{ fontSize: 16, fontWeight: 800, color: "var(--microtask)", marginTop: 8 }}>Responsive</div>
                   <div style={{ fontSize: 13, color: "var(--muted)", marginTop: 4 }}>Better responsiveness.</div>
                 </div>
               </StaggerItem>
               <StaggerItem>
-                <div style={{ padding: 20, backgroundColor: "var(--panel)", border: "1.5px solid var(--task)", borderRadius: 12, boxShadow: "0 0 22px rgba(255, 121, 198, 0.22)" }}>
+                <div style={{ padding: 20, backgroundColor: "var(--panel)", border: "1.5px solid var(--task)", borderRadius: 12, boxShadow: "0 0 22px color-mix(in srgb, var(--task) 22%, transparent)" }}>
                   <Icon icon="mdi:scale-balance" width={40} height={40} color="var(--task)" />
                   <div style={{ fontSize: 16, fontWeight: 800, color: "var(--task)", marginTop: 8 }}>Efficient</div>
                   <div style={{ fontSize: 13, color: "var(--muted)", marginTop: 4 }}>Efficient use of system resources.</div>

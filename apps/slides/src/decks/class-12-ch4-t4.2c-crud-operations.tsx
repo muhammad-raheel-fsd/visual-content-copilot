@@ -1,7 +1,7 @@
 /**
  * Class 12 CS · Chapter 4 · Sub-topic 4.2c · CRUD Operations
  *
- * THEME: class-12 (Meridian · deep plum + muted gold).
+ * THEME: class-12 (GitHub Dark: near-black canvas, grey panels, blue accent).
  *
  * VERBATIM RULE: CRUD intro paragraph, Table 4.1, all 4 operation definitions
  * (Create/Read/Update/Delete), CLASS ACTIVITY, Delete Python code, and
@@ -16,6 +16,7 @@ import { motion } from "framer-motion";
 import type { CSSProperties, ReactNode } from "react";
 import type { Deck } from "../SlideDeck";
 import { Card, HeroSlide, SlideLayout, SplitSlide } from "../components/SlideLayout";
+import { FREED_WIDTH } from "../components/safeZone";
 
 const ACCENT = "var(--accent)";
 
@@ -27,9 +28,9 @@ const bookQuoteStyle: CSSProperties = {
   color: "var(--text)",
   margin: 0,
 };
-const hlGold: CSSProperties = { color: "var(--accent)", fontWeight: 700 };
-const hlTeal: CSSProperties = { color: "var(--sync)", fontWeight: 700 };
-const hlViolet: CSSProperties = { color: "var(--microtask)", fontWeight: 700 };
+const hlBlue: CSSProperties = { color: "var(--accent)", fontWeight: 700 };
+const hlGreen: CSSProperties = { color: "var(--sync)", fontWeight: 700 };
+const hlOrange: CSSProperties = { color: "var(--microtask)", fontWeight: 700 };
 const hlPink: CSSProperties = { color: "var(--task)", fontWeight: 700 };
 
 // Fixed color per CRUD operation (consistent across whole deck)
@@ -114,12 +115,13 @@ const PY_KEYWORDS = new Set([
 ]);
 const PY_BUILTINS = new Set(["print", "len", "range", "str", "int", "float", "list", "dict", "tuple"]);
 const PY_COLORS: Record<string, string> = {
-  keyword: "var(--accent)",
-  string: "var(--sync)",
-  comment: "var(--muted)",
-  function: "var(--microtask)",
-  builtin: "var(--api)",
-  number: "var(--task)",
+  // Syntax colours come from the chapter theme (src/themes.ts).
+  keyword: "var(--syn-keyword)",
+  string: "var(--syn-string)",
+  comment: "var(--syn-comment)",
+  function: "var(--syn-function)",
+  builtin: "var(--syn-builtin)",
+  number: "var(--syn-number)",
   punct: "var(--text)",
   identifier: "var(--text)",
   whitespace: "var(--text)",
@@ -192,14 +194,14 @@ const PythonCode: React.FC<{ source: string; fontSize?: number; maxHeight?: numb
       style={{
         margin: 0,
         padding: "20px 26px",
-        backgroundColor: "#0b0820",
+        backgroundColor: "var(--code-bg)",
         border: "1px solid var(--panel-border)",
         borderRadius: 12,
         fontFamily: "Roboto Mono, monospace",
         fontSize,
         lineHeight: 1.45,
         overflow: "auto",
-        boxShadow: "0 0 24px rgba(201, 166, 107, 0.15)",
+        boxShadow: "0 0 24px color-mix(in srgb, var(--accent) 15%, transparent)",
         maxHeight,
       }}
     >
@@ -224,7 +226,7 @@ const SqlPill: React.FC<{ children: ReactNode; color?: string }> = ({ children, 
   <code
     style={{
       padding: "6px 12px",
-      backgroundColor: "#0b0820",
+      backgroundColor: "var(--code-bg)",
       borderRadius: 6,
       fontFamily: "Roboto Mono, monospace",
       fontSize: 14,
@@ -299,14 +301,14 @@ const StudentsTableMini: React.FC = () => (
       borderRadius: 10,
       overflow: "hidden",
       backgroundColor: "#f5f0e4",
-      boxShadow: "0 0 36px rgba(103, 216, 196, 0.3)",
+      boxShadow: "0 0 36px color-mix(in srgb, var(--sync) 30%, transparent)",
     }}
   >
     <div
       style={{
         padding: "6px 14px",
         backgroundColor: "var(--sync)",
-        color: "#0d0a1c",
+        color: "var(--on-accent)",
         fontWeight: 800,
         fontSize: 13,
         fontFamily: "Roboto Mono, monospace",
@@ -318,7 +320,7 @@ const StudentsTableMini: React.FC = () => (
     <table
       style={{
         borderCollapse: "collapse",
-        color: "#1b1326",
+        color: "#1f2328",
         fontFamily: "Roboto Mono, monospace",
       }}
     >
@@ -465,7 +467,7 @@ const Table41Row: React.FC<{
     <code
       style={{
         padding: "6px 10px",
-        backgroundColor: "#0b0820",
+        backgroundColor: "var(--code-bg)",
         borderRadius: 6,
         fontFamily: "Roboto Mono, monospace",
         fontSize: 13,
@@ -554,7 +556,7 @@ const ChapterEndHero: React.FC = () => (
       backgroundColor: "var(--panel)",
       border: "2px solid var(--accent)",
       borderRadius: 20,
-      boxShadow: "0 0 60px rgba(201, 166, 107, 0.3)",
+      boxShadow: "0 0 60px color-mix(in srgb, var(--accent) 30%, transparent)",
     }}
   >
     <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
@@ -562,7 +564,7 @@ const ChapterEndHero: React.FC = () => (
         style={{
           padding: "6px 16px",
           backgroundColor: "var(--accent)",
-          color: "#0d0a1c",
+          color: "var(--on-accent)",
           borderRadius: 999,
           fontSize: 18,
           fontWeight: 800,
@@ -584,7 +586,7 @@ const ChapterEndHero: React.FC = () => (
         lineHeight: 1.55,
       }}
     >
-      You went from <b style={hlGold}>Tkinter windows</b> and <b style={hlGold}>buttons</b>, through <b style={hlViolet}>event handling</b> and a <b style={hlViolet}>login form</b>, into <b style={hlTeal}>databases</b>, <b style={hlTeal}>SQL</b>, and all four <b style={hlPink}>CRUD operations</b>.
+      You went from <b style={hlBlue}>Tkinter windows</b> and <b style={hlBlue}>buttons</b>, through <b style={hlOrange}>event handling</b> and a <b style={hlOrange}>login form</b>, into <b style={hlGreen}>databases</b>, <b style={hlGreen}>SQL</b>, and all four <b style={hlPink}>CRUD operations</b>.
     </div>
     <div
       style={{
@@ -600,8 +602,8 @@ const ChapterEndHero: React.FC = () => (
           key={t}
           style={{
             padding: "6px 12px",
-            backgroundColor: "rgba(201, 166, 107, 0.12)",
-            border: "1px solid rgba(201, 166, 107, 0.4)",
+            backgroundColor: "color-mix(in srgb, var(--accent) 12%, transparent)",
+            border: "1px solid color-mix(in srgb, var(--accent) 40%, transparent)",
             borderRadius: 999,
             color: "var(--accent)",
             fontSize: 12,
@@ -616,7 +618,7 @@ const ChapterEndHero: React.FC = () => (
       style={{
         marginTop: 10,
         padding: "14px 20px",
-        backgroundColor: "rgba(103, 216, 196, 0.08)",
+        backgroundColor: "color-mix(in srgb, var(--sync) 8%, transparent)",
         border: "1px dashed var(--sync)",
         borderRadius: 10,
         fontSize: 16,
@@ -624,7 +626,7 @@ const ChapterEndHero: React.FC = () => (
         textAlign: "center",
       }}
     >
-      Next up for this chapter: the <b style={hlTeal}>Revision deck</b>, the <b style={hlTeal}>Quick Quiz deck</b>, and the <b style={hlTeal}>Board Exercise</b> (pages 58-59) with answer key.
+      Next up for this chapter: the <b style={hlGreen}>Revision deck</b>, the <b style={hlGreen}>Quick Quiz deck</b>, and the <b style={hlGreen}>Board Exercise</b> (pages 58-59) with answer key.
     </div>
   </motion.div>
 );
@@ -638,7 +640,6 @@ export const class12Ch4T42cCrudOperationsDeck: Deck = {
   topic: "4.2c · CRUD Operations",
   topicCode: "4.2c",
   topicTitle: "CRUD Operations",
-  theme: "class-12",
   accent: ACCENT,
   slides: [
     // 1. Hero
@@ -727,7 +728,7 @@ export const class12Ch4T42cCrudOperationsDeck: Deck = {
         >
           <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
             <p style={bookQuoteStyle}>
-              <b style={hlGold}>CRUD</b> stands for <b>Create, Read, Update, and Delete</b> and defines <b>basic database actions</b>. These operations are used to manage data stored in a database (as shown in Figure 4.4 and Table 4.1). <b>Every database-based application depends on CRUD operations</b>. They help maintain <b>accurate and up-to-date information</b>. Python uses SQL commands to perform these operations on databases.
+              <b style={hlBlue}>CRUD</b> stands for <b>Create, Read, Update, and Delete</b> and defines <b>basic database actions</b>. These operations are used to manage data stored in a database (as shown in Figure 4.4 and Table 4.1). <b>Every database-based application depends on CRUD operations</b>. They help maintain <b>accurate and up-to-date information</b>. Python uses SQL commands to perform these operations on databases.
             </p>
             <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
               <Icon icon="mdi:chart-bubble" width={22} height={22} color={ACCENT} />
@@ -778,7 +779,7 @@ export const class12Ch4T42cCrudOperationsDeck: Deck = {
                 maxWidth: "100%",
                 maxHeight: "100%",
                 objectFit: "contain",
-                filter: "drop-shadow(0 0 40px rgba(201, 166, 107, 0.18))",
+                filter: "drop-shadow(0 0 40px color-mix(in srgb, var(--accent) 18%, transparent))",
               }}
             />
           </div>
@@ -838,7 +839,7 @@ export const class12Ch4T42cCrudOperationsDeck: Deck = {
             style={{
               marginTop: 18,
               padding: "12px 18px",
-              backgroundColor: "rgba(201, 166, 107, 0.08)",
+              backgroundColor: "color-mix(in srgb, var(--accent) 8%, transparent)",
               border: "1px dashed var(--accent)",
               borderRadius: 10,
               fontSize: 15,
@@ -864,7 +865,7 @@ export const class12Ch4T42cCrudOperationsDeck: Deck = {
         >
           <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
             <p style={bookQuoteStyle}>
-              The <b style={hlGold}>Create</b> operation is used to <b>add new data</b> to a database table. It stores information such as <b>names, values, or records</b>. <b>SQL insert commands</b> are used for this purpose. Python sends these commands to the database. <b>New records become part of the stored data after execution</b>.
+              The <b style={hlBlue}>Create</b> operation is used to <b>add new data</b> to a database table. It stores information such as <b>names, values, or records</b>. <b>SQL insert commands</b> are used for this purpose. Python sends these commands to the database. <b>New records become part of the stored data after execution</b>.
             </p>
             <div style={{ display: "flex", alignItems: "center", gap: 14, flexWrap: "wrap" }}>
               <Icon icon="mdi:plus-circle-outline" width={28} color={C_CREATE} />
@@ -873,7 +874,7 @@ export const class12Ch4T42cCrudOperationsDeck: Deck = {
               </SqlPill>
               <Icon icon="mdi:arrow-right-bold" width={28} color="var(--muted)" />
               <div style={{ fontSize: 16, color: "var(--text)" }}>
-                Adds <b style={hlGold}>one new row</b> to the students table.
+                Adds <b style={hlBlue}>one new row</b> to the students table.
               </div>
             </div>
           </div>
@@ -924,14 +925,14 @@ export const class12Ch4T42cCrudOperationsDeck: Deck = {
         >
           <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
             <p style={bookQuoteStyle}>
-              The <b style={hlTeal}>Read</b> operation is used to <b>fetch data from the database</b>. It helps <b>display stored records when needed</b>. SQL select commands are commonly used for reading data. Python retrieves the results and processes them. <b>This operation does not change the stored data</b>.
+              The <b style={hlGreen}>Read</b> operation is used to <b>fetch data from the database</b>. It helps <b>display stored records when needed</b>. SQL select commands are commonly used for reading data. Python retrieves the results and processes them. <b>This operation does not change the stored data</b>.
             </p>
             <div style={{ display: "flex", alignItems: "center", gap: 14, flexWrap: "wrap" }}>
               <Icon icon="mdi:magnify" width={28} color={C_READ} />
               <SqlPill color={C_READ}>SELECT * FROM students;</SqlPill>
               <Icon icon="mdi:arrow-right-bold" width={28} color="var(--muted)" />
               <div style={{ fontSize: 16, color: "var(--text)" }}>
-                Returns <b style={hlTeal}>all columns</b> of <b>all rows</b> from students.
+                Returns <b style={hlGreen}>all columns</b> of <b>all rows</b> from students.
               </div>
             </div>
           </div>
@@ -982,20 +983,20 @@ export const class12Ch4T42cCrudOperationsDeck: Deck = {
         >
           <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
             <p style={bookQuoteStyle}>
-              The <b style={hlViolet}>Update</b> operation <b>changes existing data</b> in a database. It is used when stored information needs correction. <b>SQL update commands modify selected records</b>. Python executes these commands based on <b>conditions</b>. <b>Only the specified data is changed</b> during this process.
+              The <b style={hlOrange}>Update</b> operation <b>changes existing data</b> in a database. It is used when stored information needs correction. <b>SQL update commands modify selected records</b>. Python executes these commands based on <b>conditions</b>. <b>Only the specified data is changed</b> during this process.
             </p>
             <div style={{ display: "flex", alignItems: "center", gap: 14, flexWrap: "wrap" }}>
               <Icon icon="mdi:pencil-outline" width={28} color={C_UPDATE} />
               <SqlPill color={C_UPDATE}>UPDATE students SET Age = 21 WHERE ID = 1;</SqlPill>
               <Icon icon="mdi:arrow-right-bold" width={28} color="var(--muted)" />
               <div style={{ fontSize: 16, color: "var(--text)" }}>
-                Changes <b style={hlViolet}>only the student with ID 1</b> to Age 21.
+                Changes <b style={hlOrange}>only the student with ID 1</b> to Age 21.
               </div>
             </div>
             <div
               style={{
                 padding: "12px 18px",
-                backgroundColor: "rgba(255, 141, 161, 0.08)",
+                backgroundColor: "color-mix(in srgb, var(--task) 8%, transparent)",
                 border: "1px dashed var(--task)",
                 borderRadius: 10,
                 fontSize: 15,
@@ -1071,11 +1072,11 @@ export const class12Ch4T42cCrudOperationsDeck: Deck = {
               transition={{ type: "spring", damping: 16 }}
               style={{
                 padding: "32px 42px",
-                maxWidth: 1100,
-                backgroundColor: "rgba(249, 203, 76, 0.1)",
+                maxWidth: 1100 + FREED_WIDTH,
+                backgroundColor: "color-mix(in srgb, var(--api) 10%, transparent)",
                 border: "2px solid var(--warn)",
                 borderRadius: 20,
-                boxShadow: "0 0 60px rgba(249, 203, 76, 0.22)",
+                boxShadow: "0 0 60px color-mix(in srgb, var(--api) 22%, transparent)",
                 display: "flex",
                 alignItems: "center",
                 gap: 24,
@@ -1143,7 +1144,7 @@ export const class12Ch4T42cCrudOperationsDeck: Deck = {
             <div
               style={{
                 padding: "14px 18px",
-                backgroundColor: "rgba(255, 141, 161, 0.08)",
+                backgroundColor: "color-mix(in srgb, var(--task) 8%, transparent)",
                 border: "1.5px solid var(--task)",
                 borderRadius: 10,
                 fontSize: 16,
@@ -1326,15 +1327,15 @@ export const class12Ch4T42cCrudOperationsDeck: Deck = {
             style={{
               marginTop: 18,
               padding: "14px 18px",
-              backgroundColor: "rgba(228, 183, 255, 0.08)",
-              border: "1px dashed rgba(228, 183, 255, 0.5)",
+              backgroundColor: "color-mix(in srgb, var(--microtask) 8%, transparent)",
+              border: "1px dashed color-mix(in srgb, var(--microtask) 50%, transparent)",
               borderRadius: 10,
               fontSize: 15,
               color: "var(--text)",
               lineHeight: 1.55,
             }}
           >
-            <b style={hlViolet}>Big picture:</b> once you know CRUD, every backend job, every API, every mobile app's data layer feels familiar. This is the base vocabulary of all software data work.
+            <b style={hlOrange}>Big picture:</b> once you know CRUD, every backend job, every API, every mobile app's data layer feels familiar. This is the base vocabulary of all software data work.
           </div>
         </SlideLayout>
       ),

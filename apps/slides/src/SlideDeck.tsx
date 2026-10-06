@@ -1,6 +1,8 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { SAFE_ZONE_RIGHT } from "./components/safeZone";
 import { useSlideSfx } from "./hooks/useSlideSfx";
+import { applyTheme, type ThemeId } from "./themes";
 
 export type Slide = {
   /** unique key for react */
@@ -30,16 +32,19 @@ export type Deck = {
   topicCode?: string;
   topicTitle?: string;
   /**
-   * Visual theme to apply to this deck. Switches CSS custom-properties
-   * via [data-theme="..."] on the <html> element. See index.html for palettes.
-   * Omit for default (GitHub-dark-ish base theme).
+   * Optional theme override for this one deck. Normally OMIT it: curriculum decks
+   * get their chapter's theme from CHAPTER_THEMES in src/themes.ts.
    */
-  theme?: "class-10" | "class-12" | "default";
+  theme?: ThemeId;
 };
 
 type Props = {
   deck: Deck;
+  /** resolved theme (URL preview > deck override > chapter theme), see App.tsx */
+  themeId: ThemeId;
   aspect: "portrait" | "landscape";
+  /** When true, slide keyboard shortcuts are ignored (e.g. the deck browser is open). */
+  keysDisabled?: boolean;
   /** When true, hide stage border and outer padding , clean canvas for OBS recording. */
   chromeless?: boolean;
 };
@@ -60,7 +65,13 @@ const CANVAS = {
  * The deck is designed to be recorded via OBS window capture. Bookmark the URL
  * with ?deck=<id>&aspect=portrait to jump straight into a specific recording setup.
  */
-export const SlideDeck: React.FC<Props> = ({ deck, aspect, chromeless = false }) => {
+export const SlideDeck: React.FC<Props> = ({
+  deck,
+  themeId,
+  aspect,
+  chromeless = false,
+  keysDisabled = false,
+}) => {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState<1 | -1>(1);
   const { playCue } = useSlideSfx();
@@ -68,20 +79,11 @@ export const SlideDeck: React.FC<Props> = ({ deck, aspect, chromeless = false })
   const canvas = CANVAS[aspect];
   const slide = deck.slides[index]!;
 
-  // Apply the deck's theme as [data-theme="..."] on <html>, so CSS custom-properties
-  // in index.html cascade through everything. Default theme is the no-attribute base.
+  // Write the theme's tokens onto <html> as CSS custom properties, so every
+  // var(--accent), var(--panel), ... in the decks picks them up.
   useEffect(() => {
-    const theme = deck.theme && deck.theme !== "default" ? deck.theme : null;
-    const html = document.documentElement;
-    if (theme) {
-      html.setAttribute("data-theme", theme);
-    } else {
-      html.removeAttribute("data-theme");
-    }
-    return () => {
-      html.removeAttribute("data-theme");
-    };
-  }, [deck.theme]);
+    applyTheme(themeId);
+  }, [themeId]);
 
   const goNext = () => {
     if (index >= deck.slides.length - 1) return;
@@ -97,6 +99,10 @@ export const SlideDeck: React.FC<Props> = ({ deck, aspect, chromeless = false })
   // Keyboard navigation
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
+      if (keysDisabled) return;
+      // Typing in a search box or using a dropdown must not change slides.
+      const t = e.target as HTMLElement | null;
+      if (t && (t.isContentEditable || ["INPUT", "SELECT", "TEXTAREA"].includes(t.tagName))) return;
       if (e.key === "ArrowRight" || e.key === " " || e.key === "PageDown") {
         e.preventDefault();
         goNext();
@@ -116,7 +122,7 @@ export const SlideDeck: React.FC<Props> = ({ deck, aspect, chromeless = false })
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [index, deck.slides.length]);
+  }, [index, deck.slides.length, keysDisabled]);
 
   // Play the slide's entry SFX
   useEffect(() => {
@@ -178,9 +184,9 @@ export const SlideDeck: React.FC<Props> = ({ deck, aspect, chromeless = false })
 };
 
 /**
- * Unified slide chrome. Sits INSIDE the safe padding zone (32px in from every
- * edge, right side reserved 216px for the OBS webcam), so no clipping ever
- * happens at the stage borders.
+ * Unified slide chrome. Sits 32px in from every edge (plus SAFE_ZONE_RIGHT on
+ * the right, 0 now; it was 216px total while the OBS webcam zone was active),
+ * so no clipping ever happens at the stage borders.
  *
  * Layout:
  *   Top-left     : `COMPUTER SCIENCE 10 · CH 1 · 1.1 INTRODUCTION TO OS`
@@ -232,7 +238,8 @@ const SlideChrome: React.FC<{
           position: "absolute",
           top: 28,
           left: 32,
-          right: 216,
+          // right: 216, // webcam-safe version
+          right: 32 + SAFE_ZONE_RIGHT,
           display: "flex",
           alignItems: "center",
           fontSize: 13,
@@ -290,7 +297,8 @@ const SlideChrome: React.FC<{
         style={{
           position: "absolute",
           bottom: 28,
-          right: 216,
+          // right: 216, // webcam-safe version
+          right: 32 + SAFE_ZONE_RIGHT,
           display: "flex",
           alignItems: "center",
           gap: 10,
@@ -392,8 +400,9 @@ const ScaledStage: React.FC<{
 };
 
 /**
- * Faint outline of the right 10% safe zone reserved for the OBS webcam overlay.
- * OFF BY DEFAULT , opt-in with ?safezone=show for authoring, always hidden during recording.
+ * Faint outline of the right 10% OBS webcam zone. Authoring aid only, opt-in with
+ * ?safezone=show. The zone itself is no longer reserved (see components/safeZone.ts),
+ * so this outline only matters if SAFE_ZONE_RIGHT is switched back on.
  */
 const SafeZoneMarker: React.FC<{ canvasWidth: number; canvasHeight: number }> = ({
   canvasWidth,

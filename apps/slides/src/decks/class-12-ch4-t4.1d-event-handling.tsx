@@ -1,7 +1,7 @@
 /**
  * Class 12 CS · Chapter 4 · Sub-topic 4.1d · Event Handling + Login Form
  *
- * THEME: class-12 (Meridian · deep plum + muted gold).
+ * THEME: class-12 (GitHub Dark: near-black canvas, grey panels, blue accent).
  *
  * VERBATIM RULE: Headings, definitions, Python code, 5-bullet summary, and
  * CLASS ACTIVITY are copied EXACTLY from
@@ -16,6 +16,7 @@ import { motion } from "framer-motion";
 import type { CSSProperties, ReactNode } from "react";
 import type { Deck } from "../SlideDeck";
 import { Card, HeroSlide, SlideLayout, SplitSlide } from "../components/SlideLayout";
+import { FREED_WIDTH } from "../components/safeZone";
 
 const ACCENT = "var(--accent)";
 
@@ -27,9 +28,9 @@ const bookQuoteStyle: CSSProperties = {
   color: "var(--text)",
   margin: 0,
 };
-const hlGold: CSSProperties = { color: "var(--accent)", fontWeight: 700 };
-const hlTeal: CSSProperties = { color: "var(--sync)", fontWeight: 700 };
-const hlViolet: CSSProperties = { color: "var(--microtask)", fontWeight: 700 };
+const hlBlue: CSSProperties = { color: "var(--accent)", fontWeight: 700 };
+const hlGreen: CSSProperties = { color: "var(--sync)", fontWeight: 700 };
+const hlOrange: CSSProperties = { color: "var(--microtask)", fontWeight: 700 };
 
 // ── Stagger primitives ───────────────────────────────────────────────────
 
@@ -104,12 +105,13 @@ const PY_KEYWORDS = new Set([
 ]);
 const PY_BUILTINS = new Set(["print", "len", "range", "str", "int", "float", "list", "dict", "tuple"]);
 const PY_COLORS: Record<string, string> = {
-  keyword: "var(--accent)",
-  string: "var(--sync)",
-  comment: "var(--muted)",
-  function: "var(--microtask)",
-  builtin: "var(--api)",
-  number: "var(--task)",
+  // Syntax colours come from the chapter theme (src/themes.ts).
+  keyword: "var(--syn-keyword)",
+  string: "var(--syn-string)",
+  comment: "var(--syn-comment)",
+  function: "var(--syn-function)",
+  builtin: "var(--syn-builtin)",
+  number: "var(--syn-number)",
   punct: "var(--text)",
   identifier: "var(--text)",
   whitespace: "var(--text)",
@@ -182,14 +184,14 @@ const PythonCode: React.FC<{ source: string; fontSize?: number; maxHeight?: numb
       style={{
         margin: 0,
         padding: "20px 26px",
-        backgroundColor: "#0b0820",
+        backgroundColor: "var(--code-bg)",
         border: "1px solid var(--panel-border)",
         borderRadius: 12,
         fontFamily: "Roboto Mono, monospace",
         fontSize,
         lineHeight: 1.45,
         overflow: "auto",
-        boxShadow: "0 0 24px rgba(201, 166, 107, 0.15)",
+        boxShadow: "0 0 24px color-mix(in srgb, var(--accent) 15%, transparent)",
         maxHeight,
       }}
     >
@@ -226,17 +228,17 @@ const MockWindow: React.FC<{
       border: `1.5px solid ${accent}`,
       boxShadow: `0 0 32px ${accent}44`,
       backgroundColor: "#f5f0e4",
-      color: "#1b1326",
+      color: "#1f2328",
     }}
   >
     <div
       style={{
         padding: "8px 12px",
-        backgroundColor: "#2a2340",
+        backgroundColor: "var(--panel-elevated)",
         display: "flex",
         alignItems: "center",
         gap: 10,
-        color: "#eaddf0",
+        color: "var(--text)",
       }}
     >
       <Icon icon={icon} width={16} color={accent} />
@@ -262,7 +264,7 @@ const MockWindow: React.FC<{
 );
 
 const MockLabel: React.FC<{ children: ReactNode; style?: CSSProperties }> = ({ children, style }) => (
-  <div style={{ fontSize: 14, color: "#1b1326", padding: "4px 0", textAlign: "center", ...style }}>
+  <div style={{ fontSize: 14, color: "#1f2328", padding: "4px 0", textAlign: "center", ...style }}>
     {children}
   </div>
 );
@@ -278,7 +280,7 @@ const MockEntry: React.FC<{ width?: number; masked?: boolean }> = ({ width = 180
       padding: "2px 6px",
       fontSize: 13,
       fontFamily: "Roboto Mono, monospace",
-      color: "#1b1326",
+      color: "#1f2328",
       letterSpacing: masked ? 2 : 0,
     }}
   >
@@ -303,7 +305,7 @@ const MockBtn: React.FC<{
       fontWeight: 600,
       textAlign: "center",
       boxShadow: "inset 0 1px 0 rgba(255,255,255,0.5)",
-      color: "#1b1326",
+      color: "#1f2328",
       ...style,
     }}
   >
@@ -343,7 +345,7 @@ const SuccessPopupMock: React.FC = () => (
       <Icon icon="mdi:check" width={22} />
     </div>
     <div style={{ display: "flex", flexDirection: "column", gap: 10, flex: 1 }}>
-      <div style={{ fontSize: 14, color: "#1b1326", fontWeight: 600 }}>Login Successful!</div>
+      <div style={{ fontSize: 14, color: "#1f2328", fontWeight: 600 }}>Login Successful!</div>
       <div style={{ textAlign: "center" }}>
         <MockBtn width={56}>OK</MockBtn>
       </div>
@@ -369,7 +371,7 @@ const ErrorPopupMock: React.FC = () => (
       <Icon icon="mdi:close" width={22} />
     </div>
     <div style={{ display: "flex", flexDirection: "column", gap: 10, flex: 1 }}>
-      <div style={{ fontSize: 13, color: "#1b1326", fontWeight: 600 }}>
+      <div style={{ fontSize: 13, color: "#1f2328", fontWeight: 600 }}>
         Invalid Username or Password
       </div>
       <div style={{ textAlign: "center" }}>
@@ -472,7 +474,7 @@ const WaitEventActionLoop: React.FC = () => (
         alignItems: "center",
         gap: 8,
         minWidth: 150,
-        boxShadow: "0 0 24px rgba(201, 166, 107, 0.3)",
+        boxShadow: "0 0 24px color-mix(in srgb, var(--accent) 30%, transparent)",
       }}
     >
       <Icon icon="mdi:cursor-default-click" width={40} color="var(--accent)" />
@@ -499,7 +501,7 @@ const WaitEventActionLoop: React.FC = () => (
         alignItems: "center",
         gap: 8,
         minWidth: 150,
-        boxShadow: "0 0 24px rgba(103, 216, 196, 0.3)",
+        boxShadow: "0 0 24px color-mix(in srgb, var(--sync) 30%, transparent)",
       }}
     >
       <Icon icon="mdi:function-variant" width={40} color="var(--sync)" />
@@ -559,7 +561,7 @@ const CommandBridge: React.FC = () => (
         style={{
           padding: "8px 18px",
           borderRadius: 999,
-          backgroundColor: "rgba(201, 166, 107, 0.14)",
+          backgroundColor: "color-mix(in srgb, var(--accent) 14%, transparent)",
           border: "1.5px solid var(--accent)",
           color: "var(--accent)",
           fontFamily: "Roboto Mono, monospace",
@@ -585,7 +587,7 @@ const CommandBridge: React.FC = () => (
         style={{
           padding: "12px 20px",
           borderRadius: 10,
-          backgroundColor: "#0b0820",
+          backgroundColor: "var(--code-bg)",
           border: "1.5px solid var(--sync)",
           fontFamily: "Roboto Mono, monospace",
           fontSize: 16,
@@ -659,7 +661,7 @@ const NextTopicHero: React.FC = () => (
       backgroundColor: "var(--panel)",
       border: "2px solid var(--sync)",
       borderRadius: 20,
-      boxShadow: "0 0 60px rgba(103, 216, 196, 0.28)",
+      boxShadow: "0 0 60px color-mix(in srgb, var(--sync) 28%, transparent)",
     }}
   >
     <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
@@ -667,7 +669,7 @@ const NextTopicHero: React.FC = () => (
         style={{
           padding: "6px 16px",
           backgroundColor: "var(--sync)",
-          color: "#0d0a1c",
+          color: "var(--on-accent)",
           borderRadius: 999,
           fontSize: 18,
           fontWeight: 800,
@@ -689,7 +691,7 @@ const NextTopicHero: React.FC = () => (
         lineHeight: 1.55,
       }}
     >
-      Hard-coding <b style={hlGold}>admin / 1234</b> is fake. Real apps store users in a <b style={hlTeal}>database</b>. Meet entities, attributes, tables, primary keys, and foreign keys.
+      Hard-coding <b style={hlBlue}>admin / 1234</b> is fake. Real apps store users in a <b style={hlGreen}>database</b>. Meet entities, attributes, tables, primary keys, and foreign keys.
     </div>
     <div style={{ display: "flex", gap: 14, marginTop: 4, flexWrap: "wrap", justifyContent: "center" }}>
       {[
@@ -705,8 +707,8 @@ const NextTopicHero: React.FC = () => (
             alignItems: "center",
             gap: 10,
             padding: "10px 16px",
-            backgroundColor: "rgba(103, 216, 196, 0.12)",
-            border: "1px solid rgba(103, 216, 196, 0.4)",
+            backgroundColor: "color-mix(in srgb, var(--sync) 12%, transparent)",
+            border: "1px solid color-mix(in srgb, var(--sync) 40%, transparent)",
             borderRadius: 999,
           }}
         >
@@ -727,7 +729,6 @@ export const class12Ch4T41dEventHandlingDeck: Deck = {
   topic: "4.1d · Event Handling",
   topicCode: "4.1d",
   topicTitle: "Event Handling + Login Form",
-  theme: "class-12",
   accent: ACCENT,
   slides: [
     // 1. Hero
@@ -760,7 +761,7 @@ export const class12Ch4T41dEventHandlingDeck: Deck = {
                   <SuccessPopupMock />
                 </MockWindow>
               </div>
-              Make the window <b style={hlGold}>respond</b> to the user. Click a button, run a function.
+              Make the window <b style={hlBlue}>respond</b> to the user. Click a button, run a function.
             </>
           }
           accent={ACCENT}
@@ -781,7 +782,7 @@ export const class12Ch4T41dEventHandlingDeck: Deck = {
         >
           <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
             <p style={bookQuoteStyle}>
-              <b style={hlGold}>Event handling</b> and interactivity allow a program to respond to user actions. An <b style={hlGold}>event</b> is an action, such as <b>clicking a button</b> or <b>typing text</b>. The program <b>waits</b> for an event instead of running all the time. When an event occurs, a <b>specific task</b> is performed. This makes the application active and useful. Event handling is important in graphical programs. It helps control how the program behaves.
+              <b style={hlBlue}>Event handling</b> and interactivity allow a program to respond to user actions. An <b style={hlBlue}>event</b> is an action, such as <b>clicking a button</b> or <b>typing text</b>. The program <b>waits</b> for an event instead of running all the time. When an event occurs, a <b>specific task</b> is performed. This makes the application active and useful. Event handling is important in graphical programs. It helps control how the program behaves.
             </p>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 4 }}>
               <Icon icon="mdi:timeline-outline" width={22} height={22} color={ACCENT} />
@@ -832,7 +833,7 @@ export const class12Ch4T41dEventHandlingDeck: Deck = {
                 maxWidth: "100%",
                 maxHeight: "100%",
                 objectFit: "contain",
-                filter: "drop-shadow(0 0 40px rgba(201, 166, 107, 0.18))",
+                filter: "drop-shadow(0 0 40px color-mix(in srgb, var(--accent) 18%, transparent))",
               }}
             />
           </div>
@@ -852,7 +853,7 @@ export const class12Ch4T41dEventHandlingDeck: Deck = {
         >
           <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
             <p style={bookQuoteStyle}>
-              <b style={hlGold}>Event-driven programming</b> is based on actions called events. The program <b>remains idle</b> until an event occurs. Common events include <b>button clicks</b> and <b>key presses</b>. Each event is linked to a <b>specific function</b>. The function runs <b>only when the event happens</b>. This approach <b>saves system resources</b>. It is widely used in graphical user interfaces.
+              <b style={hlBlue}>Event-driven programming</b> is based on actions called events. The program <b>remains idle</b> until an event occurs. Common events include <b>button clicks</b> and <b>key presses</b>. Each event is linked to a <b>specific function</b>. The function runs <b>only when the event happens</b>. This approach <b>saves system resources</b>. It is widely used in graphical user interfaces.
             </p>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 4 }}>
               <Icon icon="mdi:brain" width={22} height={22} color={ACCENT} />
@@ -954,7 +955,7 @@ export const class12Ch4T41dEventHandlingDeck: Deck = {
             style={{
               marginTop: 18,
               padding: "12px 16px",
-              backgroundColor: "rgba(201, 166, 107, 0.08)",
+              backgroundColor: "color-mix(in srgb, var(--accent) 8%, transparent)",
               border: "1px dashed var(--accent)",
               borderRadius: 10,
               fontSize: 16,
@@ -962,7 +963,7 @@ export const class12Ch4T41dEventHandlingDeck: Deck = {
               textAlign: "center",
             }}
           >
-            Rule: <b style={hlGold}>one event → one function</b>. The function runs only when the event happens.
+            Rule: <b style={hlBlue}>one event → one function</b>. The function runs only when the event happens.
           </div>
         </SlideLayout>
       ),
@@ -980,7 +981,7 @@ export const class12Ch4T41dEventHandlingDeck: Deck = {
         >
           <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
             <p style={bookQuoteStyle}>
-              <b style={hlGold}>User input</b> is given through widgets like <b>entry fields</b> and <b>buttons</b>. Widgets are <b>connected to functions</b> in the program. When the widget is used, the connected function <b>executes</b>. This allows the program to process the input. For example, a <b>button click can display a message</b>. Proper connections ensure correct program behavior. This interaction improves user experience.
+              <b style={hlBlue}>User input</b> is given through widgets like <b>entry fields</b> and <b>buttons</b>. Widgets are <b>connected to functions</b> in the program. When the widget is used, the connected function <b>executes</b>. This allows the program to process the input. For example, a <b>button click can display a message</b>. Proper connections ensure correct program behavior. This interaction improves user experience.
             </p>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 4 }}>
               <Icon icon="mdi:transit-connection-variant" width={22} height={22} color={ACCENT} />
@@ -1050,13 +1051,13 @@ export const class12Ch4T41dEventHandlingDeck: Deck = {
               lineHeight: 1.6,
             }}
           >
-            Pass <b style={hlGold}>command=check_login</b> (no parentheses!) when creating the button. Tkinter saves the reference. When the user clicks, Tkinter calls the function for you.
+            Pass <b style={hlBlue}>command=check_login</b> (no parentheses!) when creating the button. Tkinter saves the reference. When the user clicks, Tkinter calls the function for you.
           </div>
           <div
             style={{
               marginTop: 14,
               padding: "12px 18px",
-              backgroundColor: "rgba(255, 141, 161, 0.08)",
+              backgroundColor: "color-mix(in srgb, var(--task) 8%, transparent)",
               border: "1px solid var(--task)",
               borderRadius: 10,
               fontSize: 15,
@@ -1096,12 +1097,12 @@ export const class12Ch4T41dEventHandlingDeck: Deck = {
           >
             <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
               <p style={bookQuoteStyle}>
-                A simple login form allows a user to enter a <b style={hlGold}>username</b> and <b style={hlGold}>password</b>. <b>Entry fields</b> are used to take the input from the user. A <b>button</b> is provided to <b>submit</b> the information. When the button is clicked, the program <b>checks the entered data</b>. A <b>message is then shown</b> for success or error.
+                A simple login form allows a user to enter a <b style={hlBlue}>username</b> and <b style={hlBlue}>password</b>. <b>Entry fields</b> are used to take the input from the user. A <b>button</b> is provided to <b>submit</b> the information. When the button is clicked, the program <b>checks the entered data</b>. A <b>message is then shown</b> for success or error.
               </p>
               <div
                 style={{
                   padding: "14px 18px",
-                  backgroundColor: "rgba(201, 166, 107, 0.08)",
+                  backgroundColor: "color-mix(in srgb, var(--accent) 8%, transparent)",
                   border: "1px dashed var(--accent)",
                   borderRadius: 10,
                   fontSize: 15,
@@ -1109,7 +1110,7 @@ export const class12Ch4T41dEventHandlingDeck: Deck = {
                   lineHeight: 1.5,
                 }}
               >
-                In the book's example, the valid credentials are <b style={hlGold}>admin</b> / <b style={hlGold}>1234</b>.
+                In the book's example, the valid credentials are <b style={hlBlue}>admin</b> / <b style={hlBlue}>1234</b>.
               </div>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 18, alignItems: "center" }}>
@@ -1185,7 +1186,7 @@ export const class12Ch4T41dEventHandlingDeck: Deck = {
                   lineHeight: 1.55,
                 }}
               >
-                <b style={hlGold}>Line 1-2:</b> Import Tkinter and the messagebox submodule for popup dialogs.
+                <b style={hlBlue}>Line 1-2:</b> Import Tkinter and the messagebox submodule for popup dialogs.
               </div>
               <div
                 style={{
@@ -1198,7 +1199,7 @@ export const class12Ch4T41dEventHandlingDeck: Deck = {
                   lineHeight: 1.55,
                 }}
               >
-                <b style={hlTeal}>Lines 5-7:</b> Create the main window, title it, set size to 300×200.
+                <b style={hlGreen}>Lines 5-7:</b> Create the main window, title it, set size to 300×200.
               </div>
               <div
                 style={{
@@ -1211,7 +1212,7 @@ export const class12Ch4T41dEventHandlingDeck: Deck = {
                   lineHeight: 1.55,
                 }}
               >
-                <b style={hlViolet}>check_login():</b> Reads both Entry fields with <code style={{ fontFamily: "Roboto Mono, monospace", color: "var(--microtask)" }}>.get()</code>, compares to <b>admin / 1234</b>, shows success or error popup.
+                <b style={hlOrange}>check_login():</b> Reads both Entry fields with <code style={{ fontFamily: "Roboto Mono, monospace", color: "var(--microtask)" }}>.get()</code>, compares to <b>admin / 1234</b>, shows success or error popup.
               </div>
             </div>
           </div>
@@ -1274,7 +1275,7 @@ export const class12Ch4T41dEventHandlingDeck: Deck = {
                   lineHeight: 1.55,
                 }}
               >
-                <b style={hlGold}>entry_user, entry_pass:</b> saved as variables so check_login() can read them with <code style={{ fontFamily: "Roboto Mono, monospace", color: "var(--accent)" }}>.get()</code>.
+                <b style={hlBlue}>entry_user, entry_pass:</b> saved as variables so check_login() can read them with <code style={{ fontFamily: "Roboto Mono, monospace", color: "var(--accent)" }}>.get()</code>.
               </div>
               <div
                 style={{
@@ -1287,7 +1288,7 @@ export const class12Ch4T41dEventHandlingDeck: Deck = {
                   lineHeight: 1.55,
                 }}
               >
-                <b style={hlTeal}>show="*":</b> masks each typed character so the password is hidden on screen.
+                <b style={hlGreen}>show="*":</b> masks each typed character so the password is hidden on screen.
               </div>
               <div
                 style={{
@@ -1300,7 +1301,7 @@ export const class12Ch4T41dEventHandlingDeck: Deck = {
                   lineHeight: 1.55,
                 }}
               >
-                <b style={hlViolet}>command=check_login:</b> links the button click to the function. No parentheses!
+                <b style={hlOrange}>command=check_login:</b> links the button click to the function. No parentheses!
               </div>
               <div
                 style={{
@@ -1405,11 +1406,11 @@ export const class12Ch4T41dEventHandlingDeck: Deck = {
               transition={{ type: "spring", damping: 16 }}
               style={{
                 padding: "32px 42px",
-                maxWidth: 1100,
-                backgroundColor: "rgba(249, 203, 76, 0.1)",
+                maxWidth: 1100 + FREED_WIDTH,
+                backgroundColor: "color-mix(in srgb, var(--api) 10%, transparent)",
                 border: "2px solid var(--warn)",
                 borderRadius: 20,
-                boxShadow: "0 0 60px rgba(249, 203, 76, 0.22)",
+                boxShadow: "0 0 60px color-mix(in srgb, var(--api) 22%, transparent)",
                 display: "flex",
                 alignItems: "center",
                 gap: 24,
@@ -1508,15 +1509,15 @@ export const class12Ch4T41dEventHandlingDeck: Deck = {
             style={{
               marginTop: 18,
               padding: "14px 18px",
-              backgroundColor: "rgba(228, 183, 255, 0.08)",
-              border: "1px dashed rgba(228, 183, 255, 0.5)",
+              backgroundColor: "color-mix(in srgb, var(--microtask) 8%, transparent)",
+              border: "1px dashed color-mix(in srgb, var(--microtask) 50%, transparent)",
               borderRadius: 10,
               fontSize: 15,
               color: "var(--text)",
               lineHeight: 1.55,
             }}
           >
-            <b style={hlViolet}>Big idea:</b> event-driven programming is the dominant style for UIs on every platform. Learn it here, use it for the next 30 years.
+            <b style={hlOrange}>Big idea:</b> event-driven programming is the dominant style for UIs on every platform. Learn it here, use it for the next 30 years.
           </div>
         </SlideLayout>
       ),

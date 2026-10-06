@@ -1,7 +1,7 @@
 /**
  * Class 12 CS · Chapter 4 · Sub-topic 4.1c · Layout Management (pack, grid, place)
  *
- * THEME: class-12 (Meridian · deep plum + muted gold).
+ * THEME: class-12 (GitHub Dark: near-black canvas, grey panels, blue accent).
  *
  * VERBATIM RULE: Every heading, definition, TIDBIT, code example, and key-point
  * sentence is copied EXACTLY from
@@ -16,6 +16,7 @@ import { motion } from "framer-motion";
 import type { CSSProperties, ReactNode } from "react";
 import type { Deck } from "../SlideDeck";
 import { Card, HeroSlide, SlideLayout, SplitSlide } from "../components/SlideLayout";
+import { FREED_WIDTH } from "../components/safeZone";
 
 const ACCENT = "var(--accent)";
 
@@ -27,9 +28,9 @@ const bookQuoteStyle: CSSProperties = {
   color: "var(--text)",
   margin: 0,
 };
-const hlGold: CSSProperties = { color: "var(--accent)", fontWeight: 700 };
-const hlTeal: CSSProperties = { color: "var(--sync)", fontWeight: 700 };
-const hlViolet: CSSProperties = { color: "var(--microtask)", fontWeight: 700 };
+const hlBlue: CSSProperties = { color: "var(--accent)", fontWeight: 700 };
+const hlGreen: CSSProperties = { color: "var(--sync)", fontWeight: 700 };
+const hlOrange: CSSProperties = { color: "var(--microtask)", fontWeight: 700 };
 
 // ── Stagger primitives ───────────────────────────────────────────────────
 
@@ -104,12 +105,13 @@ const PY_KEYWORDS = new Set([
 ]);
 const PY_BUILTINS = new Set(["print", "len", "range", "str", "int", "float", "list", "dict", "tuple"]);
 const PY_COLORS: Record<string, string> = {
-  keyword: "var(--accent)",
-  string: "var(--sync)",
-  comment: "var(--muted)",
-  function: "var(--microtask)",
-  builtin: "var(--api)",
-  number: "var(--task)",
+  // Syntax colours come from the chapter theme (src/themes.ts).
+  keyword: "var(--syn-keyword)",
+  string: "var(--syn-string)",
+  comment: "var(--syn-comment)",
+  function: "var(--syn-function)",
+  builtin: "var(--syn-builtin)",
+  number: "var(--syn-number)",
   punct: "var(--text)",
   identifier: "var(--text)",
   whitespace: "var(--text)",
@@ -182,14 +184,14 @@ const PythonCode: React.FC<{ source: string; fontSize?: number; maxHeight?: numb
       style={{
         margin: 0,
         padding: "20px 26px",
-        backgroundColor: "#0b0820",
+        backgroundColor: "var(--code-bg)",
         border: "1px solid var(--panel-border)",
         borderRadius: 12,
         fontFamily: "Roboto Mono, monospace",
         fontSize,
         lineHeight: 1.45,
         overflow: "auto",
-        boxShadow: "0 0 24px rgba(201, 166, 107, 0.15)",
+        boxShadow: "0 0 24px color-mix(in srgb, var(--accent) 15%, transparent)",
         maxHeight,
       }}
     >
@@ -225,17 +227,17 @@ const MockWindow: React.FC<{
       border: `1.5px solid ${accent}`,
       boxShadow: `0 0 32px ${accent}44`,
       backgroundColor: "#f5f0e4",
-      color: "#1b1326",
+      color: "#1f2328",
     }}
   >
     <div
       style={{
         padding: "8px 12px",
-        backgroundColor: "#2a2340",
+        backgroundColor: "var(--panel-elevated)",
         display: "flex",
         alignItems: "center",
         gap: 10,
-        color: "#eaddf0",
+        color: "var(--text)",
       }}
     >
       <Icon icon="mdi:leaf" width={16} color={accent} />
@@ -277,7 +279,7 @@ const MockBtn: React.FC<{
       fontWeight: 600,
       textAlign: "center",
       boxShadow: "inset 0 1px 0 rgba(255,255,255,0.5)",
-      color: "#1b1326",
+      color: "#1f2328",
       ...style,
     }}
   >
@@ -500,7 +502,7 @@ const NextTopicHero: React.FC = () => (
       backgroundColor: "var(--panel)",
       border: "2px solid var(--microtask)",
       borderRadius: 20,
-      boxShadow: "0 0 60px rgba(228, 183, 255, 0.28)",
+      boxShadow: "0 0 60px color-mix(in srgb, var(--microtask) 28%, transparent)",
     }}
   >
     <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
@@ -508,7 +510,7 @@ const NextTopicHero: React.FC = () => (
         style={{
           padding: "6px 16px",
           backgroundColor: "var(--microtask)",
-          color: "#0d0a1c",
+          color: "var(--on-accent)",
           borderRadius: 999,
           fontSize: 18,
           fontWeight: 800,
@@ -530,7 +532,7 @@ const NextTopicHero: React.FC = () => (
         lineHeight: 1.55,
       }}
     >
-      Static UI is boring. Make your window <b style={hlViolet}>respond to clicks and keypresses</b> with event-driven programming. We will build a working <b style={hlViolet}>Login Form</b> that shows success or error pop-ups.
+      Static UI is boring. Make your window <b style={hlOrange}>respond to clicks and keypresses</b> with event-driven programming. We will build a working <b style={hlOrange}>Login Form</b> that shows success or error pop-ups.
     </div>
     <div style={{ display: "flex", gap: 14, marginTop: 4, flexWrap: "wrap", justifyContent: "center" }}>
       {[
@@ -546,8 +548,8 @@ const NextTopicHero: React.FC = () => (
             alignItems: "center",
             gap: 10,
             padding: "10px 16px",
-            backgroundColor: "rgba(228, 183, 255, 0.12)",
-            border: "1px solid rgba(228, 183, 255, 0.4)",
+            backgroundColor: "color-mix(in srgb, var(--microtask) 12%, transparent)",
+            border: "1px solid color-mix(in srgb, var(--microtask) 40%, transparent)",
             borderRadius: 999,
           }}
         >
@@ -636,7 +638,6 @@ export const class12Ch4T41cLayoutManagementDeck: Deck = {
   topic: "4.1c · Layout Management",
   topicCode: "4.1c",
   topicTitle: "Layout Management (pack, grid, place)",
-  theme: "class-12",
   accent: ACCENT,
   slides: [
     // 1. Hero
@@ -691,7 +692,7 @@ export const class12Ch4T41cLayoutManagementDeck: Deck = {
         >
           <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
             <p style={bookQuoteStyle}>
-              <b style={hlGold}>Layout management</b> is used to arrange widgets inside a window in a proper way. It decides the <b>position and size</b> of each widget on the screen. Good layout management makes the interface <b>clear and easy to use</b>. It also helps in keeping the window <b>organized</b>. Tkinter provides different methods to manage layout. Each method has its own way of placing widgets.
+              <b style={hlBlue}>Layout management</b> is used to arrange widgets inside a window in a proper way. It decides the <b>position and size</b> of each widget on the screen. Good layout management makes the interface <b>clear and easy to use</b>. It also helps in keeping the window <b>organized</b>. Tkinter provides different methods to manage layout. Each method has its own way of placing widgets.
             </p>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 4 }}>
               <Icon icon="mdi:view-dashboard-outline" width={22} height={22} color={ACCENT} />
@@ -770,11 +771,11 @@ export const class12Ch4T41cLayoutManagementDeck: Deck = {
               transition={{ type: "spring", damping: 16 }}
               style={{
                 padding: "36px 48px",
-                maxWidth: 1100,
-                backgroundColor: "rgba(255, 141, 161, 0.08)",
+                maxWidth: 1100 + FREED_WIDTH,
+                backgroundColor: "color-mix(in srgb, var(--task) 8%, transparent)",
                 border: "2px solid var(--task)",
                 borderRadius: 20,
-                boxShadow: "0 0 60px rgba(255, 141, 161, 0.25)",
+                boxShadow: "0 0 60px color-mix(in srgb, var(--task) 25%, transparent)",
                 display: "flex",
                 alignItems: "center",
                 gap: 24,
@@ -815,7 +816,7 @@ export const class12Ch4T41cLayoutManagementDeck: Deck = {
         >
           <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
             <p style={bookQuoteStyle}>
-              Tkinter provides <b style={hlGold}>three ways</b> to arrange widgets. Each is a Python method you call on the widget.
+              Tkinter provides <b style={hlBlue}>three ways</b> to arrange widgets. Each is a Python method you call on the widget.
             </p>
             <Stagger style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 18 }}>
               <StaggerItem style={{ height: "100%" }}>
@@ -879,7 +880,7 @@ export const class12Ch4T41cLayoutManagementDeck: Deck = {
                 style={{
                   padding: "6px 14px",
                   borderRadius: 999,
-                  backgroundColor: "rgba(201, 166, 107, 0.14)",
+                  backgroundColor: "color-mix(in srgb, var(--accent) 14%, transparent)",
                   border: "1px solid var(--accent)",
                   fontSize: 13,
                   color: "var(--accent)",
@@ -897,7 +898,7 @@ export const class12Ch4T41cLayoutManagementDeck: Deck = {
                 style={{
                   padding: "6px 14px",
                   borderRadius: 999,
-                  backgroundColor: "rgba(103, 216, 196, 0.14)",
+                  backgroundColor: "color-mix(in srgb, var(--sync) 14%, transparent)",
                   border: "1px solid var(--sync)",
                   fontSize: 13,
                   color: "var(--sync)",
@@ -915,7 +916,7 @@ export const class12Ch4T41cLayoutManagementDeck: Deck = {
                 style={{
                   padding: "6px 14px",
                   borderRadius: 999,
-                  backgroundColor: "rgba(228, 183, 255, 0.14)",
+                  backgroundColor: "color-mix(in srgb, var(--microtask) 14%, transparent)",
                   border: "1px solid var(--microtask)",
                   fontSize: 13,
                   color: "var(--microtask)",
@@ -930,7 +931,7 @@ export const class12Ch4T41cLayoutManagementDeck: Deck = {
             style={{
               marginTop: 24,
               padding: "14px 20px",
-              backgroundColor: "rgba(201, 166, 107, 0.08)",
+              backgroundColor: "color-mix(in srgb, var(--accent) 8%, transparent)",
               border: "1px dashed var(--accent)",
               borderRadius: 10,
               fontSize: 16,
@@ -939,7 +940,7 @@ export const class12Ch4T41cLayoutManagementDeck: Deck = {
               lineHeight: 1.5,
             }}
           >
-            Choose based on your need: <b style={hlGold}>simplicity</b> (pack) · <b style={hlTeal}>structure</b> (grid) · <b style={hlViolet}>precision</b> (place).
+            Choose based on your need: <b style={hlBlue}>simplicity</b> (pack) · <b style={hlGreen}>structure</b> (grid) · <b style={hlOrange}>precision</b> (place).
           </div>
         </SlideLayout>
       ),
@@ -975,7 +976,7 @@ export const class12Ch4T41cLayoutManagementDeck: Deck = {
                 maxWidth: "100%",
                 maxHeight: "100%",
                 objectFit: "contain",
-                filter: "drop-shadow(0 0 40px rgba(201, 166, 107, 0.18))",
+                filter: "drop-shadow(0 0 40px color-mix(in srgb, var(--accent) 18%, transparent))",
               }}
             />
           </div>
@@ -1115,7 +1116,7 @@ export const class12Ch4T41cLayoutManagementDeck: Deck = {
               <div
                 style={{
                   padding: "10px 14px",
-                  backgroundColor: "rgba(103, 216, 196, 0.1)",
+                  backgroundColor: "color-mix(in srgb, var(--sync) 10%, transparent)",
                   border: "1px dashed var(--sync)",
                   borderRadius: 8,
                   fontSize: 13,
@@ -1124,7 +1125,7 @@ export const class12Ch4T41cLayoutManagementDeck: Deck = {
                   maxWidth: 280,
                 }}
               >
-                <b style={hlTeal}>columnspan=2</b> stretches Button 3 across both columns. <b style={hlTeal}>grid_columnconfigure(0, weight=1)</b> keeps content centred when the window grows.
+                <b style={hlGreen}>columnspan=2</b> stretches Button 3 across both columns. <b style={hlGreen}>grid_columnconfigure(0, weight=1)</b> keeps content centred when the window grows.
               </div>
             </div>
           </div>
@@ -1191,7 +1192,7 @@ export const class12Ch4T41cLayoutManagementDeck: Deck = {
               <div
                 style={{
                   padding: "10px 14px",
-                  backgroundColor: "rgba(228, 183, 255, 0.1)",
+                  backgroundColor: "color-mix(in srgb, var(--microtask) 10%, transparent)",
                   border: "1px dashed var(--microtask)",
                   borderRadius: 8,
                   fontSize: 13,
@@ -1200,7 +1201,7 @@ export const class12Ch4T41cLayoutManagementDeck: Deck = {
                   maxWidth: 280,
                 }}
               >
-                <b style={hlViolet}>x,y</b> are pixels from the top-left. Full control, but you must do the maths yourself.
+                <b style={hlOrange}>x,y</b> are pixels from the top-left. Full control, but you must do the maths yourself.
               </div>
             </div>
           </div>
@@ -1296,7 +1297,7 @@ export const class12Ch4T41cLayoutManagementDeck: Deck = {
         >
           <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
             <p style={bookQuoteStyle}>
-              A <b style={hlGold}>clean interface</b> has well-arranged widgets and enough <b>space between them</b>. Text and buttons should be <b>clear and easy to read</b>. <b style={hlGold}>Responsive interfaces</b> adjust their layout when the window size changes. This helps the program work well on <b>different screen sizes</b>. Proper <b>alignment</b> improves the overall look of the application. Simple design makes the interface <b>user-friendly</b>.
+              A <b style={hlBlue}>clean interface</b> has well-arranged widgets and enough <b>space between them</b>. Text and buttons should be <b>clear and easy to read</b>. <b style={hlBlue}>Responsive interfaces</b> adjust their layout when the window size changes. This helps the program work well on <b>different screen sizes</b>. Proper <b>alignment</b> improves the overall look of the application. Simple design makes the interface <b>user-friendly</b>.
             </p>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 4 }}>
               <Icon icon="mdi:check-circle-outline" width={22} height={22} color={ACCENT} />
@@ -1422,15 +1423,15 @@ export const class12Ch4T41cLayoutManagementDeck: Deck = {
             style={{
               marginTop: 18,
               padding: "14px 18px",
-              backgroundColor: "rgba(228, 183, 255, 0.08)",
-              border: "1px dashed rgba(228, 183, 255, 0.5)",
+              backgroundColor: "color-mix(in srgb, var(--microtask) 8%, transparent)",
+              border: "1px dashed color-mix(in srgb, var(--microtask) 50%, transparent)",
               borderRadius: 10,
               fontSize: 15,
               color: "var(--text)",
               lineHeight: 1.55,
             }}
           >
-            <b style={hlViolet}>Rule of thumb:</b> start with pack() for prototypes, switch to grid() when you build a real form, reach for place() only if you need pixel precision.
+            <b style={hlOrange}>Rule of thumb:</b> start with pack() for prototypes, switch to grid() when you build a real form, reach for place() only if you need pixel precision.
           </div>
         </SlideLayout>
       ),

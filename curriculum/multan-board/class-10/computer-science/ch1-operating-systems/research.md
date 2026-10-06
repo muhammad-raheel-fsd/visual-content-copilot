@@ -26,6 +26,7 @@ Before generating anything for a topic, verify all prerequisites are met. Skip a
 ### Prerequisites checklist
 
 - [ ] Muhammad has explicitly named the topic (e.g. "topic 1.2"). Never guess.
+- [ ] (New chapter only) Muhammad has chosen the chapter's slide theme and it is set in `CHAPTER_THEMES` in `apps/slides/src/themes.ts` (RUNBOOK R-L). This chapter uses `horizon`.
 - [ ] Parsed topic file exists at `curriculum/multan-board/class-10/computer-science/ch1-operating-systems/source/t<T>-<slug>.md`. If missing, extract from the PDF page range using the vision Read tool. Never use `pdftotext` (watermark defeats it). Update the chapter's `README.md` status table.
 - [ ] I have re-read `curriculum/RUNBOOK.md` (question file format + naming conventions).
 - [ ] I have re-read the durable rules: verbatim wording, no em dashes, Muhammad Raheel byline (never "bytemotion"), never "Tit Bytes" (use "Tid-Bytes"), every slide has a visual, simple English short sentences.

@@ -15,9 +15,11 @@ const HERE = dirname(fileURLToPath(import.meta.url));
 // library/scripts/remotion/*.mjs → repo root is ../../..
 const THEME_PATH = join(HERE, "..", "..", "..", "apps", "remotion", "components", "theme.ts");
 const CANVAS = { w: 1920, h: 1080 };
-// Reserved for Muhammad's OBS webcam overlay in the bottom-right corner.
-// No rect may extend past x = CANVAS.w - SAFE_ZONE_RIGHT.
-const SAFE_ZONE_RIGHT = 192;
+// OBS webcam safe zone. DISABLED 2026-10-04 (webcam is placed in OBS, videos use
+// the full width). Keep in sync with SAFE_ZONE_RIGHT in apps/remotion/components/theme.ts.
+// While on, no rect could extend past x = CANVAS.w - SAFE_ZONE_RIGHT.
+// const SAFE_ZONE_RIGHT = 192;
+const SAFE_ZONE_RIGHT = 0;
 const CONTENT_MAX_X = CANVAS.w - SAFE_ZONE_RIGHT;
 
 const source = readFileSync(THEME_PATH, "utf8");

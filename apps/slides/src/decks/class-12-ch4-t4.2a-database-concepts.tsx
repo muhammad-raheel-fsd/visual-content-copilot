@@ -1,7 +1,7 @@
 /**
  * Class 12 CS · Chapter 4 · Sub-topic 4.2a · Database Concepts + SQL Structure
  *
- * THEME: class-12 (Meridian · deep plum + muted gold).
+ * THEME: class-12 (GitHub Dark: near-black canvas, grey panels, blue accent).
  *
  * VERBATIM RULE: Definitions (Entity, Attribute, Relationship, Identifier),
  * 5 "Understanding Databases" bullets, DO YOU KNOW box, Figure 4.3 data, and
@@ -18,6 +18,7 @@ import { motion } from "framer-motion";
 import type { CSSProperties, ReactNode } from "react";
 import type { Deck } from "../SlideDeck";
 import { Card, HeroSlide, SlideLayout, SplitSlide } from "../components/SlideLayout";
+import { FREED_WIDTH } from "../components/safeZone";
 
 const ACCENT = "var(--accent)";
 
@@ -29,9 +30,9 @@ const bookQuoteStyle: CSSProperties = {
   color: "var(--text)",
   margin: 0,
 };
-const hlGold: CSSProperties = { color: "var(--accent)", fontWeight: 700 };
-const hlTeal: CSSProperties = { color: "var(--sync)", fontWeight: 700 };
-const hlViolet: CSSProperties = { color: "var(--microtask)", fontWeight: 700 };
+const hlBlue: CSSProperties = { color: "var(--accent)", fontWeight: 700 };
+const hlGreen: CSSProperties = { color: "var(--sync)", fontWeight: 700 };
+const hlOrange: CSSProperties = { color: "var(--microtask)", fontWeight: 700 };
 
 // ── Stagger primitives ───────────────────────────────────────────────────
 
@@ -174,7 +175,7 @@ const DataTable: React.FC<{
       style={{
         padding: "8px 14px",
         backgroundColor: accent,
-        color: "#0d0a1c",
+        color: "var(--on-accent)",
         fontWeight: 800,
         fontSize: 14,
         letterSpacing: 1,
@@ -187,7 +188,7 @@ const DataTable: React.FC<{
       style={{
         borderCollapse: "collapse",
         width: "100%",
-        color: "#1b1326",
+        color: "#1f2328",
         fontFamily: "Roboto Mono, monospace",
       }}
     >
@@ -343,7 +344,7 @@ const SqlRow: React.FC<{ kind: string; cmd: string; purpose: string; color: stri
     <code
       style={{
         padding: "6px 10px",
-        backgroundColor: "#0b0820",
+        backgroundColor: "var(--code-bg)",
         borderRadius: 6,
         fontFamily: "Roboto Mono, monospace",
         fontSize: 14,
@@ -408,7 +409,7 @@ const NextTopicHero: React.FC = () => (
       backgroundColor: "var(--panel)",
       border: "2px solid var(--sync)",
       borderRadius: 20,
-      boxShadow: "0 0 60px rgba(103, 216, 196, 0.28)",
+      boxShadow: "0 0 60px color-mix(in srgb, var(--sync) 28%, transparent)",
     }}
   >
     <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
@@ -416,7 +417,7 @@ const NextTopicHero: React.FC = () => (
         style={{
           padding: "6px 16px",
           backgroundColor: "var(--sync)",
-          color: "#0d0a1c",
+          color: "var(--on-accent)",
           borderRadius: 999,
           fontSize: 18,
           fontWeight: 800,
@@ -438,7 +439,7 @@ const NextTopicHero: React.FC = () => (
         lineHeight: 1.55,
       }}
     >
-      Tables on paper are nice. Now <b style={hlTeal}>Python</b> actually opens the file, runs <b style={hlGold}>sqlite3</b> queries, and talks to the database.
+      Tables on paper are nice. Now <b style={hlGreen}>Python</b> actually opens the file, runs <b style={hlBlue}>sqlite3</b> queries, and talks to the database.
     </div>
     <div style={{ display: "flex", gap: 14, marginTop: 4, flexWrap: "wrap", justifyContent: "center" }}>
       {[
@@ -454,8 +455,8 @@ const NextTopicHero: React.FC = () => (
             alignItems: "center",
             gap: 10,
             padding: "10px 16px",
-            backgroundColor: "rgba(103, 216, 196, 0.12)",
-            border: "1px solid rgba(103, 216, 196, 0.4)",
+            backgroundColor: "color-mix(in srgb, var(--sync) 12%, transparent)",
+            border: "1px solid color-mix(in srgb, var(--sync) 40%, transparent)",
             borderRadius: 999,
           }}
         >
@@ -498,7 +499,6 @@ export const class12Ch4T42aDatabaseConceptsDeck: Deck = {
   topic: "4.2a · Databases + SQL",
   topicCode: "4.2a",
   topicTitle: "Database Concepts + SQL Structure",
-  theme: "class-12",
   accent: ACCENT,
   slides: [
     // 1. Hero
@@ -517,7 +517,7 @@ export const class12Ch4T42aDatabaseConceptsDeck: Deck = {
               <div style={{ marginBottom: 24 }}>
                 <HeroTablePreview />
               </div>
-              Where <b style={hlGold}>real</b> app data lives. Tables, rows, keys, and the SQL that talks to them.
+              Where <b style={hlBlue}>real</b> app data lives. Tables, rows, keys, and the SQL that talks to them.
             </>
           }
           accent={ACCENT}
@@ -538,7 +538,7 @@ export const class12Ch4T42aDatabaseConceptsDeck: Deck = {
         >
           <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
             <p style={bookQuoteStyle}>
-              Working with databases in Python involves <b style={hlGold}>storing and managing data</b> using database systems. Python programs can connect to databases to <b>insert</b>, <b>retrieve</b>, <b>update</b>, and <b>delete</b> data. Databases allow applications to handle <b>large amounts of information</b> efficiently. Using databases helps maintain <b>data accuracy and consistency</b>. Python supports database operations through <b>built-in and external libraries</b>.
+              Working with databases in Python involves <b style={hlBlue}>storing and managing data</b> using database systems. Python programs can connect to databases to <b>insert</b>, <b>retrieve</b>, <b>update</b>, and <b>delete</b> data. Databases allow applications to handle <b>large amounts of information</b> efficiently. Using databases helps maintain <b>data accuracy and consistency</b>. Python supports database operations through <b>built-in and external libraries</b>.
             </p>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 4 }}>
               <Icon icon="mdi:database-outline" width={22} height={22} color={ACCENT} />
@@ -617,11 +617,11 @@ export const class12Ch4T42aDatabaseConceptsDeck: Deck = {
               transition={{ type: "spring", damping: 16 }}
               style={{
                 padding: "36px 48px",
-                maxWidth: 1100,
-                backgroundColor: "rgba(123, 184, 227, 0.1)",
+                maxWidth: 1100 + FREED_WIDTH,
+                backgroundColor: "color-mix(in srgb, var(--accent) 10%, transparent)",
                 border: "2px solid var(--api)",
                 borderRadius: 20,
-                boxShadow: "0 0 60px rgba(123, 184, 227, 0.25)",
+                boxShadow: "0 0 60px color-mix(in srgb, var(--accent) 25%, transparent)",
                 display: "flex",
                 alignItems: "center",
                 gap: 24,
@@ -662,7 +662,7 @@ export const class12Ch4T42aDatabaseConceptsDeck: Deck = {
         >
           <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
             <p style={bookQuoteStyle}>
-              A <b style={hlGold}>database</b> is an <b>organized collection of data</b> stored in a <b>structured format</b>. It allows data to be <b>accessed and managed easily</b>. Databases <b>reduce data duplication</b> and <b>improve reliability</b>. They support <b>secure storage</b> of information. Databases are commonly used in many types of software applications.
+              A <b style={hlBlue}>database</b> is an <b>organized collection of data</b> stored in a <b>structured format</b>. It allows data to be <b>accessed and managed easily</b>. Databases <b>reduce data duplication</b> and <b>improve reliability</b>. They support <b>secure storage</b> of information. Databases are commonly used in many types of software applications.
             </p>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 4 }}>
               <Icon icon="mdi:check-circle-outline" width={22} height={22} color={ACCENT} />
@@ -764,7 +764,7 @@ export const class12Ch4T42aDatabaseConceptsDeck: Deck = {
             style={{
               marginTop: 18,
               padding: "14px 20px",
-              backgroundColor: "rgba(201, 166, 107, 0.08)",
+              backgroundColor: "color-mix(in srgb, var(--accent) 8%, transparent)",
               border: "1px dashed var(--accent)",
               borderRadius: 10,
               fontSize: 16,
@@ -773,7 +773,7 @@ export const class12Ch4T42aDatabaseConceptsDeck: Deck = {
               lineHeight: 1.5,
             }}
           >
-            Design starts with <b style={hlGold}>entities</b>, pins <b style={hlTeal}>attributes</b> on them, names <b style={hlViolet}>relationships</b>, then picks an <b style={{ color: "var(--task)", fontWeight: 700 }}>identifier</b>.
+            Design starts with <b style={hlBlue}>entities</b>, pins <b style={hlGreen}>attributes</b> on them, names <b style={hlOrange}>relationships</b>, then picks an <b style={{ color: "var(--task)", fontWeight: 700 }}>identifier</b>.
           </div>
         </SlideLayout>
       ),
@@ -799,7 +799,7 @@ export const class12Ch4T42aDatabaseConceptsDeck: Deck = {
                 backgroundColor: "var(--panel)",
                 border: "1.5px solid var(--accent)",
                 borderRadius: 14,
-                boxShadow: "0 0 24px rgba(201, 166, 107, 0.22)",
+                boxShadow: "0 0 24px color-mix(in srgb, var(--accent) 22%, transparent)",
               }}
             >
               <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
@@ -836,7 +836,7 @@ export const class12Ch4T42aDatabaseConceptsDeck: Deck = {
                       gap: 8,
                       padding: "8px 14px",
                       borderRadius: 999,
-                      backgroundColor: "rgba(201, 166, 107, 0.12)",
+                      backgroundColor: "color-mix(in srgb, var(--accent) 12%, transparent)",
                       border: "1px solid var(--accent)",
                     }}
                   >
@@ -857,7 +857,7 @@ export const class12Ch4T42aDatabaseConceptsDeck: Deck = {
                 backgroundColor: "var(--panel)",
                 border: "1.5px solid var(--sync)",
                 borderRadius: 14,
-                boxShadow: "0 0 24px rgba(103, 216, 196, 0.22)",
+                boxShadow: "0 0 24px color-mix(in srgb, var(--sync) 22%, transparent)",
               }}
             >
               <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
@@ -893,8 +893,8 @@ export const class12Ch4T42aDatabaseConceptsDeck: Deck = {
                       gap: 12,
                       padding: "8px 14px",
                       borderRadius: 10,
-                      backgroundColor: "rgba(103, 216, 196, 0.08)",
-                      border: "1px solid rgba(103, 216, 196, 0.4)",
+                      backgroundColor: "color-mix(in srgb, var(--sync) 8%, transparent)",
+                      border: "1px solid color-mix(in srgb, var(--sync) 40%, transparent)",
                     }}
                   >
                     <Icon icon={a.icon} width={22} color="var(--sync)" />
@@ -930,7 +930,7 @@ export const class12Ch4T42aDatabaseConceptsDeck: Deck = {
                 backgroundColor: "var(--panel)",
                 border: "1.5px solid var(--microtask)",
                 borderRadius: 14,
-                boxShadow: "0 0 24px rgba(228, 183, 255, 0.22)",
+                boxShadow: "0 0 24px color-mix(in srgb, var(--microtask) 22%, transparent)",
               }}
             >
               <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
@@ -960,7 +960,7 @@ export const class12Ch4T42aDatabaseConceptsDeck: Deck = {
                   justifyContent: "center",
                   gap: 16,
                   padding: "18px 14px",
-                  backgroundColor: "rgba(228, 183, 255, 0.08)",
+                  backgroundColor: "color-mix(in srgb, var(--microtask) 8%, transparent)",
                   border: "1px dashed var(--microtask)",
                   borderRadius: 12,
                 }}
@@ -989,7 +989,7 @@ export const class12Ch4T42aDatabaseConceptsDeck: Deck = {
                       padding: "4px 12px",
                       borderRadius: 999,
                       backgroundColor: "var(--microtask)",
-                      color: "#0d0a1c",
+                      color: "var(--on-accent)",
                       fontSize: 13,
                       fontWeight: 800,
                       fontStyle: "italic",
@@ -1012,7 +1012,7 @@ export const class12Ch4T42aDatabaseConceptsDeck: Deck = {
                 </div>
               </div>
               <div style={{ fontSize: 14, color: "var(--muted)", lineHeight: 1.5 }}>
-                <b style={hlViolet}>enrols in</b> is the relationship. It connects two entities.
+                <b style={hlOrange}>enrols in</b> is the relationship. It connects two entities.
               </div>
             </div>
             <div
@@ -1024,7 +1024,7 @@ export const class12Ch4T42aDatabaseConceptsDeck: Deck = {
                 backgroundColor: "var(--panel)",
                 border: "1.5px solid var(--task)",
                 borderRadius: 14,
-                boxShadow: "0 0 24px rgba(255, 141, 161, 0.22)",
+                boxShadow: "0 0 24px color-mix(in srgb, var(--task) 22%, transparent)",
               }}
             >
               <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
@@ -1048,7 +1048,7 @@ export const class12Ch4T42aDatabaseConceptsDeck: Deck = {
               <div
                 style={{
                   padding: "14px 16px",
-                  backgroundColor: "rgba(255, 141, 161, 0.08)",
+                  backgroundColor: "color-mix(in srgb, var(--task) 8%, transparent)",
                   border: "1px dashed var(--task)",
                   borderRadius: 10,
                   fontSize: 16,
@@ -1056,7 +1056,7 @@ export const class12Ch4T42aDatabaseConceptsDeck: Deck = {
                   lineHeight: 1.55,
                 }}
               >
-                For the entity <b style={hlGold}>Student</b>, <b style={{ color: "var(--task)" }}>Roll Number</b> can be used as an identifier because <b>each student has a unique roll number</b>.
+                For the entity <b style={hlBlue}>Student</b>, <b style={{ color: "var(--task)" }}>Roll Number</b> can be used as an identifier because <b>each student has a unique roll number</b>.
               </div>
               <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 4 }}>
                 {["101 Kiran", "102 Ibrahim", "103 M Kamal", "104 Zainab"].map((s) => (
@@ -1152,7 +1152,7 @@ export const class12Ch4T42aDatabaseConceptsDeck: Deck = {
             style={{
               marginTop: 18,
               padding: "12px 18px",
-              backgroundColor: "rgba(201, 166, 107, 0.08)",
+              backgroundColor: "color-mix(in srgb, var(--accent) 8%, transparent)",
               border: "1px dashed var(--accent)",
               borderRadius: 10,
               fontSize: 15,
@@ -1270,7 +1270,7 @@ export const class12Ch4T42aDatabaseConceptsDeck: Deck = {
                 maxWidth: "100%",
                 maxHeight: "100%",
                 objectFit: "contain",
-                filter: "drop-shadow(0 0 40px rgba(201, 166, 107, 0.18))",
+                filter: "drop-shadow(0 0 40px color-mix(in srgb, var(--accent) 18%, transparent))",
               }}
             />
           </div>
@@ -1290,7 +1290,7 @@ export const class12Ch4T42aDatabaseConceptsDeck: Deck = {
         >
           <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
             <p style={bookQuoteStyle}>
-              Relational databases organize data into <b style={hlGold}>tables</b> made of <b>rows and columns</b>. Each table stores related data in a <b>structured manner</b>. Relationships between tables are maintained using <b>keys</b>. <b style={hlGold}>SQL</b> stands for <b>Structured Query Language</b> and is used to <b>interact with databases</b>. SQL commands help <b>create, read, update, and delete</b> data.
+              Relational databases organize data into <b style={hlBlue}>tables</b> made of <b>rows and columns</b>. Each table stores related data in a <b>structured manner</b>. Relationships between tables are maintained using <b>keys</b>. <b style={hlBlue}>SQL</b> stands for <b>Structured Query Language</b> and is used to <b>interact with databases</b>. SQL commands help <b>create, read, update, and delete</b> data.
             </p>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 4 }}>
               <Icon icon="mdi:code-tags" width={22} height={22} color={ACCENT} />
@@ -1404,15 +1404,15 @@ export const class12Ch4T42aDatabaseConceptsDeck: Deck = {
             style={{
               marginTop: 18,
               padding: "14px 18px",
-              backgroundColor: "rgba(228, 183, 255, 0.08)",
-              border: "1px dashed rgba(228, 183, 255, 0.5)",
+              backgroundColor: "color-mix(in srgb, var(--microtask) 8%, transparent)",
+              border: "1px dashed color-mix(in srgb, var(--microtask) 50%, transparent)",
               borderRadius: 10,
               fontSize: 15,
               color: "var(--text)",
               lineHeight: 1.55,
             }}
           >
-            <b style={hlViolet}>Rule of thumb:</b> if your data is tabular with clear relationships (students, courses, orders, invoices), use a relational SQL database. For free-form documents, consider a NoSQL one.
+            <b style={hlOrange}>Rule of thumb:</b> if your data is tabular with clear relationships (students, courses, orders, invoices), use a relational SQL database. For free-form documents, consider a NoSQL one.
           </div>
         </SlideLayout>
       ),

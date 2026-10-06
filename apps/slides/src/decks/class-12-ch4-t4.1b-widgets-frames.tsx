@@ -1,7 +1,7 @@
 /**
  * Class 12 CS · Chapter 4 · Sub-topic 4.1b · Tkinter Widgets + Frames
  *
- * THEME: class-12 (Meridian · deep plum + muted gold).
+ * THEME: class-12 (GitHub Dark: near-black canvas, grey panels, blue accent).
  *
  * VERBATIM RULE: Every heading, definition, CLASS ACTIVITY box, code example,
  * and key-point sentence is copied EXACTLY from
@@ -27,9 +27,9 @@ const bookQuoteStyle: CSSProperties = {
   color: "var(--text)",
   margin: 0,
 };
-const hlGold: CSSProperties = { color: "var(--accent)", fontWeight: 700 };
-const hlTeal: CSSProperties = { color: "var(--sync)", fontWeight: 700 };
-const hlViolet: CSSProperties = { color: "var(--microtask)", fontWeight: 700 };
+const hlBlue: CSSProperties = { color: "var(--accent)", fontWeight: 700 };
+const hlGreen: CSSProperties = { color: "var(--sync)", fontWeight: 700 };
+const hlOrange: CSSProperties = { color: "var(--microtask)", fontWeight: 700 };
 
 // ── Stagger primitives ───────────────────────────────────────────────────
 
@@ -125,12 +125,13 @@ const PY_KEYWORDS = new Set([
 const PY_BUILTINS = new Set(["print", "len", "range", "str", "int", "float", "list", "dict", "tuple"]);
 
 const PY_COLORS: Record<string, string> = {
-  keyword: "var(--accent)",
-  string: "var(--sync)",
-  comment: "var(--muted)",
-  function: "var(--microtask)",
-  builtin: "var(--api)",
-  number: "var(--task)",
+  // Syntax colours come from the chapter theme (src/themes.ts).
+  keyword: "var(--syn-keyword)",
+  string: "var(--syn-string)",
+  comment: "var(--syn-comment)",
+  function: "var(--syn-function)",
+  builtin: "var(--syn-builtin)",
+  number: "var(--syn-number)",
   punct: "var(--text)",
   identifier: "var(--text)",
   whitespace: "var(--text)",
@@ -203,14 +204,14 @@ const PythonCode: React.FC<{ source: string; fontSize?: number; maxHeight?: numb
       style={{
         margin: 0,
         padding: "20px 26px",
-        backgroundColor: "#0b0820",
+        backgroundColor: "var(--code-bg)",
         border: "1px solid var(--panel-border)",
         borderRadius: 12,
         fontFamily: "Roboto Mono, monospace",
         fontSize,
         lineHeight: 1.45,
         overflow: "auto",
-        boxShadow: "0 0 24px rgba(201, 166, 107, 0.15)",
+        boxShadow: "0 0 24px color-mix(in srgb, var(--accent) 15%, transparent)",
         maxHeight,
       }}
     >
@@ -245,17 +246,17 @@ const MockWindow: React.FC<{
       border: `1.5px solid ${accent}`,
       boxShadow: `0 0 32px ${accent}44`,
       backgroundColor: "#f5f0e4",
-      color: "#1b1326",
+      color: "#1f2328",
     }}
   >
     <div
       style={{
         padding: "8px 12px",
-        backgroundColor: "#2a2340",
+        backgroundColor: "var(--panel-elevated)",
         display: "flex",
         alignItems: "center",
         gap: 10,
-        color: "#eaddf0",
+        color: "var(--text)",
       }}
     >
       <Icon icon="mdi:leaf" width={16} color={accent} />
@@ -290,7 +291,7 @@ const MockFrame: React.FC<{
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      color: "#1b1326",
+      color: "#1f2328",
       fontSize: 16,
       fontWeight: 500,
     }}
@@ -304,7 +305,7 @@ const MockLabel: React.FC<{ children: ReactNode }> = ({ children }) => (
     style={{
       textAlign: "center",
       fontSize: 15,
-      color: "#1b1326",
+      color: "#1f2328",
       padding: "10px 20px",
     }}
   >
@@ -361,7 +362,7 @@ const MockMenuBar: React.FC = () => (
     }}
   >
     {["File", "Edit", "View", "Help"].map((m) => (
-      <span key={m} style={{ color: "#1b1326" }}>{m}</span>
+      <span key={m} style={{ color: "#1f2328" }}>{m}</span>
     ))}
   </div>
 );
@@ -373,7 +374,7 @@ const MockListbox: React.FC<{ items: string[] }> = ({ items }) => (
       border: "1px solid #999",
       backgroundColor: "#ffffff",
       fontSize: 14,
-      color: "#1b1326",
+      color: "#1f2328",
       fontFamily: "sans-serif",
     }}
   >
@@ -383,7 +384,7 @@ const MockListbox: React.FC<{ items: string[] }> = ({ items }) => (
         style={{
           padding: "4px 10px",
           backgroundColor: i === 1 ? "#3b82f6" : "transparent",
-          color: i === 1 ? "#ffffff" : "#1b1326",
+          color: i === 1 ? "#ffffff" : "#1f2328",
         }}
       >
         {item}
@@ -445,7 +446,7 @@ const BuildingBlock: React.FC<{
         height: 28,
         borderRadius: "50%",
         backgroundColor: color,
-        color: "#0d0a1c",
+        color: "var(--on-accent)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -575,7 +576,7 @@ const NextTopicHero: React.FC = () => (
       backgroundColor: "var(--panel)",
       border: "2px solid var(--microtask)",
       borderRadius: 20,
-      boxShadow: "0 0 60px rgba(228, 183, 255, 0.28)",
+      boxShadow: "0 0 60px color-mix(in srgb, var(--microtask) 28%, transparent)",
     }}
   >
     <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
@@ -583,7 +584,7 @@ const NextTopicHero: React.FC = () => (
         style={{
           padding: "6px 16px",
           backgroundColor: "var(--microtask)",
-          color: "#0d0a1c",
+          color: "var(--on-accent)",
           borderRadius: 999,
           fontSize: 18,
           fontWeight: 800,
@@ -605,7 +606,7 @@ const NextTopicHero: React.FC = () => (
         lineHeight: 1.55,
       }}
     >
-      You have widgets and frames. Now meet the <b style={hlViolet}>three ways to place them</b>: <b style={hlViolet}>pack()</b> for simple stacks, <b style={hlViolet}>grid()</b> for tables and forms, and <b style={hlViolet}>place()</b> for exact coordinates.
+      You have widgets and frames. Now meet the <b style={hlOrange}>three ways to place them</b>: <b style={hlOrange}>pack()</b> for simple stacks, <b style={hlOrange}>grid()</b> for tables and forms, and <b style={hlOrange}>place()</b> for exact coordinates.
     </div>
     <div style={{ display: "flex", gap: 14, marginTop: 4, flexWrap: "wrap", justifyContent: "center" }}>
       {[
@@ -620,8 +621,8 @@ const NextTopicHero: React.FC = () => (
             alignItems: "center",
             gap: 10,
             padding: "10px 16px",
-            backgroundColor: "rgba(228, 183, 255, 0.12)",
-            border: "1px solid rgba(228, 183, 255, 0.4)",
+            backgroundColor: "color-mix(in srgb, var(--microtask) 12%, transparent)",
+            border: "1px solid color-mix(in srgb, var(--microtask) 40%, transparent)",
             borderRadius: 999,
           }}
         >
@@ -677,7 +678,6 @@ export const class12Ch4T41bWidgetsFramesDeck: Deck = {
   topic: "4.1b · Widgets + Frames",
   topicCode: "4.1b",
   topicTitle: "Tkinter Widgets + Frames",
-  theme: "class-12",
   accent: ACCENT,
   slides: [
     // 1. Hero
@@ -718,7 +718,7 @@ export const class12Ch4T41bWidgetsFramesDeck: Deck = {
         >
           <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
             <p style={bookQuoteStyle}>
-              Tkinter provides many components, called <b style={hlGold}>widgets</b>, that help build interactive graphical applications. A program can contain multiple visual elements such as <b>windows, frames, buttons, and text fields</b>. These widgets allow users to <b>enter data, choose options, or perform actions</b>. Each widget has its own purpose, and combining them creates a complete interface. Tkinter also supports <b>layout management</b>, so widgets can be arranged neatly on the screen.
+              Tkinter provides many components, called <b style={hlBlue}>widgets</b>, that help build interactive graphical applications. A program can contain multiple visual elements such as <b>windows, frames, buttons, and text fields</b>. These widgets allow users to <b>enter data, choose options, or perform actions</b>. Each widget has its own purpose, and combining them creates a complete interface. Tkinter also supports <b>layout management</b>, so widgets can be arranged neatly on the screen.
             </p>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 4 }}>
               <Icon icon="mdi:puzzle-outline" width={22} height={22} color={ACCENT} />
@@ -778,8 +778,8 @@ export const class12Ch4T41bWidgetsFramesDeck: Deck = {
           <div
             style={{
               padding: "28px 32px",
-              backgroundColor: "rgba(228, 183, 255, 0.08)",
-              border: "1.5px solid rgba(228, 183, 255, 0.45)",
+              backgroundColor: "color-mix(in srgb, var(--microtask) 8%, transparent)",
+              border: "1.5px solid color-mix(in srgb, var(--microtask) 45%, transparent)",
               borderRadius: 14,
             }}
           >
@@ -835,7 +835,7 @@ export const class12Ch4T41bWidgetsFramesDeck: Deck = {
                       height: 32,
                       borderRadius: "50%",
                       backgroundColor: "var(--microtask)",
-                      color: "#0d0a1c",
+                      color: "var(--on-accent)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -871,7 +871,7 @@ export const class12Ch4T41bWidgetsFramesDeck: Deck = {
             left={
               <Card title="From the book" accent={ACCENT}>
                 <p style={bookQuoteStyle}>
-                  A Tkinter program begins by creating a <b style={hlGold}>main window</b>, which serves as the <b>base for all other elements</b>. The window can be <b>resized</b>, given a <b>title</b>, and designed to hold different widgets. <b style={hlGold}>Frames</b> are <b>sections within the window</b> that help organize content. Frames divide the window into smaller parts, making it easier to group related widgets. This structure improves clarity and keeps the interface well-arranged.
+                  A Tkinter program begins by creating a <b style={hlBlue}>main window</b>, which serves as the <b>base for all other elements</b>. The window can be <b>resized</b>, given a <b>title</b>, and designed to hold different widgets. <b style={hlBlue}>Frames</b> are <b>sections within the window</b> that help organize content. Frames divide the window into smaller parts, making it easier to group related widgets. This structure improves clarity and keeps the interface well-arranged.
                 </p>
               </Card>
             }
@@ -906,14 +906,14 @@ export const class12Ch4T41bWidgetsFramesDeck: Deck = {
                     display: "flex",
                     flexDirection: "column",
                     gap: 10,
-                    boxShadow: "0 0 30px rgba(201, 166, 107, 0.3)",
+                    boxShadow: "0 0 30px color-mix(in srgb, var(--accent) 30%, transparent)",
                   }}
                 >
                   <div
                     style={{
                       padding: "10px 16px",
                       borderRadius: 8,
-                      backgroundColor: "rgba(201, 166, 107, 0.18)",
+                      backgroundColor: "color-mix(in srgb, var(--accent) 18%, transparent)",
                       border: "1px solid var(--accent)",
                       color: "var(--accent)",
                       fontFamily: "Roboto Mono, monospace",
@@ -938,7 +938,7 @@ export const class12Ch4T41bWidgetsFramesDeck: Deck = {
                         style={{
                           padding: "8px 12px",
                           borderRadius: 6,
-                          backgroundColor: "rgba(228, 183, 255, 0.14)",
+                          backgroundColor: "color-mix(in srgb, var(--microtask) 14%, transparent)",
                           border: "1px solid var(--microtask)",
                           color: "var(--microtask)",
                           fontFamily: "Roboto Mono, monospace",
@@ -962,7 +962,7 @@ export const class12Ch4T41bWidgetsFramesDeck: Deck = {
                     style={{
                       padding: "10px 16px",
                       borderRadius: 8,
-                      backgroundColor: "rgba(103, 216, 196, 0.18)",
+                      backgroundColor: "color-mix(in srgb, var(--sync) 18%, transparent)",
                       border: "1px solid var(--sync)",
                       color: "var(--sync)",
                       fontSize: 13,
@@ -1010,7 +1010,7 @@ export const class12Ch4T41bWidgetsFramesDeck: Deck = {
                 maxWidth: "100%",
                 maxHeight: "100%",
                 objectFit: "contain",
-                filter: "drop-shadow(0 0 40px rgba(201, 166, 107, 0.18))",
+                filter: "drop-shadow(0 0 40px color-mix(in srgb, var(--accent) 18%, transparent))",
               }}
             />
           </div>
@@ -1272,7 +1272,7 @@ label.pack()`}
                 fontSize={16}
               />
               <div style={{ fontSize: 14, color: "var(--muted)", lineHeight: 1.55 }}>
-                Two lines. Create the Label, then <b style={hlGold}>pack()</b> it into the window.
+                Two lines. Create the Label, then <b style={hlBlue}>pack()</b> it into the window.
               </div>
             </div>
           </div>
@@ -1434,15 +1434,15 @@ label.pack()`}
             style={{
               marginTop: 16,
               padding: "14px 18px",
-              backgroundColor: "rgba(228, 183, 255, 0.08)",
-              border: "1px dashed rgba(228, 183, 255, 0.5)",
+              backgroundColor: "color-mix(in srgb, var(--microtask) 8%, transparent)",
+              border: "1px dashed color-mix(in srgb, var(--microtask) 50%, transparent)",
               borderRadius: 10,
               fontSize: 14,
               color: "var(--text)",
               lineHeight: 1.55,
             }}
           >
-            <b style={hlViolet}>Also worth knowing</b>: <b style={hlGold}>ttk</b> is a themed version of these widgets with a more modern look (`from tkinter import ttk; ttk.Button(...)`), and <b style={hlGold}>tk.messagebox</b> gives you one-line pop-up dialogs (used in the Login Form example coming in 4.1d).
+            <b style={hlOrange}>Also worth knowing</b>: <b style={hlBlue}>ttk</b> is a themed version of these widgets with a more modern look (`from tkinter import ttk; ttk.Button(...)`), and <b style={hlBlue}>tk.messagebox</b> gives you one-line pop-up dialogs (used in the Login Form example coming in 4.1d).
           </div>
         </SlideLayout>
       ),

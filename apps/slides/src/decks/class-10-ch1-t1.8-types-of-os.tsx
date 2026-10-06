@@ -164,7 +164,7 @@ const OsTypeCard: React.FC<{
         style={{
           padding: "6px 14px",
           backgroundColor: color,
-          color: "#0a0e14",
+          color: "var(--on-accent)",
           borderRadius: 999,
           fontSize: 14,
           fontWeight: 800,
@@ -255,8 +255,8 @@ const DoYouKnow: React.FC<{ children: ReactNode }> = ({ children }) => (
   <div
     style={{
       padding: "22px 26px",
-      backgroundColor: "rgba(88, 166, 255, 0.08)",
-      border: "1.5px solid rgba(88, 166, 255, 0.4)",
+      backgroundColor: "color-mix(in srgb, var(--accent) 8%, transparent)",
+      border: "1.5px solid color-mix(in srgb, var(--accent) 40%, transparent)",
       borderRadius: 14,
       display: "flex",
       alignItems: "flex-start",
@@ -362,7 +362,7 @@ const ChapterCompleteHero: React.FC = () => (
       backgroundColor: "var(--panel)",
       border: "2px solid var(--sync)",
       borderRadius: 20,
-      boxShadow: "0 0 70px rgba(63, 185, 80, 0.35)",
+      boxShadow: "0 0 70px color-mix(in srgb, var(--sync) 35%, transparent)",
     }}
   >
     <motion.div
@@ -376,17 +376,17 @@ const ChapterCompleteHero: React.FC = () => (
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        boxShadow: "0 0 40px rgba(63, 185, 80, 0.6)",
+        boxShadow: "0 0 40px color-mix(in srgb, var(--sync) 60%, transparent)",
       }}
     >
-      <Icon icon="mdi:trophy-outline" width={56} height={56} color="#0a0e14" />
+      <Icon icon="mdi:trophy-outline" width={56} height={56} color="var(--on-accent)" />
     </motion.div>
     <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
       <div
         style={{
           padding: "6px 16px",
           backgroundColor: "var(--sync)",
-          color: "#0a0e14",
+          color: "var(--on-accent)",
           borderRadius: 999,
           fontSize: 16,
           fontWeight: 800,
@@ -415,8 +415,8 @@ const ChapterCompleteHero: React.FC = () => (
             alignItems: "center",
             gap: 10,
             padding: "10px 16px",
-            backgroundColor: "rgba(63, 185, 80, 0.12)",
-            border: "1px solid rgba(63, 185, 80, 0.45)",
+            backgroundColor: "color-mix(in srgb, var(--sync) 12%, transparent)",
+            border: "1px solid color-mix(in srgb, var(--sync) 45%, transparent)",
             borderRadius: 999,
           }}
         >
@@ -440,7 +440,6 @@ export const class10Ch1T18TypesOfOsDeck: Deck = {
   topic: "1.8 · Types of Operating Systems",
   topicCode: "1.8",
   topicTitle: "Types of Operating Systems",
-  theme: "class-10",
   accent: ACCENT,
   slides: [
     // 1. Hero
@@ -644,7 +643,7 @@ export const class10Ch1T18TypesOfOsDeck: Deck = {
                 maxWidth: "100%",
                 maxHeight: "100%",
                 objectFit: "contain",
-                filter: "drop-shadow(0 0 40px rgba(88, 166, 255, 0.15))",
+                filter: "drop-shadow(0 0 40px color-mix(in srgb, var(--accent) 15%, transparent))",
               }}
             />
           </div>
@@ -835,8 +834,8 @@ export const class10Ch1T18TypesOfOsDeck: Deck = {
             style={{
               marginTop: 16,
               padding: "12px 16px",
-              backgroundColor: "rgba(255, 179, 71, 0.08)",
-              border: "1px solid rgba(255, 179, 71, 0.4)",
+              backgroundColor: "color-mix(in srgb, var(--microtask) 8%, transparent)",
+              border: "1px solid color-mix(in srgb, var(--microtask) 40%, transparent)",
               borderRadius: 10,
               fontSize: 14,
               color: "var(--muted)",

@@ -1,7 +1,7 @@
 /**
  * Class 12 CS · Chapter 4 · Quick Quiz Deck
  *
- * THEME: class-12 (Meridian · deep plum + muted gold).
+ * THEME: class-12 (GitHub Dark: near-black canvas, grey panels, blue accent).
  *
  * 17 slides: hero + how-to + 7 Q+Reveal pairs (one per sub-topic) + score card.
  * Each question is a Short-Question style prompt, answer is revealed on the
@@ -12,11 +12,12 @@ import { motion } from "framer-motion";
 import type { CSSProperties, ReactNode } from "react";
 import type { Deck } from "../SlideDeck";
 import { HeroSlide, SlideLayout } from "../components/SlideLayout";
+import { FREED_WIDTH } from "../components/safeZone";
 
 const ACCENT = "var(--accent)";
 
-const hlGold: CSSProperties = { color: "var(--accent)", fontWeight: 700 };
-const hlTeal: CSSProperties = { color: "var(--sync)", fontWeight: 700 };
+const hlBlue: CSSProperties = { color: "var(--accent)", fontWeight: 700 };
+const hlGreen: CSSProperties = { color: "var(--sync)", fontWeight: 700 };
 
 // ── Question slide ──────────────────────────────────────────────────────
 
@@ -51,7 +52,7 @@ const QuestionSlide: React.FC<{
         style={{
           padding: "6px 14px",
           backgroundColor: color,
-          color: "#0d0a1c",
+          color: "var(--on-accent)",
           borderRadius: 999,
           fontSize: 16,
           fontWeight: 800,
@@ -67,7 +68,7 @@ const QuestionSlide: React.FC<{
       transition={{ delay: 0.2, type: "spring", damping: 16 }}
       style={{
         padding: "40px 48px",
-        maxWidth: 1200,
+        maxWidth: 1200 + FREED_WIDTH,
         backgroundColor: "var(--panel)",
         border: `2px solid ${color}`,
         borderRadius: 20,
@@ -137,7 +138,7 @@ const RevealSlide: React.FC<{
         style={{
           padding: "6px 14px",
           backgroundColor: color,
-          color: "#0d0a1c",
+          color: "var(--on-accent)",
           borderRadius: 999,
           fontSize: 15,
           fontWeight: 800,
@@ -151,7 +152,7 @@ const RevealSlide: React.FC<{
           style={{
             padding: "4px 12px",
             borderRadius: 999,
-            backgroundColor: "rgba(201, 166, 107, 0.14)",
+            backgroundColor: "color-mix(in srgb, var(--accent) 14%, transparent)",
             border: "1px solid var(--accent)",
             color: "var(--accent)",
             fontSize: 11,
@@ -166,7 +167,7 @@ const RevealSlide: React.FC<{
     <div
       style={{
         padding: "16px 24px",
-        maxWidth: 1100,
+        maxWidth: 1100 + FREED_WIDTH,
         backgroundColor: "var(--panel)",
         border: "1px dashed var(--muted)",
         borderRadius: 10,
@@ -182,7 +183,7 @@ const RevealSlide: React.FC<{
       transition={{ type: "spring", damping: 16 }}
       style={{
         padding: "32px 44px",
-        maxWidth: 1200,
+        maxWidth: 1200 + FREED_WIDTH,
         backgroundColor: "var(--panel)",
         border: `2px solid ${color}`,
         borderRadius: 20,
@@ -270,7 +271,6 @@ export const class12Ch4QuizDeck: Deck = {
   topic: "Quick Quiz",
   topicCode: "Ch 4",
   topicTitle: "Chapter 4 Quick Quiz",
-  theme: "class-12",
   accent: ACCENT,
   slides: [
     // 1. Hero
@@ -300,7 +300,7 @@ export const class12Ch4QuizDeck: Deck = {
                     style={{
                       padding: "8px 14px",
                       borderRadius: 999,
-                      backgroundColor: "rgba(103, 216, 196, 0.14)",
+                      backgroundColor: "color-mix(in srgb, var(--sync) 14%, transparent)",
                       border: "1px solid var(--sync)",
                       color: "var(--sync)",
                       fontFamily: "Roboto Mono, monospace",
@@ -312,7 +312,7 @@ export const class12Ch4QuizDeck: Deck = {
                   </div>
                 ))}
               </div>
-              <b style={hlTeal}>7 questions</b>. One per sub-topic. Think first, then peek at the answer.
+              <b style={hlGreen}>7 questions</b>. One per sub-topic. Think first, then peek at the answer.
             </>
           }
           accent={ACCENT}
@@ -362,7 +362,7 @@ export const class12Ch4QuizDeck: Deck = {
                     height: 40,
                     borderRadius: "50%",
                     backgroundColor: s.color,
-                    color: "#0d0a1c",
+                    color: "var(--on-accent)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -484,7 +484,7 @@ export const class12Ch4QuizDeck: Deck = {
             <div
               style={{
                 padding: "14px 20px",
-                backgroundColor: "rgba(201, 166, 107, 0.08)",
+                backgroundColor: "color-mix(in srgb, var(--accent) 8%, transparent)",
                 border: "1px dashed var(--accent)",
                 borderRadius: 10,
                 fontSize: 16,
@@ -493,7 +493,7 @@ export const class12Ch4QuizDeck: Deck = {
                 maxWidth: 900,
               }}
             >
-              Full chapter kit: <b style={hlGold}>Revision deck</b> · <b style={hlTeal}>Mock Test (60 min)</b> · <b style={hlGold}>Board EXERCISE</b> · <b style={hlTeal}>Mixed MCQ bank (30 Qs)</b>. Everything you need for the paper is in this chapter folder.
+              Full chapter kit: <b style={hlBlue}>Revision deck</b> · <b style={hlGreen}>Mock Test (60 min)</b> · <b style={hlBlue}>Board EXERCISE</b> · <b style={hlGreen}>Mixed MCQ bank (30 Qs)</b>. Everything you need for the paper is in this chapter folder.
             </div>
           </div>
         </SlideLayout>

@@ -23,7 +23,10 @@ Every diagram you produce is **teaching material**. Muhammad shows it to student
 10. **Save-source-not-SVG.** Never edit the rendered `.svg`. Only edit the `.excalidraw` JSON, then re-render.
 11. **DARK BACKGROUND, LIGHT STROKES.** Set `appState.viewBackgroundColor: "#0d1117"` (matches the video theme). All strokes and text default to `#e6edf3` (light) except concept-colored elements. Never use pure black strokes — they disappear on the dark bg. This is compulsory because Muhammad views SVGs on a dark desktop and embeds them in dark Remotion compositions.
 12. **COMPULSORY SUMMARY / STEPS BOX.** Every diagram MUST include a "STEPS" or "KEY POINTS" box that lists the concept in bullet points, in reading order. Format: rectangle container + title text + 3-6 short bullet lines. Place it inside the content-safe area (see rule 13), typically middle-right or lower-left. Rule of thumb: if you removed every arrow and label, the summary box alone should still explain the diagram.
-13. **OBS SAFE ZONE — reserve right 10%.** Muhammad records video with an OBS webcam overlay in the bottom-right corner. **NO element (shape, text, arrow, badge, summary box) may extend past x = canvas_width × 0.9.** For a standard 1600px-wide diagram, that means everything stops at x ≤ 1440. For 1920-wide, x ≤ 1728. This rule is compulsory even for standalone SVGs since diagrams may be embedded in videos or slides where the webcam is present. Do NOT change diagram canvas width to avoid this rule — the safe zone applies proportionally.
+13. **OBS safe zone: DISABLED (2026-10-04).** Muhammad now places the webcam in his own OBS window, so diagrams may use the full canvas width. Do not leave the right 10% empty.
+<!-- Original rule, kept in case the webcam overlay comes back:
+13. **OBS SAFE ZONE - reserve right 10%.** Muhammad records video with an OBS webcam overlay in the bottom-right corner. **NO element (shape, text, arrow, badge, summary box) may extend past x = canvas_width × 0.9.** For a standard 1600px-wide diagram, that means everything stops at x ≤ 1440. For 1920-wide, x ≤ 1728. This rule is compulsory even for standalone SVGs since diagrams may be embedded in videos or slides where the webcam is present. Do NOT change diagram canvas width to avoid this rule - the safe zone applies proportionally.
+-->
 
 ## Excalidraw file format (v2)
 
@@ -172,6 +175,20 @@ Below is a compliant diagram: title + 3 concept boxes with labels + 2 numbered a
 - A slide in a Slidev-style deck needs an authored infographic (not a generic icon)
 
 For decorative sketchy accents INSIDE a beat (circles around active elements, arrows between two Panels), use `RoughShape` from `apps/remotion/components/primitives/` instead — no file, no build step.
+
+## Curriculum diagrams live in the chapter folder (RUNBOOK R-I, R-J)
+
+`library/diagrams/source/` is the home ONLY for generic, non-chapter diagrams (e.g. `event-loop`). For a curriculum topic:
+
+1. Write the master to `curriculum/<board>/class-<N>/<subject>/ch<M>-<slug>/diagrams/source/t<T>-<name>.excalidraw`.
+2. Create RELATIVE symlinks with the chapter prefix (never absolute `/home/...` paths):
+   - `library/diagrams/source/class-<N>-ch<M>-t<T>-<name>.excalidraw` → `../../../curriculum/.../diagrams/source/t<T>-<name>.excalidraw`
+   - `library/diagrams/class-<N>-ch<M>-t<T>-<name>.svg` → `../../curriculum/.../diagrams/rendered/t<T>-<name>.svg`
+3. `npm run render:diagrams` then writes through the SVG link into the chapter's `diagrams/rendered/`. If the source link lacks the `class-<N>-ch<M>-` prefix, the render lands as a loose copy in `library/diagrams/` instead (this happened once; do not repeat it).
+4. The deck consumes it as `<img src="/diagrams/class-<N>-ch<M>-t<T>-<name>.svg" />` (the slides app serves `library/` as its public dir).
+5. Verify: `find library/diagrams -xtype l` prints nothing.
+
+**Background per chapter theme:** look up the chapter's theme in `CHAPTER_THEMES` (`apps/slides/src/themes.ts`) and use that theme's `bg` as `appState.viewBackgroundColor` and its tokens (`accent`, `sync`, `microtask`, `task`, `api`, `warn`, `text`, `muted`) for strokes, so diagrams match the slides. Generic/video diagrams use `#0d1117`. Concept colours should come from that theme's tokens in `apps/slides/index.html`.
 
 ## Workflow
 

@@ -1,7 +1,7 @@
 /**
  * Class 12 CS · Chapter 4 · Sub-topic 4.1a · GUI Basics + Tkinter Introduction
  *
- * THEME: class-12 (Meridian  ·  deep plum + muted gold). First deck using this theme live.
+ * THEME: class-12 (GitHub Dark: near-black canvas, grey panels, blue accent).
  *
  * VERBATIM RULE (memory: feedback_verbatim_book_wording.md):
  * Every heading, definition, and key-point sentence is copied EXACTLY from
@@ -28,9 +28,9 @@ const bookQuoteStyle: CSSProperties = {
   color: "var(--text)",
   margin: 0,
 };
-const hlGold: CSSProperties = { color: "var(--accent)", fontWeight: 700 };
-const hlTeal: CSSProperties = { color: "var(--sync)", fontWeight: 700 };
-const hlViolet: CSSProperties = { color: "var(--microtask)", fontWeight: 700 };
+const hlBlue: CSSProperties = { color: "var(--accent)", fontWeight: 700 };
+const hlGreen: CSSProperties = { color: "var(--sync)", fontWeight: 700 };
+const hlOrange: CSSProperties = { color: "var(--microtask)", fontWeight: 700 };
 
 // ── Stagger primitives ───────────────────────────────────────────────────
 
@@ -126,12 +126,13 @@ const PY_KEYWORDS = new Set([
 const PY_BUILTINS = new Set(["print", "len", "range", "str", "int", "float", "list", "dict", "tuple"]);
 
 const PY_COLORS: Record<string, string> = {
-  keyword: "var(--accent)", // muted gold
-  string: "var(--sync)", // teal
-  comment: "var(--muted)",
-  function: "var(--microtask)", // violet
-  builtin: "var(--api)", // bright gold
-  number: "var(--task)", // pink
+  // Syntax colours come from the chapter theme (src/themes.ts).
+  keyword: "var(--syn-keyword)",
+  string: "var(--syn-string)",
+  comment: "var(--syn-comment)",
+  function: "var(--syn-function)",
+  builtin: "var(--syn-builtin)",
+  number: "var(--syn-number)",
   punct: "var(--text)",
   identifier: "var(--text)",
   whitespace: "var(--text)",
@@ -204,14 +205,14 @@ const PythonCode: React.FC<{ source: string; fontSize?: number; maxHeight?: numb
       style={{
         margin: 0,
         padding: "20px 26px",
-        backgroundColor: "#0b0820",
+        backgroundColor: "var(--code-bg)",
         border: "1px solid var(--panel-border)",
         borderRadius: 12,
         fontFamily: "Roboto Mono, monospace",
         fontSize,
         lineHeight: 1.45,
         overflow: "auto",
-        boxShadow: "0 0 24px rgba(201, 166, 107, 0.15)",
+        boxShadow: "0 0 24px color-mix(in srgb, var(--accent) 15%, transparent)",
         maxHeight,
       }}
     >
@@ -246,17 +247,17 @@ const MockWindow: React.FC<{
       border: `1.5px solid ${accent}`,
       boxShadow: `0 0 32px ${accent}44`,
       backgroundColor: "#f5f0e4",
-      color: "#1b1326",
+      color: "#1f2328",
     }}
   >
     <div
       style={{
         padding: "8px 12px",
-        backgroundColor: "#2a2340",
+        backgroundColor: "var(--panel-elevated)",
         display: "flex",
         alignItems: "center",
         gap: 10,
-        color: "#eaddf0",
+        color: "var(--text)",
       }}
     >
       <Icon icon="mdi:leaf" width={16} color={accent} />
@@ -282,7 +283,7 @@ const MockWindow: React.FC<{
 );
 
 const MockLabel: React.FC<{ children: ReactNode }> = ({ children }) => (
-  <div style={{ textAlign: "center", fontSize: 15, color: "#1b1326" }}>{children}</div>
+  <div style={{ textAlign: "center", fontSize: 15, color: "#1f2328" }}>{children}</div>
 );
 
 const MockEntry: React.FC = () => (
@@ -377,7 +378,7 @@ const BuildingBlock: React.FC<{
         height: 28,
         borderRadius: "50%",
         backgroundColor: color,
-        color: "#0d0a1c",
+        color: "var(--on-accent)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -462,7 +463,7 @@ const NextTopicHero: React.FC = () => (
       backgroundColor: "var(--panel)",
       border: "2px solid var(--microtask)",
       borderRadius: 20,
-      boxShadow: "0 0 60px rgba(228, 183, 255, 0.28)",
+      boxShadow: "0 0 60px color-mix(in srgb, var(--microtask) 28%, transparent)",
     }}
   >
     <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
@@ -470,7 +471,7 @@ const NextTopicHero: React.FC = () => (
         style={{
           padding: "6px 16px",
           backgroundColor: "var(--microtask)",
-          color: "#0d0a1c",
+          color: "var(--on-accent)",
           borderRadius: 999,
           fontSize: 18,
           fontWeight: 800,
@@ -492,7 +493,7 @@ const NextTopicHero: React.FC = () => (
         lineHeight: 1.55,
       }}
     >
-      Now that you've seen Tkinter's hello-world, let's break the window into reusable sections with <b style={hlViolet}>Frames</b> and meet all the common <b style={hlViolet}>Widgets</b>: Label, Button, Entry, Menu, and Listbox.
+      Now that you've seen Tkinter's hello-world, let's break the window into reusable sections with <b style={hlOrange}>Frames</b> and meet all the common <b style={hlOrange}>Widgets</b>: Label, Button, Entry, Menu, and Listbox.
     </div>
     <div style={{ display: "flex", gap: 14, marginTop: 4, flexWrap: "wrap", justifyContent: "center" }}>
       {[
@@ -510,8 +511,8 @@ const NextTopicHero: React.FC = () => (
             alignItems: "center",
             gap: 10,
             padding: "10px 16px",
-            backgroundColor: "rgba(228, 183, 255, 0.12)",
-            border: "1px solid rgba(228, 183, 255, 0.4)",
+            backgroundColor: "color-mix(in srgb, var(--microtask) 12%, transparent)",
+            border: "1px solid color-mix(in srgb, var(--microtask) 40%, transparent)",
             borderRadius: 999,
           }}
         >
@@ -558,7 +559,6 @@ export const class12Ch4T41aTkinterIntroDeck: Deck = {
   topic: "4.1a · GUI Basics + Tkinter",
   topicCode: "4.1a",
   topicTitle: "Graphical User Interface (GUI) Development with Tkinter",
-  theme: "class-12",
   accent: ACCENT,
   slides: [
     // 1. Hero
@@ -598,7 +598,7 @@ export const class12Ch4T41aTkinterIntroDeck: Deck = {
         >
           <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
             <p style={bookQuoteStyle}>
-              In this chapter, students will learn to develop user-friendly <b style={hlGold}>Graphical User Interfaces (GUIs)</b> using <b style={hlGold}>Tkinter</b>, Python's built-in GUI toolkit. They will create windows, frames, labels, buttons, entry fields, and manage layouts using <b style={hlGold}>pack(), grid(), and place()</b>. They will practice event handling by linking user actions with functions and developing a simple login form. The chapter also introduces database concepts, SQL, Python database connectivity, and basic <b style={hlGold}>CRUD operations</b> using SQLite or MySQL.
+              In this chapter, students will learn to develop user-friendly <b style={hlBlue}>Graphical User Interfaces (GUIs)</b> using <b style={hlBlue}>Tkinter</b>, Python's built-in GUI toolkit. They will create windows, frames, labels, buttons, entry fields, and manage layouts using <b style={hlBlue}>pack(), grid(), and place()</b>. They will practice event handling by linking user actions with functions and developing a simple login form. The chapter also introduces database concepts, SQL, Python database connectivity, and basic <b style={hlBlue}>CRUD operations</b> using SQLite or MySQL.
             </p>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 4 }}>
               <Icon icon="mdi:target" width={22} height={22} color={ACCENT} />
@@ -651,7 +651,7 @@ export const class12Ch4T41aTkinterIntroDeck: Deck = {
             left={
               <Card title="From the book" accent={ACCENT}>
                 <p style={bookQuoteStyle}>
-                  <b style={hlGold}>Graphical User Interface (GUI)</b> development allows programs to interact with users through <b>visual elements</b> like windows, buttons, labels, and text boxes (as shown in Figure 4.1). GUIs make applications more <b>user-friendly</b> and <b>easier to use</b> compared to command-line interfaces. Python provides tools to create GUI applications efficiently. <b style={hlGold}>Tkinter</b> is Python's built-in library for creating GUI programs. It is <b>simple</b>, <b>widely used</b>, and allows developers to design interactive applications quickly.
+                  <b style={hlBlue}>Graphical User Interface (GUI)</b> development allows programs to interact with users through <b>visual elements</b> like windows, buttons, labels, and text boxes (as shown in Figure 4.1). GUIs make applications more <b>user-friendly</b> and <b>easier to use</b> compared to command-line interfaces. Python provides tools to create GUI applications efficiently. <b style={hlBlue}>Tkinter</b> is Python's built-in library for creating GUI programs. It is <b>simple</b>, <b>widely used</b>, and allows developers to design interactive applications quickly.
                 </p>
               </Card>
             }
@@ -701,7 +701,7 @@ export const class12Ch4T41aTkinterIntroDeck: Deck = {
         >
           <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
             <p style={bookQuoteStyle}>
-              A <b style={hlGold}>GUI</b>, or Graphical User Interface, is a <b>visual interface</b> that allows users to interact with software using elements like <b>buttons, menus, and forms</b>. GUIs are important because they make programs easier to understand and operate, especially for non-technical users. They improve <b>usability</b> by providing <b style={hlGold}>visual feedback</b> and reducing the need to remember complex commands. GUI applications are widely used in <b>desktop software, web applications, and mobile apps</b>.
+              A <b style={hlBlue}>GUI</b>, or Graphical User Interface, is a <b>visual interface</b> that allows users to interact with software using elements like <b>buttons, menus, and forms</b>. GUIs are important because they make programs easier to understand and operate, especially for non-technical users. They improve <b>usability</b> by providing <b style={hlBlue}>visual feedback</b> and reducing the need to remember complex commands. GUI applications are widely used in <b>desktop software, web applications, and mobile apps</b>.
             </p>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 4 }}>
               <Icon icon="mdi:thumb-up-outline" width={22} height={22} color={ACCENT} />
@@ -803,15 +803,15 @@ export const class12Ch4T41aTkinterIntroDeck: Deck = {
             style={{
               marginTop: 18,
               padding: "14px 18px",
-              backgroundColor: "rgba(228, 183, 255, 0.08)",
-              border: "1px dashed rgba(228, 183, 255, 0.5)",
+              backgroundColor: "color-mix(in srgb, var(--microtask) 8%, transparent)",
+              border: "1px dashed color-mix(in srgb, var(--microtask) 50%, transparent)",
               borderRadius: 10,
               fontSize: 15,
               color: "var(--text)",
               lineHeight: 1.55,
             }}
           >
-            <b style={hlViolet}>Before GUIs</b>, people typed every command: <span className="mono" style={{ color: "var(--accent)" }}>copy file1.txt file2.txt</span>. The <b>Xerox Star</b> (1981) and <b>Apple Macintosh</b> (1984) changed that forever by making computers point-and-click.
+            <b style={hlOrange}>Before GUIs</b>, people typed every command: <span className="mono" style={{ color: "var(--accent)" }}>copy file1.txt file2.txt</span>. The <b>Xerox Star</b> (1981) and <b>Apple Macintosh</b> (1984) changed that forever by making computers point-and-click.
           </div>
         </SlideLayout>
       ),
@@ -830,7 +830,7 @@ export const class12Ch4T41aTkinterIntroDeck: Deck = {
         >
           <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
             <p style={bookQuoteStyle}>
-              <b style={hlGold}>Tkinter</b> is Python's <b>standard GUI toolkit</b> that comes <b style={hlGold}>pre-installed</b> with the language. It provides a set of <b>classes and functions</b> to create windows, buttons, labels, entry fields, and other widgets. Tkinter is <b style={hlGold}>easy to learn, lightweight,</b> and supports <b style={hlGold}>event-driven programming</b>, where actions are triggered by user events. It is suitable for building <b>small to medium-sized GUI applications</b> quickly and efficiently.
+              <b style={hlBlue}>Tkinter</b> is Python's <b>standard GUI toolkit</b> that comes <b style={hlBlue}>pre-installed</b> with the language. It provides a set of <b>classes and functions</b> to create windows, buttons, labels, entry fields, and other widgets. Tkinter is <b style={hlBlue}>easy to learn, lightweight,</b> and supports <b style={hlBlue}>event-driven programming</b>, where actions are triggered by user events. It is suitable for building <b>small to medium-sized GUI applications</b> quickly and efficiently.
             </p>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 4 }}>
               <Icon icon="mdi:check-circle-outline" width={22} height={22} color={ACCENT} />
@@ -1191,15 +1191,15 @@ export const class12Ch4T41aTkinterIntroDeck: Deck = {
             style={{
               marginTop: 18,
               padding: "14px 18px",
-              backgroundColor: "rgba(228, 183, 255, 0.08)",
-              border: "1px dashed rgba(228, 183, 255, 0.5)",
+              backgroundColor: "color-mix(in srgb, var(--microtask) 8%, transparent)",
+              border: "1px dashed color-mix(in srgb, var(--microtask) 50%, transparent)",
               borderRadius: 10,
               fontSize: 14,
               color: "var(--text)",
               lineHeight: 1.55,
             }}
           >
-            <b style={hlViolet}>Under the hood</b>: Tkinter wraps a cross-platform GUI toolkit called <b style={hlGold}>Tcl/Tk</b>, invented at Berkeley in 1988. That's why your Tkinter window looks the same on Windows, Mac, and Linux.
+            <b style={hlOrange}>Under the hood</b>: Tkinter wraps a cross-platform GUI toolkit called <b style={hlBlue}>Tcl/Tk</b>, invented at Berkeley in 1988. That's why your Tkinter window looks the same on Windows, Mac, and Linux.
           </div>
         </SlideLayout>
       ),

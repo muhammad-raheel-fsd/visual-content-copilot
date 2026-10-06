@@ -1,5 +1,9 @@
-import { useEffect, useState } from "react";
+import { Icon } from "@iconify/react";
+import { useEffect, useMemo, useState } from "react";
+import { buildCatalog } from "./catalog";
+import { DeckBrowser } from "./components/DeckBrowser";
 import { SlideDeck } from "./SlideDeck";
+import { THEME_IDS, THEMES, chapterKeyOf, chapterThemeFor, isThemeId, type ThemeId } from "./themes";
 import { eventLoopDeck } from "./decks/event-loop";
 import { class10Ch1IntroToOsDeck } from "./decks/class-10-ch1-intro-to-os";
 import { class10Ch1T12ArchitectureDeck } from "./decks/class-10-ch1-t1.2-architecture";
@@ -47,39 +51,72 @@ const DECKS = {
 
 type DeckId = keyof typeof DECKS;
 
+const isDeckId = (v: string | null): v is DeckId => !!v && v in DECKS;
+
 /**
  * Chrome behavior:
- *   - Normal browser mode: TopBar visible (deck picker, aspect toggle, kbd hints), border around stage.
+ *   - Normal browser mode: TopBar (library button, breadcrumb, theme + aspect pickers).
  *   - Fullscreen mode (F key): all chrome hidden, clean canvas for OBS recording.
- * Slide counter is always visible (bottom-left, subtle).
  *
  * URL params:
- *   ?deck=<id>            — pick a deck (default: event-loop)
- *   ?aspect=portrait      — portrait 9:16 canvas (default: landscape 16:9)
- *   ?safezone=show        — overlay OBS webcam safe-zone outline (default: hidden)
+ *   ?deck=<id>            pick a deck (no deck: the library opens so you can choose)
+ *   ?aspect=portrait      portrait 9:16 canvas (default: landscape 16:9)
+ *   ?theme=<theme-id>     PREVIEW the deck in another theme (src/themes.ts). Not saved.
+ *   ?safezone=show        overlay the (disabled) OBS webcam safe-zone outline
  *
- * Keyboard: → / Space / PgDn next · ← / PgUp prev · Home / End · F fullscreen
+ * Keyboard: → / Space / PgDn next · ← / PgUp prev · Home / End · F fullscreen · L library · Esc close
  */
 export function App() {
   const isFullscreen = useIsFullscreen();
+  const params = new URLSearchParams(window.location.search);
 
   const [deckId, setDeckId] = useState<DeckId>(() => {
-    const initial = new URLSearchParams(window.location.search).get("deck");
-    return (initial as DeckId) in DECKS ? (initial as DeckId) : "event-loop";
+    const initial = params.get("deck");
+    return isDeckId(initial) ? initial : "event-loop";
   });
-  const [aspect, setAspect] = useState<"portrait" | "landscape">(() => {
-    const q = new URLSearchParams(window.location.search).get("aspect");
-    return q === "portrait" ? "portrait" : "landscape";
+  const [aspect, setAspect] = useState<"portrait" | "landscape">(() =>
+    params.get("aspect") === "portrait" ? "portrait" : "landscape",
+  );
+  const [previewTheme, setPreviewTheme] = useState<ThemeId | null>(() => {
+    const t = params.get("theme");
+    return isThemeId(t) ? t : null;
   });
+  // First visit without a deck in the URL: open the library instead of guessing.
+  const [browserOpen, setBrowserOpen] = useState(() => !isDeckId(params.get("deck")));
+
+  const catalog = useMemo(() => buildCatalog(DECKS), []);
+  const deck = DECKS[deckId];
+  const chapterTheme = chapterThemeFor(deckId, deck.theme);
+  const themeId = previewTheme ?? chapterTheme;
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    params.set("deck", deckId);
-    params.set("aspect", aspect);
-    window.history.replaceState({}, "", `?${params.toString()}`);
-  }, [deckId, aspect]);
+    const p = new URLSearchParams(window.location.search);
+    p.set("deck", deckId);
+    p.set("aspect", aspect);
+    if (previewTheme) p.set("theme", previewTheme);
+    else p.delete("theme");
+    window.history.replaceState({}, "", `?${p.toString()}`);
+  }, [deckId, aspect, previewTheme]);
 
-  const deck = DECKS[deckId];
+  // L opens the library, Esc closes it. Ignored while typing in a field.
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setBrowserOpen(false);
+        return;
+      }
+      const t = e.target as HTMLElement | null;
+      if (t && ["INPUT", "SELECT", "TEXTAREA"].includes(t.tagName)) return;
+      if (e.key === "l" || e.key === "L") setBrowserOpen((o) => !o);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
+  const pickDeck = (id: string) => {
+    if (isDeckId(id)) setDeckId(id);
+    setBrowserOpen(false);
+  };
 
   return (
     <div
@@ -94,27 +131,60 @@ export function App() {
     >
       {!isFullscreen && (
         <TopBar
-          deckId={deckId}
-          deckIds={Object.keys(DECKS) as DeckId[]}
-          onDeckChange={setDeckId}
+          crumbs={breadcrumb(deckId, deck)}
+          onOpenLibrary={() => setBrowserOpen(true)}
+          themeId={themeId}
+          chapterTheme={chapterTheme}
+          previewTheme={previewTheme}
+          onPreviewTheme={setPreviewTheme}
           aspect={aspect}
           onAspectChange={setAspect}
         />
       )}
       <div style={{ flex: 1, position: "relative", overflow: "hidden" }}>
-        <SlideDeck deck={deck} aspect={aspect} chromeless={isFullscreen} />
+        {/* key: a new deck always starts at slide 1 (a shorter deck must not inherit a high index) */}
+        <SlideDeck
+          key={deckId}
+          deck={deck}
+          themeId={themeId}
+          aspect={aspect}
+          chromeless={isFullscreen}
+          keysDisabled={browserOpen && !isFullscreen}
+        />
       </div>
+      {browserOpen && !isFullscreen && (
+        <DeckBrowser
+          catalog={catalog}
+          currentId={deckId}
+          activeTheme={themeId}
+          previewTheme={previewTheme}
+          onPick={pickDeck}
+          onPreviewTheme={setPreviewTheme}
+          onClose={() => setBrowserOpen(false)}
+        />
+      )}
     </div>
   );
 }
 
+/** ["Class 12", "Ch 4", "4.1a Tkinter Widgets..."] for the top bar. */
+function breadcrumb(deckId: string, deck: (typeof DECKS)[DeckId]): string[] {
+  const m = deckId.match(/^class-(\d+)-ch(\d+)-/);
+  if (!m || !chapterKeyOf(deckId)) return ["Other videos", deck.title];
+  const code = deckId.endsWith("-revision") ? "Revision" : deckId.endsWith("-quiz") ? "Quiz" : deck.topicCode;
+  return [`Class ${m[1]}`, `Ch ${m[2]}`, [code, deck.title].filter(Boolean).join("  ")];
+}
+
 const TopBar: React.FC<{
-  deckId: DeckId;
-  deckIds: DeckId[];
-  onDeckChange: (id: DeckId) => void;
+  crumbs: string[];
+  onOpenLibrary: () => void;
+  themeId: ThemeId;
+  chapterTheme: ThemeId;
+  previewTheme: ThemeId | null;
+  onPreviewTheme: (t: ThemeId | null) => void;
   aspect: "portrait" | "landscape";
   onAspectChange: (a: "portrait" | "landscape") => void;
-}> = ({ deckId, deckIds, onDeckChange, aspect, onAspectChange }) => {
+}> = ({ crumbs, onOpenLibrary, themeId, chapterTheme, previewTheme, onPreviewTheme, aspect, onAspectChange }) => {
   return (
     <div
       style={{
@@ -129,35 +199,82 @@ const TopBar: React.FC<{
         flex: "none",
       }}
     >
-      <span style={{ color: "var(--text)", fontWeight: 600 }}>bytemotion slides</span>
-      <select
-        value={deckId}
-        onChange={(e) => onDeckChange(e.target.value as DeckId)}
-        style={selectStyle}
-      >
-        {deckIds.map((id) => (
-          <option key={id} value={id}>
-            {id}
-          </option>
+      <button onClick={onOpenLibrary} style={libraryButton} title="Open the deck library (L)">
+        <Icon icon="mdi:folder-open-outline" width={17} />
+        Library
+      </button>
+      <div style={{ display: "flex", alignItems: "center", gap: 6, minWidth: 0, overflow: "hidden" }}>
+        {crumbs.map((c, i) => (
+          <span key={i} style={{ display: "inline-flex", alignItems: "center", gap: 6, minWidth: 0 }}>
+            {i > 0 && <Icon icon="mdi:chevron-right" width={14} style={{ flex: "none", opacity: 0.6 }} />}
+            <span
+              style={{
+                color: i === crumbs.length - 1 ? "var(--text)" : "var(--muted)",
+                fontWeight: i === crumbs.length - 1 ? 600 : 500,
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+              }}
+            >
+              {c}
+            </span>
+          </span>
         ))}
-      </select>
-      <select
-        value={aspect}
-        onChange={(e) => onAspectChange(e.target.value as "portrait" | "landscape")}
-        style={selectStyle}
-      >
-        <option value="landscape">landscape 16:9 (1920×1080)</option>
-        <option value="portrait">portrait 9:16 (1080×1920)</option>
-      </select>
-      <div style={{ marginLeft: "auto", opacity: 0.7 }}>
-        <kbd style={kbdStyle}>F</kbd> fullscreen (hides this bar) &nbsp;
-        <kbd style={kbdStyle}>→</kbd> / <kbd style={kbdStyle}>Space</kbd> next &nbsp;
-        <kbd style={kbdStyle}>←</kbd> prev
+      </div>
+      <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 10, flex: "none" }}>
+        <select
+          value={previewTheme ?? ""}
+          onChange={(e) => onPreviewTheme(isThemeId(e.target.value) ? e.target.value : null)}
+          style={{ ...selectStyle, color: previewTheme ? "var(--accent)" : "var(--text)" }}
+          title="Preview this deck in another theme (not saved)"
+        >
+          <option value="">Theme: {THEMES[chapterTheme].name} (chapter)</option>
+          {THEME_IDS.filter((id) => id !== chapterTheme).map((id) => (
+            <option key={id} value={id}>
+              Preview: {THEMES[id].name}
+            </option>
+          ))}
+        </select>
+        <span style={{ display: "inline-flex", gap: 3 }} title={THEMES[themeId].name}>
+          {(["accent", "sync", "microtask", "task"] as const).map((k) => (
+            <span
+              key={k}
+              style={{ width: 9, height: 9, borderRadius: "50%", backgroundColor: THEMES[themeId].tokens[k] }}
+            />
+          ))}
+        </span>
+        <select
+          value={aspect}
+          onChange={(e) => onAspectChange(e.target.value as "portrait" | "landscape")}
+          style={selectStyle}
+        >
+          <option value="landscape">landscape 16:9</option>
+          <option value="portrait">portrait 9:16</option>
+        </select>
+        <span style={{ opacity: 0.7, whiteSpace: "nowrap" }}>
+          <kbd style={kbdStyle}>L</kbd> library &nbsp;
+          <kbd style={kbdStyle}>F</kbd> fullscreen &nbsp;
+          <kbd style={kbdStyle}>←</kbd> <kbd style={kbdStyle}>→</kbd> slides
+        </span>
       </div>
     </div>
   );
 };
 
+const libraryButton: React.CSSProperties = {
+  display: "inline-flex",
+  alignItems: "center",
+  gap: 6,
+  padding: "5px 12px",
+  borderRadius: 6,
+  border: "1px solid var(--panel-border)",
+  backgroundColor: "var(--panel-elevated)",
+  color: "var(--text)",
+  fontSize: 13,
+  fontWeight: 600,
+  cursor: "pointer",
+  flex: "none",
+};
 const selectStyle: React.CSSProperties = {
   backgroundColor: "var(--bg)",
   color: "var(--text)",

@@ -1,4 +1,5 @@
 import type { CSSProperties, ReactNode } from "react";
+import { SAFE_ZONE_RIGHT } from "./safeZone";
 
 
 /**
@@ -19,8 +20,9 @@ export const SlideLayout: React.FC<{
         height: "100%",
         display: "flex",
         flexDirection: "column",
-        // Right padding = 80 (regular) + 192 (SAFE_ZONE_RIGHT for OBS webcam).
-        padding: "60px 272px 60px 80px",
+        // Right padding = 80 (regular) + SAFE_ZONE_RIGHT (0 now, was 192 for the OBS webcam).
+        // padding: "60px 272px 60px 80px", // webcam-safe version
+        padding: `60px ${80 + SAFE_ZONE_RIGHT}px 60px 80px`,
         color: "var(--text)",
         ...style,
       }}
@@ -76,8 +78,9 @@ export const HeroSlide: React.FC<{
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        // Match SlideLayout: top 90 / bottom 78 (chrome) + right 272 (safe zone).
-        padding: "90px 272px 78px 80px",
+        // Match SlideLayout: top 90 / bottom 78 (chrome) + right 80 + SAFE_ZONE_RIGHT.
+        // padding: "90px 272px 78px 80px", // webcam-safe version
+        padding: `90px ${80 + SAFE_ZONE_RIGHT}px 78px 80px`,
         textAlign: "center",
       }}
     >

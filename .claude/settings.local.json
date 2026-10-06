@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p /home/janab/learnings/code-stuff-animations/.claude/skills/frontend-design)",
+      "Bash(cp /home/janab/.claude/plugins/cache/claude-plugins-official/frontend-design/unknown/skills/frontend-design/SKILL.md /home/janab/learnings/code-stuff-animations/.claude/skills/frontend-design/SKILL.md)",
+      "Bash(npm run *)",
+      "Bash(mkdir -p /tmp/eventloop-check)",
+      "Bash(npx remotion *)",
+      "WebSearch",
+      "WebFetch(domain:www.remotion.dev)",
+      "WebFetch(domain:github.com)"
+    ]
+  }
+}

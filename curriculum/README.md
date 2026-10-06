@@ -1,91 +1,50 @@
+---
+kind: curriculum_index
+last_updated: 2026-10-03
+---
+
 # Curriculum content
 
-Chapter-based teaching content for board syllabi. Same markdown source powers all three output stages: Slidev slides → Excalidraw diagrams → Remotion videos.
+Board-syllabus teaching content. Current focus: Multan Board (Punjab, Pakistan) Computer Science, PECTAA "Computer Science and Entrepreneurship" books, classes 9-12.
 
-## Current focus
+**Where files go:** [FOLDER-STRUCTURE.md](../FOLDER-STRUCTURE.md) (canonical).
+**How to author a topic:** [RUNBOOK.md](RUNBOOK.md) (question format, naming, rules R-A to R-J).
+**Reference chapter:** [class-10 ch1 Operating Systems](multan-board/class-10/computer-science/ch1-operating-systems/).
 
-Multan Board (Pakistan) Computer Science, classes 9-12. Each class = one folder, each chapter = one markdown file.
-
-## Folder layout
+## Layout
 
 ```
 curriculum/
-  README.md                          (this file)
-  chapter-template.md                (copy this to start a new chapter)
+  README.md                 (this file)
+  RUNBOOK.md                (authoring rules + Postgres-ready question format)
+  chapter-template.md       (LEGACY beat-style template, see note inside)
+  books/                    (source PDFs, gitignored: class-10-cs.pdf, class-12-cs.pdf)
   multan-board/
-    class-9/
-      ch-01-<slug>.md
-      ch-02-<slug>.md
-    class-10/
-    class-11/
-      ch-01-programming-fundamentals.md
-      ch-02-data-types.md
-    class-12/
-    questions/
-      class-11-ch-01-mcq.md          (multiple choice)
-      class-11-ch-01-short.md        (short-answer)
-      class-11-ch-01-long.md         (long-answer)
+    class-<N>/<subject>/ch<M>-<slug>/
+      README.md             chapter index + status
+      research.md           chapter brain: workflow, status tracker, per-topic plans
+      source/               verbatim book text (overview, t<T>-*.md, summary, board-exercise)
+      questions/            t<T>-{mcqs,short,long}.md + board-exercise + mock-test + mixed-mcqs
+      diagrams/             source/ (Excalidraw master) + rendered/ (SVG)
+      slides/README.md      deck index; deck .tsx files live in apps/slides/src/decks/
 ```
 
-A chapter file is the single source of truth. From it, the pipeline produces:
-1. A **Slidev deck** at `slides/src/decks/<slug>.tsx` — for live teaching or recording
-2. Zero or more **Excalidraw diagrams** at `public/diagrams/source/<slug>-*.excalidraw` — visual reference
-3. A **Remotion video** at `src/videos/<slug>/` — final YouTube/reels output
+## Chapters
 
-## Chapter file structure
+| Chapter | Topics | Theme | Status |
+|---|---|---|---|
+| [Class 10 · Ch1 Operating Systems](multan-board/class-10/computer-science/ch1-operating-systems/) | 8 (1.1-1.8) | Horizon (`horizon`) | COMPLETE |
+| [Class 12 · Ch4 Development of GUI](multan-board/class-12/computer-science/ch4-development-of-gui/) | 7 (4.1a-4.2c) | GitHub Dark (`github-dark`) | COMPLETE |
 
-See `chapter-template.md` for the exact skeleton. Every chapter has:
+## Starting a new chapter
 
-- YAML frontmatter (board, class, chapter number, topic slug, target duration, difficulty)
-- **Learning objectives** — what a student should be able to do after
-- **Prerequisites** — what they need to know already
-- **Beats** — 6-12 concept blocks, each with title, key point, voiceover line, on-screen text, visuals hint
-- **Assets needed** — list of diagrams (excalidraw), sfx, illustrations
-- **Assessment** — link to matching `questions/` files
-
-## Adding a new chapter
-
-1. Copy `chapter-template.md` to `curriculum/multan-board/class-XX/ch-NN-<slug>.md`
-2. Fill in objectives, beats, voiceover lines
-3. Ask Claude to:
-   - Generate a Slidev deck: `slides/src/decks/<slug>.tsx`
-   - Generate Excalidraw diagrams: `public/diagrams/source/<slug>-*.excalidraw`
-   - Generate Remotion composition: `src/videos/<slug>/`
-   - Generate matching MCQ / short / long question files in `questions/`
-4. Review each stage: slides (fastest iteration), then diagrams, then video.
-
-## Question file format
-
-MCQ:
-```yaml
-- id: mcq-01
-  question: "What is a variable in programming?"
-  options:
-    a: "A container that holds data"
-    b: "A type of loop"
-    c: "A function name"
-    d: "An operator"
-  correct: a
-  explanation: "Variables store data that can be read and updated during program execution."
-```
-
-Short answer:
-```yaml
-- id: short-01
-  question: "Define a variable and give two examples."
-  answer_hint: "Container for data; examples like `age = 15` and `name = 'Ali'`."
-  marks: 3
-```
-
-Long answer:
-```yaml
-- id: long-01
-  question: "Explain data types in a programming language with examples."
-  answer_hint: "Cover integer, float, string, boolean with a short example each; mention type inference vs explicit typing."
-  marks: 8
-```
+1. Create the chapter folder with all subfolders, `README.md`, and `research.md`. Copy the structure of the class-10 ch1 `research.md` (sections 1-5).
+2. Extract the chapter from the PDF into `source/` with the vision Read tool (`pages: "N-M"`), never `pdftotext`. Extract Summary + EXERCISE first (R-H).
+3. Per topic, when Muhammad names it: deck + MCQs + short + long + registration, plus diagrams where `research.md` plans them. Follow `research.md` section 1.
+4. Chapter end: board-exercise questions, mock test, mixed MCQ bank, revision deck, quiz deck (R-G, R-H).
 
 ## Future (planned, not built)
 
-- Next.js quiz site consuming `questions/*.md` for interactive drills
-- Python FastAPI grading pipeline for long-answer evaluation
+- `library/scripts/questions-to-json.mjs`: lift every `questions/*.md` into JSON for Postgres (see RUNBOOK "Pipeline to Postgres").
+- Next.js quiz site consuming that JSON for interactive drills.
+- Python FastAPI grading pipeline for long-answer evaluation.

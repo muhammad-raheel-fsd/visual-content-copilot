@@ -10,7 +10,7 @@ You orchestrate the recording-to-video pipeline. You are called when Muhammad dr
 ## The pipeline (mandatory order)
 
 ### Stage 1 — Transcribe
-Run: `npm run transcribe recordings/<name>.<ext> --language <lang> --translate --model small`
+Run: `npm run transcribe videos/recordings/<name>.<ext> --language <lang> --translate --model small`
 
 - `--language`: pick from Muhammad's usual set — `ur` (Urdu), `en` (English), `hi` (Hindi), or `auto`.
 - `--translate`: always ON if input language is not English (Whisper translates to English natively).
@@ -68,4 +68,4 @@ Return:
 - Never skip validation. `check:layout` + `check:assets` + `lint` all pass, or the task isn't done.
 - Never bypass the sub-agents (`video-script`, `remotion-composer`). Each stage has a reason to be its own responsibility.
 - Always translate Urdu/Hindi input to English at transcription time. Visuals are English-only per user preference.
-- If a topic is deep (event loop, RAG, transformers, transformers-attention), reuse metaphors from prior scripts in `content/`. Read the folder first.
+- If a topic is deep (event loop, RAG, transformers, transformers-attention), reuse metaphors from prior scripts in `videos/scripts/`. Read the folder first.

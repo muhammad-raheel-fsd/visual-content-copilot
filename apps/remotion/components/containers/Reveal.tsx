@@ -25,8 +25,8 @@ export const Reveal: React.FC<{
         position: "absolute",
         top: LAYOUT.reveal.y,
         left: 0,
-        // Right offset so text is centered inside the content area, not
-        // the full canvas — stays clear of the OBS webcam overlay.
+        // Right offset by SAFE_ZONE_RIGHT keeps text centred in the content area.
+        // SAFE_ZONE_RIGHT is 0 now (webcam zone disabled), so this centres on the full canvas.
         right: SAFE_ZONE_RIGHT,
         textAlign: "center",
         opacity,

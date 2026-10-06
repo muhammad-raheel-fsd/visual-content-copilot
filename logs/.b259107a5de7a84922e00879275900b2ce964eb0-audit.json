@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "/home/vortex/personal-projects/bytemotion/logs/.b259107a5de7a84922e00879275900b2ce964eb0-audit.json",
+    "files": [
+        {
+            "date": 1791206958488,
+            "name": "/home/vortex/personal-projects/bytemotion/logs/mcp-puppeteer-2026-10-05.log",
+            "hash": "e78cc7bbb49e330ae81c2245f106adad604e0ab8f7223c6d3d761d91b9044d06"
+        }
+    ],
+    "hashType": "sha256"
+}

@@ -5,10 +5,10 @@
  *   node scripts/transcribe.mjs <input> [--language ur] [--translate] [--model medium]
  *
  * Examples:
- *   node scripts/transcribe.mjs recordings/event-loop.mp4
- *   node scripts/transcribe.mjs recordings/event-loop.mp4 --language ur --translate
+ *   npm run transcribe videos/recordings/event-loop.mp4
+ *   npm run transcribe videos/recordings/event-loop.mp4 --language ur --translate
  *
- * Output: transcripts/<basename>.json  with word-level timestamps and full text.
+ * Output: videos/transcripts/<basename>.json  with word-level timestamps and full text.
  *
  * First run: this script downloads whisper.cpp + the requested model (~150MB for base,
  * ~500MB for small, ~1.5GB for medium, ~3GB for large-v3). Models cache under
@@ -24,7 +24,7 @@ import { fileURLToPath } from "node:url";
 const HERE = dirname(fileURLToPath(import.meta.url));
 // library/scripts/shared/*.mjs → repo root is ../../..
 const REPO_ROOT = join(HERE, "..", "..", "..");
-const TRANSCRIPT_DIR = join(REPO_ROOT, "content", "transcripts");
+const TRANSCRIPT_DIR = join(REPO_ROOT, "videos", "transcripts");
 const WHISPER_DIR = join(REPO_ROOT, ".whisper");
 
 async function loadWhisper() {

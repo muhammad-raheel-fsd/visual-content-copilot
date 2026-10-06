@@ -39,10 +39,10 @@ const OptionPill: React.FC<{
         alignItems: "center",
         gap: 16,
         padding: "16px 20px",
-        backgroundColor: isCorrect ? "rgba(63, 185, 80, 0.14)" : "var(--panel)",
+        backgroundColor: isCorrect ? "color-mix(in srgb, var(--sync) 14%, transparent)" : "var(--panel)",
         border: isCorrect ? "2px solid var(--sync)" : "1px solid var(--panel-border)",
         borderRadius: 12,
-        boxShadow: isCorrect ? "0 0 30px rgba(63, 185, 80, 0.4)" : "none",
+        boxShadow: isCorrect ? "0 0 30px color-mix(in srgb, var(--sync) 40%, transparent)" : "none",
       }}
     >
       <div
@@ -52,7 +52,7 @@ const OptionPill: React.FC<{
           borderRadius: 10,
           backgroundColor: isCorrect ? "var(--sync)" : "var(--panel)",
           border: isCorrect ? "none" : `1.5px solid ${color}`,
-          color: isCorrect ? "#0a0e14" : color,
+          color: isCorrect ? "var(--on-accent)" : color,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -107,7 +107,7 @@ const QuestionSlide: React.FC<{
           style={{
             padding: "8px 16px",
             backgroundColor: "var(--accent)",
-            color: "#0a0e14",
+            color: "var(--on-accent)",
             borderRadius: 999,
             fontSize: 15,
             fontWeight: 800,
@@ -119,8 +119,8 @@ const QuestionSlide: React.FC<{
         <div
           style={{
             padding: "6px 12px",
-            backgroundColor: "rgba(88, 166, 255, 0.15)",
-            border: "1px solid rgba(88, 166, 255, 0.4)",
+            backgroundColor: "color-mix(in srgb, var(--accent) 15%, transparent)",
+            border: "1px solid color-mix(in srgb, var(--accent) 40%, transparent)",
             borderRadius: 999,
             fontSize: 12,
             letterSpacing: 2,
@@ -160,8 +160,8 @@ const QuestionSlide: React.FC<{
           gap: 10,
           marginTop: 4,
           padding: "10px 16px",
-          backgroundColor: "rgba(255, 179, 71, 0.08)",
-          border: "1px dashed rgba(255, 179, 71, 0.5)",
+          backgroundColor: "color-mix(in srgb, var(--microtask) 8%, transparent)",
+          border: "1px dashed color-mix(in srgb, var(--microtask) 50%, transparent)",
           borderRadius: 10,
           color: "var(--microtask)",
         }}
@@ -196,7 +196,7 @@ const RevealSlide: React.FC<{
           style={{
             padding: "8px 16px",
             backgroundColor: "var(--sync)",
-            color: "#0a0e14",
+            color: "var(--on-accent)",
             borderRadius: 999,
             fontSize: 15,
             fontWeight: 800,
@@ -208,8 +208,8 @@ const RevealSlide: React.FC<{
         <div
           style={{
             padding: "6px 12px",
-            backgroundColor: "rgba(63, 185, 80, 0.15)",
-            border: "1px solid rgba(63, 185, 80, 0.4)",
+            backgroundColor: "color-mix(in srgb, var(--sync) 15%, transparent)",
+            border: "1px solid color-mix(in srgb, var(--sync) 40%, transparent)",
             borderRadius: 999,
             fontSize: 12,
             letterSpacing: 2,
@@ -250,8 +250,8 @@ const RevealSlide: React.FC<{
         transition={{ delay: 0.8, type: "spring", damping: 18 }}
         style={{
           padding: "14px 18px",
-          backgroundColor: "rgba(88, 166, 255, 0.08)",
-          border: "1px solid rgba(88, 166, 255, 0.4)",
+          backgroundColor: "color-mix(in srgb, var(--accent) 8%, transparent)",
+          border: "1px solid color-mix(in srgb, var(--accent) 40%, transparent)",
           borderRadius: 12,
         }}
       >
@@ -283,7 +283,7 @@ const ResultsPanel: React.FC = () => (
       backgroundColor: "var(--panel)",
       border: "2px solid var(--sync)",
       borderRadius: 20,
-      boxShadow: "0 0 60px rgba(63, 185, 80, 0.35)",
+      boxShadow: "0 0 60px color-mix(in srgb, var(--sync) 35%, transparent)",
       maxWidth: 900,
     }}
   >
@@ -298,10 +298,10 @@ const ResultsPanel: React.FC = () => (
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        boxShadow: "0 0 40px rgba(63, 185, 80, 0.6)",
+        boxShadow: "0 0 40px color-mix(in srgb, var(--sync) 60%, transparent)",
       }}
     >
-      <Icon icon="mdi:medal-outline" width={52} height={52} color="#0a0e14" />
+      <Icon icon="mdi:medal-outline" width={52} height={52} color="var(--on-accent)" />
     </motion.div>
     <div style={{ fontSize: 32, fontWeight: 800, color: "var(--text)", textAlign: "center" }}>
       Count your score
@@ -375,7 +375,6 @@ export const class10Ch1QuizDeck: Deck = {
   topic: "Ch 1 · Quick Quiz",
   topicCode: "QUIZ",
   topicTitle: "Chapter 1 Quick Quiz · 8 questions",
-  theme: "class-10",
   accent: ACCENT,
   slides: [
     // 1. Hero
@@ -407,7 +406,7 @@ export const class10Ch1QuizDeck: Deck = {
                       fontWeight: 800,
                       color: "var(--accent)",
                       fontFamily: "Roboto Mono, monospace",
-                      boxShadow: "0 0 16px rgba(88, 166, 255, 0.35)",
+                      boxShadow: "0 0 16px color-mix(in srgb, var(--accent) 35%, transparent)",
                     }}
                   >
                     {t}
@@ -479,7 +478,7 @@ export const class10Ch1QuizDeck: Deck = {
             <div
               style={{
                 padding: "16px 20px",
-                backgroundColor: "rgba(88, 166, 255, 0.08)",
+                backgroundColor: "color-mix(in srgb, var(--accent) 8%, transparent)",
                 border: "1px dashed var(--accent)",
                 borderRadius: 12,
                 fontSize: 15,

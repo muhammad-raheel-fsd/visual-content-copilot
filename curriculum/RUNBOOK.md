@@ -1,6 +1,6 @@
 ---
 title: Curriculum content runbook
-last_updated: 2026-09-26
+last_updated: 2026-10-03
 maintained_by: Claude Code + Muhammad Raheel
 ---
 
@@ -25,15 +25,17 @@ Currently in place:
 Tree layout:
 
 ```
-curriculum/books/parsed/
-  <book-slug>/                             e.g. class-10-cs
-    ch<M>-<chapter-slug>/                  e.g. ch1-operating-systems
-      README.md                            chapter index + status table + extraction workflow
+curriculum/<board>/class-<N>/<subject>/
+  ch<M>-<chapter-slug>/                    e.g. ch1-operating-systems
+    README.md                              chapter index + status table
+    source/
       overview.md                          SLOs + Introduction (chapter-scope material)
       t<T>-<topic-slug>.md                 one file per book topic, e.g. t1.1-intro-to-os.md
-      t<T>-<topic-slug>.md
-      ...
+      summary.md                           book's own chapter Summary (R-H)
+      board-exercise.md                    book's own EXERCISE section (R-H)
 ```
+
+Full chapter layout (questions/, diagrams/, slides/, research.md): see [FOLDER-STRUCTURE.md](../FOLDER-STRUCTURE.md).
 
 Rules:
 
@@ -50,20 +52,25 @@ Example current state:
 - `curriculum/multan-board/class-10/computer-science/ch1-operating-systems/source/t1.1-intro-to-os.md`
 - `curriculum/multan-board/class-10/computer-science/ch1-operating-systems/source/t1.2-architecture.md`
 
-## For every topic, produce five artefacts
+## For every topic, produce six artefacts
 
-When Muhammad says "cover topic 1.1", generate all five:
+When Muhammad says "cover topic 1.1", generate all six (the sixth, the website article, is
+written by the `web-article-writer` agent and imported with `pnpm content:import` in
+`apps/bytemotion-web-app`):
 
 ```
 apps/slides/src/decks/class-<N>-ch<M>-t<T>-<slug>.tsx    (interactive slide deck)
-curriculum/multan-board/class-<N>/questions/
-  ch<M>-t<T>-mcqs.md                                     (10 to 15 MCQs)
-  ch<M>-t<T>-short.md                                    (5 to 8 short questions)
-  ch<M>-t<T>-long.md                                     (2 to 3 long questions if applicable)
+curriculum/<board>/class-<N>/<subject>/ch<M>-<chapter-slug>/questions/
+  t<T>-mcqs.md                                           (10 to 15 MCQs)
+  t<T>-short.md                                          (5 to 8 short questions)
+  t<T>-long.md                                           (2 to 3 long questions if applicable)
+curriculum/<board>/class-<N>/<subject>/ch<M>-<chapter-slug>/web/
+  t<T>-<slug>.md                                         (website article: own words, book definitions in :::definition)
+  overview.md                                            (once per chapter: title, URL slug, intro)
 ```
 
 Optional per topic (not always needed):
-- `library/diagrams/source/class-<N>-ch<M>-t<T>-*.excalidraw` (hand-drawn diagrams)
+- `curriculum/<board>/class-<N>/<subject>/ch<M>-<chapter-slug>/diagrams/source/t<T>-<name>.excalidraw` (hand-drawn diagram master), rendered to `diagrams/rendered/t<T>-<name>.svg`, with RELATIVE symlinks `library/diagrams/source/class-<N>-ch<M>-t<T>-<name>.excalidraw` and `library/diagrams/class-<N>-ch<M>-t<T>-<name>.svg` so `npm run render:diagrams` and the slides app find them (see R-I)
 - `apps/remotion/videos/class-<N>-ch<M>-t<T>-<slug>/` (full narrated video)
 
 ## Question file format
@@ -226,13 +233,13 @@ The MD format is designed so parsing is trivial: frontmatter for the metadata, h
 
 The default pipeline:
 
-1. **Ensure the topic file exists** at `curriculum/books/parsed/<book-slug>/ch<M>-<chapter-slug>/t<T>-<topic-slug>.md`. If not, extract from PDF first using the vision Read tool (pages range) and update the chapter `README.md` status table.
+1. **Ensure the topic file exists** at `curriculum/<board>/class-<N>/<subject>/ch<M>-<chapter-slug>/source/t<T>-<topic-slug>.md`. If not, extract from PDF first using the vision Read tool (pages range) and update the chapter `README.md` status table.
 2. **Slides**: `apps/slides/src/decks/<slug>.tsx` with verbatim wording, punchy tagline per slide, top-left chrome, no em dashes.
-3. **MCQs**: 10 to 15 in `curriculum/<board>/class-<N>/questions/ch<M>-t<T>-mcqs.md`.
-4. **Short questions**: 5 to 8 in `.../ch<M>-t<T>-short.md`.
-5. **Long questions**: 2 to 3 in `.../ch<M>-t<T>-long.md` (skip if the topic is not exam-worthy at long length).
+3. **MCQs**: 10 to 15 in `curriculum/<board>/class-<N>/<subject>/ch<M>-<chapter-slug>/questions/t<T>-mcqs.md`.
+4. **Short questions**: 5 to 8 in `.../questions/t<T>-short.md`.
+5. **Long questions**: 2 to 3 in `.../questions/t<T>-long.md` (skip if the topic is not exam-worthy at long length).
 6. **Register the slide deck** in `apps/slides/src/App.tsx` `DECKS` map.
-7. **Update the topic manifest** at `videos/topics/<slug>.md` linking all five artefacts.
+7. **Update the chapter docs**: chapter `README.md` tables, `slides/README.md` deck index, and the `research.md` status tracker. (`videos/topics/` manifests are for non-curriculum videos only.)
 8. **Verify**: `pnpm run slides:build`, `pnpm run lint`, zero em dashes / no `Tit Byt` / no `bytemotion` on-screen.
 
 ## Naming conventions
@@ -240,12 +247,13 @@ The default pipeline:
 - Book slug: lowercase-hyphenated, `class-10-cs`, `class-12-cs`
 - Chapter number: `1`, `2`, ... (no leading zero)
 - Topic code: dot-separated `1.1`, `1.2`, `2.3.1` (matches the book exactly)
-- Deck ID (in URL and DECKS map): `class-<N>-ch<M>-t<T>-<slug>`, example `class-10-ch1-t1.1-intro-to-os`
-- Question file: `ch<M>-t<T>-<type>.md`, example `ch1-t1.1-mcqs.md`
+- Deck ID (in URL and DECKS map): `class-<N>-ch<M>-t<T>-<slug>`, example `class-10-ch1-t1.2-architecture` (one legacy exception: topic 1.1 shipped as `class-10-ch1-intro-to-os`)
+- Question file: `t<T>-<type>.md` inside the chapter's `questions/`, example `questions/t1.1-mcqs.md`
+- Diagram: `t<T>-<name>` inside the chapter, `class-<N>-ch<M>-t<T>-<name>` for the library symlinks
 
 ## Rules summary (all durable, all enforced)
 
-From `~/.claude/projects/-home-janab-learnings-bytemotion/memory/`:
+Originally kept as Claude memory files on the previous machine (`/home/janab/...`). Those files did not migrate on 2026-10-03, so THIS list is now the surviving copy:
 
 - **feedback_verbatim_book_wording.md**: verbatim book text is untouchable. Real-world examples labelled `BEYOND THE BOOK`.
 - **feedback_slides_and_content.md**: no em dashes, every slide has a visual, simple English, short sentences.
@@ -254,6 +262,14 @@ From `~/.claude/projects/-home-janab-learnings-bytemotion/memory/`:
 - **feedback_visual_and_process.md**: no pill/border badges; always use project agents/skills; never hallucinate coordinates, APIs, or paths.
 
 ## Rules discovered while shipping topics (auto-added, do not remove)
+
+- **R-W (2026-10-06) Website articles are own words.** `web/t<T>-<slug>.md` explains the topic
+  in our own simple English; only definitions, the book's headings and short lists are quoted,
+  inside `:::definition{source="<book> (PECTAA), topic <T>"}` blocks. Never paste book
+  paragraphs (copyright). Format contract: `.claude/agents/web-article-writer.md`. Question files
+  must keep the formats above: the importer parses them (`questions/mixed-mcqs.md` is skipped,
+  because it repeats the topic MCQs).
+
 
 These rules were learned during real slide reviews with Muhammad. They apply to every future topic.
 
@@ -316,3 +332,22 @@ These rules were learned during real slide reviews with Muhammad. They apply to 
 - **Slide `.tsx` source files must stay in `apps/slides/src/decks/`** — Vite compiles from there. The chapter's `slides/README.md` acts as the index + preview URL list; the physical .tsx cannot move.
 - **Rendered chapter SVGs live in the chapter's `diagrams/rendered/`** as the master. Symlink into `library/diagrams/class-<N>-ch<M>-*.svg` so Vite can serve them at `/diagrams/*.svg`. Never keep the physical SVG in `library/`; the symlink resolves to the chapter folder.
 - **Reason:** Muhammad 2026-09-30, after a scattering incident. Structured patterns beat one-off placement every time. Complete guide: `FOLDER-STRUCTURE.md` at repo root.
+
+**R-J. Library symlinks must be RELATIVE, and must carry the `class-<N>-ch<M>-` prefix.**
+- Create them from inside the link's folder, e.g. `cd library/diagrams && ln -s ../../curriculum/<...>/diagrams/rendered/t4.1c-layout-managers.svg class-12-ch4-t4.1c-layout-managers.svg`. Never `ln -s /home/<user>/...`.
+- **Why:** the 2026-09-30 links were absolute `/home/janab/learnings/bytemotion/...` paths. When the repo moved to a new machine (2026-10-03) every one of them broke, and all 12 deck diagrams stopped loading. Separately, four class-12 source links had no `class-12-ch4-` prefix, so `npm run render:diagrams` wrote loose `library/diagrams/t4.*.svg` copies instead of writing through the prefixed SVG link into the chapter's `diagrams/rendered/`.
+- **Check:** `find library/diagrams -xtype l` must print nothing, and `find library/diagrams -type l -lname '/*'` must print nothing.
+- Clone or check out this repo with Linux git inside WSL, not a Windows git client: Windows git turns symlinks into small "IntxLNK" stub files.
+
+**R-K. No webcam safe zone: slides, videos and diagrams use the full canvas width (2026-10-04).**
+- Muhammad now places his webcam himself in the OBS window, so the old right-10% reservation (192px of 1920) is switched off everywhere. Do not leave an empty strip on the right of any slide, beat, or diagram.
+- The switch is kept, not deleted, in case the overlay comes back: `apps/slides/src/components/safeZone.ts` (`SAFE_ZONE_RIGHT`, `FREED_WIDTH`) for slides, `SAFE_ZONE_RIGHT` in `apps/remotion/components/theme.ts` plus `library/scripts/remotion/check-layout.mjs` for videos (old LAYOUT presets are in comments next to the new ones), and a commented-out rule 13 in `.claude/agents/excalidraw-designer.md`.
+- When authoring a new deck, rely on `SlideLayout` / `HeroSlide` padding instead of hardcoding right padding. If a centred card needs a fixed `maxWidth`, size it for the full 1760px content width.
+
+**R-L. Ask Muhammad which theme to use BEFORE starting a new chapter. Themes are per chapter, set in ONE place (2026-10-05).**
+- **When:** the first time a new chapter is started (new `ch<M>` folder), before building its first deck. Ask with the theme list from `apps/slides/src/themes.ts` (ids: `horizon`, `github-dark`, `one-dark`, `catppuccin-mocha`, `tokyo-night`, `gruvbox`, `nord`, `everforest`) and mention which ones other chapters already use, so neighbouring chapters can look different. He can compare them live in the slide app: **Library** (or `L`) > **Themes** tab, or `?theme=<id>` in the URL.
+- **Where it is set:** one line in `CHAPTER_THEMES` in `apps/slides/src/themes.ts`, e.g. `"class-11-ch2": "gruvbox"`. Record the choice in the chapter's `research.md` (section 0) and `README.md`.
+- **Decks never carry a theme:** no `theme:` field in the Deck export, and no hardcoded theme colours. Use `var(--accent)`, `var(--sync)`, `var(--microtask)`, `var(--task)`, `var(--api)`, `var(--warn)`, `var(--panel)`, `var(--code-bg)`, `var(--on-accent)` (dark text on a coloured badge), `var(--syn-*)` for code. For tints use `color-mix(in srgb, var(--accent) 10%, transparent)`, never `rgba(r, g, b, a)` of a theme colour. Fixed real-world colours (brand logos, the book's own `lightblue`, mock app windows) may stay hardcoded.
+- **Diagrams** are drawn in the chapter theme's colours (background = the theme's `bg`, strokes from its tokens). Changing a chapter's theme later means re-colouring its diagrams too.
+- **Adding a new theme:** add an entry to `THEMES` with the palette copied from the theme's official source (link in `source`), then run a WCAG AA contrast check: every text/accent colour must reach 4.5:1 on `panel` and `bg`. Lighten a colour just enough to pass and note it in a comment.
+- **Why:** Muhammad found two chapters looking the same (both dark blue) and wants each chapter to have its own look, chosen by him.

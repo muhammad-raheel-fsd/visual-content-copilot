@@ -188,7 +188,7 @@ const CarEngineAnalogy: React.FC = () => (
         backgroundColor: "var(--panel)",
         border: "2px solid var(--warn)",
         borderRadius: 16,
-        boxShadow: "0 0 40px rgba(255, 179, 71, 0.25)",
+        boxShadow: "0 0 40px color-mix(in srgb, var(--microtask) 25%, transparent)",
       }}
     >
       <Icon icon="mdi:engine-outline" width={80} height={80} color="var(--warn)" />
@@ -212,7 +212,7 @@ const CarEngineAnalogy: React.FC = () => (
         backgroundColor: "var(--panel)",
         border: "2px solid var(--accent)",
         borderRadius: 16,
-        boxShadow: "0 0 40px rgba(88, 166, 255, 0.25)",
+        boxShadow: "0 0 40px color-mix(in srgb, var(--accent) 25%, transparent)",
       }}
     >
       <div style={{ display: "flex", gap: 12 }}>
@@ -246,7 +246,7 @@ const ShellComparison: React.FC = () => (
         backgroundColor: "var(--panel)",
         border: "1.5px solid var(--sync)",
         borderRadius: 16,
-        boxShadow: "0 0 30px rgba(63, 185, 80, 0.22)",
+        boxShadow: "0 0 30px color-mix(in srgb, var(--sync) 22%, transparent)",
       }}
     >
       <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
@@ -299,7 +299,7 @@ const ShellComparison: React.FC = () => (
         backgroundColor: "var(--panel)",
         border: "1.5px solid var(--microtask)",
         borderRadius: 16,
-        boxShadow: "0 0 30px rgba(255, 179, 71, 0.22)",
+        boxShadow: "0 0 30px color-mix(in srgb, var(--microtask) 22%, transparent)",
       }}
     >
       <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
@@ -310,7 +310,7 @@ const ShellComparison: React.FC = () => (
         style={{
           height: 120,
           borderRadius: 10,
-          backgroundColor: "#0a0e14",
+          backgroundColor: "var(--code-bg)",
           border: "1px solid var(--panel-border)",
           padding: "10px 14px",
           fontFamily: "Roboto Mono, monospace",
@@ -393,7 +393,7 @@ const ConcentricArchitecture: React.FC = () => {
             alignItems: "center",
             justifyContent: "center",
             gap: 6,
-            boxShadow: "0 0 60px 10px rgba(255, 121, 198, 0.25)",
+            boxShadow: "0 0 60px 10px color-mix(in srgb, var(--task) 25%, transparent)",
           }}
         >
           <div style={{ display: "flex", gap: 10 }}>
@@ -613,8 +613,8 @@ const ActivityBox: React.FC = () => (
   <div
     style={{
       padding: "22px 26px",
-      backgroundColor: "rgba(255, 179, 71, 0.08)",
-      border: "1.5px solid rgba(255, 179, 71, 0.45)",
+      backgroundColor: "color-mix(in srgb, var(--microtask) 8%, transparent)",
+      border: "1.5px solid color-mix(in srgb, var(--microtask) 45%, transparent)",
       borderRadius: 14,
     }}
   >
@@ -776,7 +776,7 @@ const NextTopicHero: React.FC = () => (
       backgroundColor: "var(--panel)",
       border: "2px solid var(--microtask)",
       borderRadius: 20,
-      boxShadow: "0 0 60px rgba(255, 179, 71, 0.28)",
+      boxShadow: "0 0 60px color-mix(in srgb, var(--microtask) 28%, transparent)",
     }}
   >
     <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
@@ -784,7 +784,7 @@ const NextTopicHero: React.FC = () => (
         style={{
           padding: "6px 16px",
           backgroundColor: "var(--microtask)",
-          color: "#0a0e14",
+          color: "var(--on-accent)",
           borderRadius: 999,
           fontSize: 18,
           fontWeight: 800,
@@ -813,8 +813,8 @@ const NextTopicHero: React.FC = () => (
             alignItems: "center",
             gap: 10,
             padding: "10px 16px",
-            backgroundColor: "rgba(255, 179, 71, 0.12)",
-            border: "1px solid rgba(255, 179, 71, 0.45)",
+            backgroundColor: "color-mix(in srgb, var(--microtask) 12%, transparent)",
+            border: "1px solid color-mix(in srgb, var(--microtask) 45%, transparent)",
             borderRadius: 999,
           }}
         >
@@ -862,7 +862,6 @@ export const class10Ch1T12ArchitectureDeck: Deck = {
   topic: "1.2 · Architecture of an OS",
   topicCode: "1.2",
   topicTitle: "Architecture of an Operating System",
-  theme: "class-10",
   accent: ACCENT,
   slides: [
     // 1. Hero
@@ -1017,7 +1016,7 @@ export const class10Ch1T12ArchitectureDeck: Deck = {
                 maxWidth: "100%",
                 maxHeight: "100%",
                 objectFit: "contain",
-                filter: "drop-shadow(0 0 40px rgba(88, 166, 255, 0.15))",
+                filter: "drop-shadow(0 0 40px color-mix(in srgb, var(--accent) 15%, transparent))",
               }}
             />
           </div>
@@ -1235,9 +1234,9 @@ export const class10Ch1T12ArchitectureDeck: Deck = {
                 style={{
                   marginTop: 6,
                   padding: "12px 14px",
-                  backgroundColor: "rgba(255, 179, 71, 0.10)",
+                  backgroundColor: "color-mix(in srgb, var(--microtask) 10%, transparent)",
                   borderRadius: 10,
-                  border: "1px solid rgba(255, 179, 71, 0.4)",
+                  border: "1px solid color-mix(in srgb, var(--microtask) 40%, transparent)",
                 }}
               >
                 <div style={{ fontSize: 12, letterSpacing: 2, color: "var(--microtask)", fontWeight: 800, marginBottom: 4 }}>

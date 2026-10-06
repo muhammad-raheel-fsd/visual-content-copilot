@@ -131,7 +131,7 @@ const RecapCard: React.FC<{
         style={{
           padding: "6px 16px",
           backgroundColor: color,
-          color: "#0a0e14",
+          color: "var(--on-accent)",
           borderRadius: 999,
           fontSize: 16,
           fontWeight: 800,
@@ -179,7 +179,7 @@ const RecapCard: React.FC<{
                 height: 26,
                 borderRadius: "50%",
                 backgroundColor: color,
-                color: "#0a0e14",
+                color: "var(--on-accent)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -228,7 +228,7 @@ const ChapterMindMap: React.FC = () => {
             left: CENTER - R - 10,
             top: CENTER - R - 10,
             borderRadius: "50%",
-            border: "2px dashed rgba(88, 166, 255, 0.28)",
+            border: "2px dashed color-mix(in srgb, var(--accent) 28%, transparent)",
           }}
         />
         <div
@@ -246,7 +246,7 @@ const ChapterMindMap: React.FC = () => {
             alignItems: "center",
             justifyContent: "center",
             gap: 4,
-            boxShadow: "0 0 60px 10px rgba(88, 166, 255, 0.4)",
+            boxShadow: "0 0 60px 10px color-mix(in srgb, var(--accent) 40%, transparent)",
           }}
         >
           <Icon icon="mdi:cog-sync-outline" width={44} height={44} color="var(--accent)" />
@@ -342,7 +342,6 @@ export const class10Ch1RevisionDeck: Deck = {
   topic: "Ch 1 · Revision",
   topicCode: "REV",
   topicTitle: "Chapter 1 Revision · Operating Systems",
-  theme: "class-10",
   accent: ACCENT,
   slides: [
     // 1. Hero
@@ -675,7 +674,7 @@ export const class10Ch1RevisionDeck: Deck = {
                     height: 24,
                     borderRadius: "50%",
                     backgroundColor: "var(--accent)",
-                    color: "#0a0e14",
+                    color: "var(--on-accent)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -710,7 +709,7 @@ export const class10Ch1RevisionDeck: Deck = {
             <div
               style={{
                 padding: "14px 18px",
-                backgroundColor: "rgba(255, 179, 71, 0.08)",
+                backgroundColor: "color-mix(in srgb, var(--microtask) 8%, transparent)",
                 border: "1px dashed var(--microtask)",
                 borderRadius: 10,
                 fontSize: 15,
@@ -782,8 +781,8 @@ export const class10Ch1RevisionDeck: Deck = {
             <div
               style={{
                 padding: "14px 18px",
-                backgroundColor: "rgba(255, 121, 198, 0.08)",
-                border: "1px solid rgba(255, 121, 198, 0.4)",
+                backgroundColor: "color-mix(in srgb, var(--task) 8%, transparent)",
+                border: "1px solid color-mix(in srgb, var(--task) 40%, transparent)",
                 borderRadius: 10,
               }}
             >
@@ -825,10 +824,10 @@ export const class10Ch1RevisionDeck: Deck = {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                boxShadow: "0 0 40px rgba(63, 185, 80, 0.55)",
+                boxShadow: "0 0 40px color-mix(in srgb, var(--sync) 55%, transparent)",
               }}
             >
-              <Icon icon="mdi:podium" width={44} height={44} color="#0a0e14" />
+              <Icon icon="mdi:podium" width={44} height={44} color="var(--on-accent)" />
             </motion.div>
             <div style={{ fontSize: 26, fontWeight: 800, color: "var(--text)", textAlign: "center" }}>
               Study in this order for maximum score

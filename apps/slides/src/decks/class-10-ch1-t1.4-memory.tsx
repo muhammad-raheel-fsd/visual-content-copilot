@@ -106,7 +106,7 @@ const HeroRamStack: React.FC = () => (
         gridTemplateColumns: "60px repeat(8, 1fr) 60px",
         gap: 6,
         padding: 8,
-        boxShadow: "0 0 50px rgba(88, 166, 255, 0.35)",
+        boxShadow: "0 0 50px color-mix(in srgb, var(--accent) 35%, transparent)",
       }}
     >
       <div
@@ -127,7 +127,7 @@ const HeroRamStack: React.FC = () => (
           animate={{ opacity: [0.4, 1, 0.4] }}
           transition={{ delay: 0.4 + i * 0.06, duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
           style={{
-            backgroundColor: "rgba(88, 166, 255, 0.15)",
+            backgroundColor: "color-mix(in srgb, var(--accent) 15%, transparent)",
             border: "1px solid var(--accent)",
             borderRadius: 6,
           }}
@@ -162,8 +162,8 @@ const HeroRamStack: React.FC = () => (
             gap: 8,
             padding: "6px 14px",
             borderRadius: 999,
-            backgroundColor: "rgba(88, 166, 255, 0.12)",
-            border: "1px solid rgba(88, 166, 255, 0.4)",
+            backgroundColor: "color-mix(in srgb, var(--accent) 12%, transparent)",
+            border: "1px solid color-mix(in srgb, var(--accent) 40%, transparent)",
           }}
         >
           <Icon icon={p.icon} width={18} height={18} color="var(--accent)" />
@@ -220,7 +220,7 @@ const WordDocIntoRam: React.FC = () => (
         backgroundColor: "var(--panel)",
         border: "1.5px solid var(--sync)",
         borderRadius: 14,
-        boxShadow: "0 0 30px rgba(63, 185, 80, 0.28)",
+        boxShadow: "0 0 30px color-mix(in srgb, var(--sync) 28%, transparent)",
       }}
     >
       <Icon icon="mdi:file-word-outline" width={70} height={70} color="var(--sync)" />
@@ -246,7 +246,7 @@ const WordDocIntoRam: React.FC = () => (
         backgroundColor: "var(--panel)",
         border: "1.5px solid var(--accent)",
         borderRadius: 14,
-        boxShadow: "0 0 30px rgba(88, 166, 255, 0.32)",
+        boxShadow: "0 0 30px color-mix(in srgb, var(--accent) 32%, transparent)",
       }}
     >
       <Icon icon="mdi:memory" width={70} height={70} color="var(--accent)" />
@@ -273,7 +273,7 @@ const WordDocIntoRam: React.FC = () => (
         backgroundColor: "var(--panel)",
         border: "1.5px solid var(--microtask)",
         borderRadius: 14,
-        boxShadow: "0 0 30px rgba(255, 179, 71, 0.32)",
+        boxShadow: "0 0 30px color-mix(in srgb, var(--microtask) 32%, transparent)",
       }}
     >
       <Icon icon="mdi:chip" width={70} height={70} color="var(--microtask)" />
@@ -334,8 +334,8 @@ const VirtualMemoryFlow: React.FC = () => (
               style={{
                 fontSize: 12,
                 padding: "6px 10px",
-                backgroundColor: i === 5 ? "rgba(255, 179, 71, 0.14)" : "rgba(88, 166, 255, 0.12)",
-                border: i === 5 ? "1px dashed var(--microtask)" : "1px solid rgba(88, 166, 255, 0.35)",
+                backgroundColor: i === 5 ? "color-mix(in srgb, var(--microtask) 14%, transparent)" : "color-mix(in srgb, var(--accent) 12%, transparent)",
+                border: i === 5 ? "1px dashed var(--microtask)" : "1px solid color-mix(in srgb, var(--accent) 35%, transparent)",
                 borderRadius: 6,
                 color: i === 5 ? "var(--microtask)" : "var(--accent)",
                 fontWeight: 700,
@@ -377,7 +377,7 @@ const VirtualMemoryFlow: React.FC = () => (
         <div
           style={{
             padding: "12px 14px",
-            backgroundColor: "rgba(255, 179, 71, 0.12)",
+            backgroundColor: "color-mix(in srgb, var(--microtask) 12%, transparent)",
             border: "1px dashed var(--microtask)",
             borderRadius: 8,
             fontSize: 13,
@@ -421,8 +421,8 @@ const DoYouKnow: React.FC<{ children: ReactNode }> = ({ children }) => (
   <div
     style={{
       padding: "22px 26px",
-      backgroundColor: "rgba(88, 166, 255, 0.08)",
-      border: "1.5px solid rgba(88, 166, 255, 0.4)",
+      backgroundColor: "color-mix(in srgb, var(--accent) 8%, transparent)",
+      border: "1.5px solid color-mix(in srgb, var(--accent) 40%, transparent)",
       borderRadius: 14,
       display: "flex",
       alignItems: "flex-start",
@@ -538,7 +538,7 @@ const NextTopicHero: React.FC = () => (
       backgroundColor: "var(--panel)",
       border: "2px solid var(--microtask)",
       borderRadius: 20,
-      boxShadow: "0 0 60px rgba(255, 179, 71, 0.28)",
+      boxShadow: "0 0 60px color-mix(in srgb, var(--microtask) 28%, transparent)",
     }}
   >
     <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
@@ -546,7 +546,7 @@ const NextTopicHero: React.FC = () => (
         style={{
           padding: "6px 16px",
           backgroundColor: "var(--microtask)",
-          color: "#0a0e14",
+          color: "var(--on-accent)",
           borderRadius: 999,
           fontSize: 18,
           fontWeight: 800,
@@ -573,8 +573,8 @@ const NextTopicHero: React.FC = () => (
             alignItems: "center",
             gap: 10,
             padding: "10px 16px",
-            backgroundColor: "rgba(255, 179, 71, 0.12)",
-            border: "1px solid rgba(255, 179, 71, 0.45)",
+            backgroundColor: "color-mix(in srgb, var(--microtask) 12%, transparent)",
+            border: "1px solid color-mix(in srgb, var(--microtask) 45%, transparent)",
             borderRadius: 999,
           }}
         >
@@ -595,7 +595,6 @@ export const class10Ch1T14MemoryDeck: Deck = {
   topic: "1.4 · Memory",
   topicCode: "1.4",
   topicTitle: "Memory",
-  theme: "class-10",
   accent: ACCENT,
   slides: [
     // 1. Hero
@@ -731,7 +730,7 @@ export const class10Ch1T14MemoryDeck: Deck = {
                 maxWidth: "100%",
                 maxHeight: "100%",
                 objectFit: "contain",
-                filter: "drop-shadow(0 0 40px rgba(88, 166, 255, 0.15))",
+                filter: "drop-shadow(0 0 40px color-mix(in srgb, var(--accent) 15%, transparent))",
               }}
             />
           </div>
@@ -819,7 +818,7 @@ export const class10Ch1T14MemoryDeck: Deck = {
                   backgroundColor: "var(--panel)",
                   border: "1.5px solid var(--accent)",
                   borderRadius: 14,
-                  boxShadow: "0 0 24px rgba(88, 166, 255, 0.28)",
+                  boxShadow: "0 0 24px color-mix(in srgb, var(--accent) 28%, transparent)",
                 }}
               >
                 <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 10 }}>
@@ -846,7 +845,7 @@ export const class10Ch1T14MemoryDeck: Deck = {
                   backgroundColor: "var(--panel)",
                   border: "1.5px solid var(--warn)",
                   borderRadius: 14,
-                  boxShadow: "0 0 24px rgba(255, 179, 71, 0.28)",
+                  boxShadow: "0 0 24px color-mix(in srgb, var(--microtask) 28%, transparent)",
                 }}
               >
                 <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 10 }}>
@@ -1063,8 +1062,8 @@ export const class10Ch1T14MemoryDeck: Deck = {
             style={{
               marginTop: 20,
               padding: "16px 20px",
-              backgroundColor: "rgba(255, 179, 71, 0.08)",
-              border: "1px solid rgba(255, 179, 71, 0.4)",
+              backgroundColor: "color-mix(in srgb, var(--microtask) 8%, transparent)",
+              border: "1px solid color-mix(in srgb, var(--microtask) 40%, transparent)",
               borderRadius: 12,
             }}
           >
