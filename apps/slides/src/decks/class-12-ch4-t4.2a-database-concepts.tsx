@@ -424,7 +424,7 @@ const NextTopicHero: React.FC = () => (
           fontFamily: "Roboto Mono, monospace",
         }}
       >
-        4.2b
+        4.2
       </div>
       <div style={{ fontSize: 34, fontWeight: 800, color: "var(--text)" }}>
         Connecting Python to a Database
@@ -493,12 +493,12 @@ const QARow: React.FC<{ q: string; a: string }> = ({ q, a }) => (
 // ── the deck ─────────────────────────────────────────────────────────────
 
 export const class12Ch4T42aDatabaseConceptsDeck: Deck = {
-  title: "Database Concepts + SQL Structure",
+  title: "Working with Databases in Python",
   book: "Computer Science 12 (PECTAA)",
   chapter: "Ch 4 · Development of Graphical User Interface (GUI)",
-  topic: "4.2a · Databases + SQL",
-  topicCode: "4.2a",
-  topicTitle: "Database Concepts + SQL Structure",
+  topic: "4.2 · Working with Databases in Python",
+  topicCode: "4.2",
+  topicTitle: "Working with Databases in Python",
   accent: ACCENT,
   slides: [
     // 1. Hero
@@ -509,7 +509,7 @@ export const class12Ch4T42aDatabaseConceptsDeck: Deck = {
         <HeroSlide
           title={
             <>
-              4.2a <span style={{ color: ACCENT }}>Databases</span> + SQL
+              4.2 Working with <span style={{ color: ACCENT }}>Databases</span> in Python
             </>
           }
           subtitle={
@@ -1285,7 +1285,7 @@ export const class12Ch4T42aDatabaseConceptsDeck: Deck = {
       render: (
         <SlideLayout
           title="Overview of Relational Databases and SQL Structure"
-          subtitle='SQL = Structured Query Language. Four commands cover almost everything. (Preview of Table 4.1 · covered in 4.2c.)'
+          subtitle='SQL = Structured Query Language. Four commands cover almost everything. (Preview of Table 4.1 · covered in CRUD Operations.)'
           accent={ACCENT}
         >
           <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
@@ -1424,7 +1424,7 @@ export const class12Ch4T42aDatabaseConceptsDeck: Deck = {
       title: "Important Concepts",
       entrySfx: "ding.wav",
       render: (
-        <SlideLayout title="Important Concepts from 4.2a" accent={ACCENT}>
+        <SlideLayout title="Important Concepts: Working with Databases in Python" accent={ACCENT}>
           <Stagger style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
             <StaggerItem>
               <ConceptTag
@@ -1532,7 +1532,7 @@ export const class12Ch4T42aDatabaseConceptsDeck: Deck = {
     // 14. Coming up next
     {
       id: "next-topic",
-      title: "Next up: 4.2b Connecting Python to a Database",
+      title: "Next up: 4.2 Connecting Python to a Database",
       entrySfx: "swoosh.wav",
       render: (
         <SlideLayout title="Coming up next" accent="var(--sync)">

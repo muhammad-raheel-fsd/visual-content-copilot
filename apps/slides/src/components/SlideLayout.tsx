@@ -108,7 +108,7 @@ export const HeroSlide: React.FC<{
 
 /**
  * Personal byline shown on hero slides: Muhammad Raheel + titles + avatar.
- * Avatar tries /clipart/muhammad-raheel.jpg from the library; falls back to
+ * Avatar tries /clipart/muhammad-raheel.png from the library; falls back to
  * "MR" initials on a gradient if the photo is not there yet.
  */
 export const PresenterByline: React.FC<{ accent?: string; size?: "sm" | "md" | "lg" }> = ({
@@ -169,7 +169,7 @@ const Avatar: React.FC<{ size: number; accent: string }> = ({ size, accent }) =>
       }}
     >
       <img
-        src="/clipart/muhammad-raheel.jpg"
+        src="/clipart/muhammad-raheel.png"
         alt="Muhammad Raheel"
         style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", inset: 0 }}
         onError={(e) => {

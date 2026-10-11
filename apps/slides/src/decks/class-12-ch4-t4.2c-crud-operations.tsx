@@ -574,7 +574,7 @@ const ChapterEndHero: React.FC = () => (
         CH 4 WRAPPED
       </div>
       <div style={{ fontSize: 30, fontWeight: 800, color: "var(--text)" }}>
-        All 7 sub-topics shipped
+        All 7 lessons done
       </div>
     </div>
     <div
@@ -597,7 +597,7 @@ const ChapterEndHero: React.FC = () => (
         justifyContent: "center",
       }}
     >
-      {["4.1a Tkinter intro", "4.1b Widgets+Frames", "4.1c Layouts", "4.1d Event handling", "4.2a DB concepts", "4.2b Python+DB", "4.2c CRUD"].map((t) => (
+      {["4.1 What is a GUI?", "4.1 Components and Widgets", "4.1 Layout Management", "4.1 Event Handling", "4.2 Introduction to Databases", "4.2 Connecting Python to a Database", "4.2 CRUD Operations"].map((t) => (
         <div
           key={t}
           style={{
@@ -637,9 +637,9 @@ export const class12Ch4T42cCrudOperationsDeck: Deck = {
   title: "CRUD Operations",
   book: "Computer Science 12 (PECTAA)",
   chapter: "Ch 4 · Development of Graphical User Interface (GUI)",
-  topic: "4.2c · CRUD Operations",
-  topicCode: "4.2c",
-  topicTitle: "CRUD Operations",
+  topic: "4.2 · CRUD Operations",
+  topicCode: "4.2",
+  topicTitle: "Working with Databases in Python",
   accent: ACCENT,
   slides: [
     // 1. Hero
@@ -650,7 +650,7 @@ export const class12Ch4T42cCrudOperationsDeck: Deck = {
         <HeroSlide
           title={
             <>
-              4.2c <span style={{ color: ACCENT }}>CRUD</span> Operations
+              4.2 <span style={{ color: ACCENT }}>CRUD</span> Operations
             </>
           }
           subtitle={

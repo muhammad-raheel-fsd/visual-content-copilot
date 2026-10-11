@@ -676,10 +676,10 @@ const NextTopicHero: React.FC = () => (
           fontFamily: "Roboto Mono, monospace",
         }}
       >
-        4.2a
+        4.2
       </div>
       <div style={{ fontSize: 34, fontWeight: 800, color: "var(--text)" }}>
-        Database Concepts + SQL Structure
+        Working with Databases in Python
       </div>
     </div>
     <div
@@ -723,12 +723,12 @@ const NextTopicHero: React.FC = () => (
 // ── the deck ─────────────────────────────────────────────────────────────
 
 export const class12Ch4T41dEventHandlingDeck: Deck = {
-  title: "Event Handling + Login Form",
+  title: "Event Handling and Interactivity",
   book: "Computer Science 12 (PECTAA)",
   chapter: "Ch 4 · Development of Graphical User Interface (GUI)",
-  topic: "4.1d · Event Handling",
-  topicCode: "4.1d",
-  topicTitle: "Event Handling + Login Form",
+  topic: "4.1 · Event Handling and Interactivity",
+  topicCode: "4.1",
+  topicTitle: "Graphical User Interface (GUI) Development with Tkinter",
   accent: ACCENT,
   slides: [
     // 1. Hero
@@ -739,7 +739,7 @@ export const class12Ch4T41dEventHandlingDeck: Deck = {
         <HeroSlide
           title={
             <>
-              4.1d <span style={{ color: ACCENT }}>Event</span> Handling
+              4.1 <span style={{ color: ACCENT }}>Event</span> Handling and Interactivity
             </>
           }
           subtitle={

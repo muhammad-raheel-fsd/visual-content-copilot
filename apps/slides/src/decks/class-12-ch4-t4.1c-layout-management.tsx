@@ -517,10 +517,10 @@ const NextTopicHero: React.FC = () => (
           fontFamily: "Roboto Mono, monospace",
         }}
       >
-        4.1d
+        4.1
       </div>
       <div style={{ fontSize: 34, fontWeight: 800, color: "var(--text)" }}>
-        Event Handling + Login Form
+        Event Handling and Interactivity
       </div>
     </div>
     <div
@@ -632,12 +632,12 @@ window.mainloop()`;
 // ── the deck ─────────────────────────────────────────────────────────────
 
 export const class12Ch4T41cLayoutManagementDeck: Deck = {
-  title: "Layout Management (pack, grid, place)",
+  title: "Layout Management",
   book: "Computer Science 12 (PECTAA)",
   chapter: "Ch 4 · Development of Graphical User Interface (GUI)",
-  topic: "4.1c · Layout Management",
-  topicCode: "4.1c",
-  topicTitle: "Layout Management (pack, grid, place)",
+  topic: "4.1 · Layout Management",
+  topicCode: "4.1",
+  topicTitle: "Graphical User Interface (GUI) Development with Tkinter",
   accent: ACCENT,
   slides: [
     // 1. Hero
@@ -648,7 +648,7 @@ export const class12Ch4T41cLayoutManagementDeck: Deck = {
         <HeroSlide
           title={
             <>
-              4.1c <span style={{ color: ACCENT }}>Layout</span> Management
+              4.1 <span style={{ color: ACCENT }}>Layout</span> Management
             </>
           }
           subtitle={
@@ -1443,7 +1443,7 @@ export const class12Ch4T41cLayoutManagementDeck: Deck = {
       title: "Important Concepts",
       entrySfx: "ding.wav",
       render: (
-        <SlideLayout title="Important Concepts from 4.1c" accent={ACCENT}>
+        <SlideLayout title="Important Concepts: Layout Management" accent={ACCENT}>
           <Stagger style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
             <StaggerItem>
               <ConceptTag
@@ -1537,7 +1537,7 @@ export const class12Ch4T41cLayoutManagementDeck: Deck = {
     // 14. Coming up next
     {
       id: "next-topic",
-      title: "Next up: 4.1d Event Handling + Login Form",
+      title: "Next up: 4.1 Event Handling and Interactivity",
       entrySfx: "swoosh.wav",
       render: (
         <SlideLayout title="Coming up next" accent="var(--microtask)">

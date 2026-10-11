@@ -41,3 +41,10 @@ import { Img, staticFile } from "remotion";
 
 <Img src={staticFile("clipart/doodle-lightbulb.svg")} style={{ width: 120 }} />
 ```
+
+## Muhammad's photo
+
+`muhammad-raheel.png` (1200 x 1200, a circle on a dark backdrop): Muhammad's own photo, copied from
+the web app (`apps/bytemotion-web-app/public/brand/profile-circle.png`). Used by the slides byline
+(`SlideLayout` Avatar), the faceless videos (`Avatar` in `components/faceless/kit.tsx`: end cards,
+Short outro) and `figma-assets/brand/`. Replace this one file to change it everywhere.

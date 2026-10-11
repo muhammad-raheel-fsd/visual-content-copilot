@@ -214,12 +214,15 @@ const SlideChrome: React.FC<{
   nextTitle,
   accent = "var(--accent)",
 }) => {
+  // When the line is too long, the book and chapter shrink (ending in "..."); the topic, the
+  // book's own number and heading, always stays whole (RUNBOOK R-N).
+  const shrink: React.CSSProperties = { minWidth: 0, overflow: "hidden", textOverflow: "ellipsis" };
   const parts: React.ReactNode[] = [];
-  if (book) parts.push(<span key="b">{book}</span>);
-  if (chapter) parts.push(<span key="c">{chapter}</span>);
+  if (book) parts.push(<span key="b" style={shrink}>{book}</span>);
+  if (chapter) parts.push(<span key="c" style={shrink}>{chapter}</span>);
   if (topicCode && topicTitle) {
     parts.push(
-      <span key="t" style={{ color: accent }}>
+      <span key="t" style={{ color: accent, flexShrink: 0 }}>
         {topicCode} {topicTitle}
       </span>,
     );
@@ -227,7 +230,11 @@ const SlideChrome: React.FC<{
   const joined: React.ReactNode[] = [];
   parts.forEach((p, i) => {
     if (i > 0)
-      joined.push(<span key={`sep-${i}`} style={{ opacity: 0.35, margin: "0 10px" }}>·</span>);
+      joined.push(
+        <span key={`sep-${i}`} style={{ opacity: 0.35, margin: "0 10px", flexShrink: 0 }}>
+          ·
+        </span>,
+      );
     joined.push(p);
   });
 

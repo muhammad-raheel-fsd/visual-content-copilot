@@ -205,7 +205,7 @@ const RevealSlide: React.FC<{
 
 const QUIZ_ITEMS = [
   {
-    code: "4.1a",
+    code: "4.1",
     color: "var(--accent)",
     q: "What is Tkinter and what is it suitable for?",
     hint: "Think about where it comes from and what size of apps it fits.",
@@ -213,7 +213,7 @@ const QUIZ_ITEMS = [
     verbatim: true,
   },
   {
-    code: "4.1b",
+    code: "4.1",
     color: "var(--sync)",
     q: "What is a Frame in Tkinter, and why do we use frames?",
     hint: "Container... group... divide window.",
@@ -221,7 +221,7 @@ const QUIZ_ITEMS = [
     verbatim: true,
   },
   {
-    code: "4.1c",
+    code: "4.1",
     color: "var(--microtask)",
     q: "What are the three layout methods in Tkinter, and when do you use each?",
     hint: "pack · grid · place · simple / table / coordinates",
@@ -229,7 +229,7 @@ const QUIZ_ITEMS = [
     verbatim: true,
   },
   {
-    code: "4.1d",
+    code: "4.1",
     color: "var(--task)",
     q: "How does Tkinter connect a button click to a Python function? Give the exact syntax.",
     hint: "One keyword parameter · no parentheses.",
@@ -237,7 +237,7 @@ const QUIZ_ITEMS = [
     verbatim: false,
   },
   {
-    code: "4.2a",
+    code: "4.2",
     color: "var(--api)",
     q: "Differentiate between Primary Key and Foreign Key. Give one example from Figure 4.3.",
     hint: "unique id vs link to another table.",
@@ -245,7 +245,7 @@ const QUIZ_ITEMS = [
     verbatim: true,
   },
   {
-    code: "4.2b",
+    code: "4.2",
     color: "var(--sync)",
     q: "List the 5 steps of connecting Python to a SQLite database and running a SELECT query.",
     hint: "connect → cursor → execute → fetch → close.",
@@ -253,7 +253,7 @@ const QUIZ_ITEMS = [
     verbatim: true,
   },
   {
-    code: "4.2c",
+    code: "4.2",
     color: "var(--microtask)",
     q: "What are the 4 CRUD operations, and what SQL command does each use?",
     hint: "C · R · U · D.",
@@ -294,7 +294,7 @@ export const class12Ch4QuizDeck: Deck = {
                   marginBottom: 24,
                 }}
               >
-                {["4.1a", "4.1b", "4.1c", "4.1d", "4.2a", "4.2b", "4.2c"].map((t) => (
+                {["4.1", "4.2"].map((t) => (
                   <div
                     key={t}
                     style={{
@@ -312,7 +312,7 @@ export const class12Ch4QuizDeck: Deck = {
                   </div>
                 ))}
               </div>
-              <b style={hlGreen}>7 questions</b>. One per sub-topic. Think first, then peek at the answer.
+              <b style={hlGreen}>7 questions</b>. One per lesson. Think first, then peek at the answer.
             </>
           }
           accent={ACCENT}
@@ -431,7 +431,7 @@ export const class12Ch4QuizDeck: Deck = {
       render: (
         <SlideLayout
           title="How did you do?"
-          subtitle='Score yourself. Review the sub-topics where you got the answer wrong.'
+          subtitle='Score yourself. Review the lessons where you got the answer wrong.'
           accent={ACCENT}
         >
           <div
@@ -453,9 +453,9 @@ export const class12Ch4QuizDeck: Deck = {
             >
               {[
                 { range: "7 / 7", icon: "mdi:trophy-outline", color: "var(--accent)", title: "Exam-ready", detail: "You can walk into the paper today. Attempt the Mock Test for timing." },
-                { range: "5-6 / 7", icon: "mdi:medal-outline", color: "var(--sync)", title: "Strong", detail: "Review the 1-2 sub-topics you missed. Attempt the Board EXERCISE next." },
-                { range: "3-4 / 7", icon: "mdi:book-open-outline", color: "var(--microtask)", title: "On your way", detail: "Re-watch the sub-topic decks where you missed. Then quiz again." },
-                { range: "0-2 / 7", icon: "mdi:refresh-circle", color: "var(--task)", title: "Needs another pass", detail: "Start with the Revision deck, then re-watch each sub-topic in order." },
+                { range: "5-6 / 7", icon: "mdi:medal-outline", color: "var(--sync)", title: "Strong", detail: "Review the 1-2 lessons you missed. Attempt the Board EXERCISE next." },
+                { range: "3-4 / 7", icon: "mdi:book-open-outline", color: "var(--microtask)", title: "On your way", detail: "Re-watch the lessons where you missed. Then quiz again." },
+                { range: "0-2 / 7", icon: "mdi:refresh-circle", color: "var(--task)", title: "Needs another pass", detail: "Start with the Revision deck, then re-watch each lesson in order." },
               ].map((row) => (
                 <div
                   key={row.range}

@@ -591,7 +591,7 @@ const NextTopicHero: React.FC = () => (
           fontFamily: "Roboto Mono, monospace",
         }}
       >
-        4.1c
+        4.1
       </div>
       <div style={{ fontSize: 34, fontWeight: 800, color: "var(--text)" }}>
         Layout Management
@@ -672,12 +672,12 @@ label_bottom.pack(pady=50)
 window.mainloop()`;
 
 export const class12Ch4T41bWidgetsFramesDeck: Deck = {
-  title: "Tkinter Widgets + Frames",
+  title: "Tkinter Components and Widgets",
   book: "Computer Science 12 (PECTAA)",
   chapter: "Ch 4 · Development of Graphical User Interface (GUI)",
-  topic: "4.1b · Widgets + Frames",
-  topicCode: "4.1b",
-  topicTitle: "Tkinter Widgets + Frames",
+  topic: "4.1 · Tkinter Components and Widgets",
+  topicCode: "4.1",
+  topicTitle: "Graphical User Interface (GUI) Development with Tkinter",
   accent: ACCENT,
   slides: [
     // 1. Hero
@@ -688,8 +688,8 @@ export const class12Ch4T41bWidgetsFramesDeck: Deck = {
         <HeroSlide
           title={
             <>
-              4.1b <span style={{ color: ACCENT }}>Widgets</span> +{" "}
-              <span style={{ color: ACCENT }}>Frames</span>
+              4.1 Tkinter <span style={{ color: ACCENT }}>Components</span> and{" "}
+              <span style={{ color: ACCENT }}>Widgets</span>
             </>
           }
           subtitle={
@@ -1454,7 +1454,7 @@ label.pack()`}
       title: "Important Concepts",
       entrySfx: "ding.wav",
       render: (
-        <SlideLayout title="Important Concepts from 4.1b" accent={ACCENT}>
+        <SlideLayout title="Important Concepts: Tkinter Components and Widgets" accent={ACCENT}>
           <Stagger style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
             <StaggerItem>
               <ConceptTag
@@ -1506,7 +1506,7 @@ label.pack()`}
     // 13. Coming up next: 4.1c Layout Management
     {
       id: "next-topic",
-      title: "Next up: 4.1c Layout Management",
+      title: "Next up: 4.1 Layout Management",
       entrySfx: "swoosh.wav",
       render: (
         <SlideLayout title="Coming up next" accent="var(--microtask)">

@@ -59,7 +59,19 @@ Everything about this chapter lives inside this folder. One source of truth.
 
 **Book pages:** 45-59 (15 pages)
 **Book's own structure:** 2 top-level sections  ·  4.1 Tkinter GUI Development + 4.2 Working with Databases in Python.
-**My pedagogical breakdown:** 7 sub-topics (research.md section 2).
+**My pedagogical breakdown:** 7 lessons (research.md section 2). The file codes `4.1a` to `4.2c`
+are internal only (file names, deck ids, question files). On screen every lesson shows the
+book's own numbering (RUNBOOK R-N, 2026-10-09):
+
+| Lesson file | Book section (top-left of every slide)                     | Deck title = book sub-heading           |
+| ----------- | ---------------------------------------------------------- | --------------------------------------- |
+| t4.1a       | 4.1 Graphical User Interface (GUI) Development with Tkinter | (the section heading itself)            |
+| t4.1b       | 4.1                                                        | Tkinter Components and Widgets          |
+| t4.1c       | 4.1                                                        | Layout Management                       |
+| t4.1d       | 4.1                                                        | Event Handling and Interactivity        |
+| t4.2a       | 4.2 Working with Databases in Python                       | (the section heading itself)            |
+| t4.2b       | 4.2                                                        | Connecting Python to a Database         |
+| t4.2c       | 4.2                                                        | CRUD Operations                         |
 **Theme:** `github-dark` (near-black canvas, grey panels, blue accent). Replaced the plum + gold Meridian theme on 2026-10-05.
 
 **Student Learning Outcomes (verbatim):**

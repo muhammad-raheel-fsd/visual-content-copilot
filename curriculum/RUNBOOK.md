@@ -269,6 +269,16 @@ Originally kept as Claude memory files on the previous machine (`/home/janab/...
   paragraphs (copyright). Format contract: `.claude/agents/web-article-writer.md`. Question files
   must keep the formats above: the importer parses them (`questions/mixed-mcqs.md` is skipped,
   because it repeats the topic MCQs).
+- **R-T (2026-10-07) "Instructor", never "teacher", in our own words.** Muhammad is the
+  site's one instructor: articles, slides, emails and the website say "instructor" (singular),
+  never "teacher". Book wording quoted verbatim stays as printed (for example the book's
+  database examples "Student, Teacher, Course").
+- **R-N (2026-10-09) Only the book's own numbering on screen.** Never invent topic codes such
+  as "4.1a" or "4.2b". When one book section is split into several decks, every deck shows the
+  book's section number and exact section title (`topicCode: "4.1"`, `topicTitle` = the book's
+  heading), and the deck title is the book's own sub-heading for that part (for example
+  "Layout Management"). The decks are "lessons", never "sub-topics". File names and deck ids
+  may keep their internal suffixes (OBS bookmarks), but nothing a student sees may.
 
 
 These rules were learned during real slide reviews with Muhammad. They apply to every future topic.

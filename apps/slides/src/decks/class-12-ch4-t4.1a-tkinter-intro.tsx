@@ -478,10 +478,10 @@ const NextTopicHero: React.FC = () => (
           fontFamily: "Roboto Mono, monospace",
         }}
       >
-        4.1b
+        4.1
       </div>
       <div style={{ fontSize: 34, fontWeight: 800, color: "var(--text)" }}>
-        Widgets + Frames
+        Tkinter Components and Widgets
       </div>
     </div>
     <div
@@ -553,11 +553,11 @@ button.pack(pady=10)
 window.mainloop()`;
 
 export const class12Ch4T41aTkinterIntroDeck: Deck = {
-  title: "GUI Basics + Tkinter Introduction",
+  title: "Graphical User Interface (GUI) Development with Tkinter",
   book: "Computer Science 12 (PECTAA)",
   chapter: "Ch 4 · Development of Graphical User Interface (GUI)",
-  topic: "4.1a · GUI Basics + Tkinter",
-  topicCode: "4.1a",
+  topic: "4.1 · Graphical User Interface (GUI) Development with Tkinter",
+  topicCode: "4.1",
   topicTitle: "Graphical User Interface (GUI) Development with Tkinter",
   accent: ACCENT,
   slides: [
@@ -569,7 +569,7 @@ export const class12Ch4T41aTkinterIntroDeck: Deck = {
         <HeroSlide
           title={
             <>
-              4.1a <span style={{ color: ACCENT }}>GUI</span> + <span style={{ color: ACCENT }}>Tkinter</span>
+              4.1 Graphical User Interface (<span style={{ color: ACCENT }}>GUI</span>) Development with <span style={{ color: ACCENT }}>Tkinter</span>
             </>
           }
           subtitle={
@@ -1211,7 +1211,7 @@ export const class12Ch4T41aTkinterIntroDeck: Deck = {
       title: "Important Concepts",
       entrySfx: "ding.wav",
       render: (
-        <SlideLayout title="Important Concepts from 4.1a" accent={ACCENT}>
+        <SlideLayout title="Important Concepts: Graphical User Interface (GUI) Development with Tkinter" accent={ACCENT}>
           <Stagger style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
             <StaggerItem>
               <ConceptTag
@@ -1263,7 +1263,7 @@ export const class12Ch4T41aTkinterIntroDeck: Deck = {
     // 12. Coming up next: 4.1b Widgets + Frames
     {
       id: "next-topic",
-      title: "Next up: 4.1b Widgets + Frames",
+      title: "Next up: 4.1 Tkinter Components and Widgets",
       entrySfx: "swoosh.wav",
       render: (
         <SlideLayout title="Coming up next" accent="var(--microtask)">

@@ -511,7 +511,7 @@ const NextTopicHero: React.FC = () => (
           fontFamily: "Roboto Mono, monospace",
         }}
       >
-        4.2c
+        4.2
       </div>
       <div style={{ fontSize: 34, fontWeight: 800, color: "var(--text)" }}>CRUD Operations</div>
     </div>
@@ -568,9 +568,9 @@ export const class12Ch4T42bPythonDbConnectionDeck: Deck = {
   title: "Connecting Python to a Database",
   book: "Computer Science 12 (PECTAA)",
   chapter: "Ch 4 · Development of Graphical User Interface (GUI)",
-  topic: "4.2b · Python + Database",
-  topicCode: "4.2b",
-  topicTitle: "Connecting Python to a Database",
+  topic: "4.2 · Connecting Python to a Database",
+  topicCode: "4.2",
+  topicTitle: "Working with Databases in Python",
   accent: ACCENT,
   slides: [
     // 1. Hero
@@ -581,7 +581,7 @@ export const class12Ch4T42bPythonDbConnectionDeck: Deck = {
         <HeroSlide
           title={
             <>
-              4.2b <span style={{ color: ACCENT }}>Python</span> opens the DB
+              4.2 Connecting <span style={{ color: ACCENT }}>Python</span> to a Database
             </>
           }
           subtitle={
@@ -1401,7 +1401,7 @@ export const class12Ch4T42bPythonDbConnectionDeck: Deck = {
       title: "Important Concepts",
       entrySfx: "ding.wav",
       render: (
-        <SlideLayout title="Important Concepts from 4.2b" accent={ACCENT}>
+        <SlideLayout title="Important Concepts: Connecting Python to a Database" accent={ACCENT}>
           <Stagger style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
             <StaggerItem>
               <ConceptTag
@@ -1453,7 +1453,7 @@ export const class12Ch4T42bPythonDbConnectionDeck: Deck = {
     // 13. Coming up next: 4.2c CRUD
     {
       id: "next-topic",
-      title: "Next up: 4.2c CRUD Operations",
+      title: "Next up: 4.2 CRUD Operations",
       entrySfx: "swoosh.wav",
       render: (
         <SlideLayout title="Coming up next" accent="var(--sync)">

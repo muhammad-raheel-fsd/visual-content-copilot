@@ -1,4 +1,4 @@
-import { writeFileSync, mkdirSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -30,6 +30,36 @@ function writeWav(filename, samples) {
     buf.writeInt16LE(Math.round(s * 32767), 44 + i * 2);
   }
   writeFileSync(filename, buf);
+}
+
+// Every sound is equalised before it is mixed (pipeline/production-guide.md, section 3): the RMS
+// of its voiced part (10 ms frames above -45 dBFS) is set to -20 dBFS, peaks capped at -1 dBFS,
+// so a cue's `volume` alone decides how loud it sits under the voice.
+const TARGET_RMS_DB = -20;
+const PEAK_CAP_DB = -1;
+function equalize(samples) {
+  const hop = Math.round(SAMPLE_RATE / 100);
+  const frames = [];
+  for (let i = 0; i + hop <= samples.length; i += hop) {
+    let sum = 0;
+    for (let j = i; j < i + hop; j++) sum += samples[j] * samples[j];
+    frames.push(Math.sqrt(sum / hop));
+  }
+  const loud = frames.filter((r) => r > 10 ** (-45 / 20));
+  const use = loud.length ? loud : frames;
+  const rms = Math.sqrt(use.reduce((a, r) => a + r * r, 0) / use.length);
+  const peak = samples.reduce((m, x) => Math.max(m, Math.abs(x)), 0);
+  const gainDb = Math.min(TARGET_RMS_DB - 20 * Math.log10(rms + 1e-12), PEAK_CAP_DB - 20 * Math.log10(peak + 1e-12));
+  const g = 10 ** (gainDb / 20);
+  return samples.map((x) => x * g);
+}
+
+function readWav(filename) {
+  const buf = readFileSync(filename);
+  const n = buf.readUInt32LE(40) / 2;
+  const out = new Float32Array(n);
+  for (let i = 0; i < n; i++) out[i] = buf.readInt16LE(44 + i * 2) / 32768;
+  return out;
 }
 
 function makeBuffer(seconds) {
@@ -214,6 +244,37 @@ function swoosh() {
   return s;
 }
 
+// snap: crisp, pitch-free emphasis click (noise only), ~70ms. Replaces bell "ting" in the
+// faceless series (pipeline/production-guide.md: no bells or melodies).
+function snap() {
+  const s = makeBuffer(0.07);
+  let hp = 0;
+  let prev = 0;
+  for (let i = 0; i < s.length; i++) {
+    const t = i / SAMPLE_RATE;
+    const raw = Math.random() * 2 - 1;
+    hp = 0.85 * (hp + raw - prev); // simple high-pass: bright, no pitch
+    prev = raw;
+    s[i] = hp * Math.exp(-t * 90) * 0.7;
+  }
+  return s;
+}
+
+// thud: soft, low, pitch-free impact (low-passed noise), ~220ms. Replaces "ding" / "chime" /
+// "notify" for reveals and success moments in the faceless series.
+function thud() {
+  const s = makeBuffer(0.22);
+  let lp = 0;
+  const alpha = Math.exp((-2 * Math.PI * 180) / SAMPLE_RATE);
+  for (let i = 0; i < s.length; i++) {
+    const t = i / SAMPLE_RATE;
+    const raw = Math.random() * 2 - 1;
+    lp = raw * (1 - alpha) + lp * alpha;
+    s[i] = lp * Math.exp(-t * 18) * 6;
+  }
+  return s;
+}
+
 const sounds = {
   tick,
   click,
@@ -227,10 +288,18 @@ const sounds = {
   chime,
   "click-soft": clickSoft,
   swoosh,
+  snap,
+  thud,
 };
 
+// `node generate-sfx.mjs snap thud` writes only the named sounds (the noise-based ones differ
+// on every run, so regenerating everything would churn files that did not change).
+// `node generate-sfx.mjs --equalize` re-levels the existing files without re-synthesising them.
+const only = process.argv.slice(2).filter((a) => !a.startsWith("--"));
+const equalizeOnly = process.argv.includes("--equalize");
 for (const [name, fn] of Object.entries(sounds)) {
-  const samples = fn();
+  if (only.length > 0 && !only.includes(name)) continue;
+  const samples = equalize(equalizeOnly ? readWav(join(OUT_DIR, `${name}.wav`)) : fn());
   const path = join(OUT_DIR, `${name}.wav`);
   writeWav(path, samples);
   const ms = ((samples.length / SAMPLE_RATE) * 1000).toFixed(0);

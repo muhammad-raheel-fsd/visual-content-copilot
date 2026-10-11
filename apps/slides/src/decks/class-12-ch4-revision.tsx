@@ -269,7 +269,7 @@ export const class12Ch4RevisionDeck: Deck = {
                   marginBottom: 24,
                 }}
               >
-                {["4.1a", "4.1b", "4.1c", "4.1d", "4.2a", "4.2b", "4.2c"].map((t) => (
+                {["4.1", "4.2"].map((t) => (
                   <div
                     key={t}
                     style={{
@@ -287,7 +287,7 @@ export const class12Ch4RevisionDeck: Deck = {
                   </div>
                 ))}
               </div>
-              Everything you need to recall. <b style={hlBlue}>7 sub-topics</b>, the book summary, and the board paper's trickiest MCQ.
+              Everything you need to recall. <b style={hlBlue}>7 lessons</b>, the book summary, and the board paper's trickiest MCQ.
             </>
           }
           accent={ACCENT}
@@ -326,29 +326,29 @@ export const class12Ch4RevisionDeck: Deck = {
                     textAlign: "center",
                   }}
                 >
-                  4.1 · GUI with Tkinter
+                  4.1 · Graphical User Interface (GUI) Development with Tkinter
                 </div>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
                   <MindBranch
-                    label="4.1a Intro"
+                    label="What is a GUI?"
                     icon="mdi:application-outline"
                     color="var(--accent)"
                     items={["GUI definition", "Tkinter toolkit", "Simple GUI code"]}
                   />
                   <MindBranch
-                    label="4.1b Widgets+Frames"
+                    label="Components and Widgets"
                     icon="mdi:view-grid-outline"
                     color="var(--sync)"
                     items={["Label/Button/Entry", "Menu/Listbox", "Frames + pack"]}
                   />
                   <MindBranch
-                    label="4.1c Layouts"
+                    label="Layout Management"
                     icon="mdi:view-dashboard-outline"
                     color="var(--microtask)"
                     items={["pack()", "grid()", "place()", "Figure 4.2"]}
                   />
                   <MindBranch
-                    label="4.1d Events"
+                    label="Event Handling"
                     icon="mdi:cursor-default-click"
                     color="var(--task)"
                     items={["Event-driven", "command= bridge", "Login form"]}
@@ -376,11 +376,11 @@ export const class12Ch4RevisionDeck: Deck = {
                     textAlign: "center",
                   }}
                 >
-                  4.2 · Databases + SQL
+                  4.2 · Working with Databases in Python
                 </div>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
                   <MindBranch
-                    label="4.2a Concepts"
+                    label="Introduction to Databases"
                     icon="mdi:database-outline"
                     color="var(--accent)"
                     items={[
@@ -391,14 +391,14 @@ export const class12Ch4RevisionDeck: Deck = {
                     ]}
                   />
                   <MindBranch
-                    label="4.2b Python+DB"
+                    label="Connecting Python to a Database"
                     icon="mdi:language-python"
                     color="var(--sync)"
                     items={["sqlite3", "connect/cursor", "commit/close"]}
                   />
                   <div style={{ gridColumn: "1 / span 2" }}>
                     <MindBranch
-                      label="4.2c CRUD"
+                      label="CRUD Operations"
                       icon="mdi:chart-bubble"
                       color="var(--microtask)"
                       items={[
@@ -421,16 +421,16 @@ export const class12Ch4RevisionDeck: Deck = {
     // 3. 4.1a recap
     {
       id: "recap-4-1a",
-      title: "Recap · 4.1a Tkinter Introduction",
+      title: "Recap · 4.1 Graphical User Interface (GUI) Development with Tkinter",
       render: (
         <SlideLayout
-          title="Recap · 4.1a Tkinter Introduction"
+          title="Recap · 4.1 Graphical User Interface (GUI) Development with Tkinter"
           subtitle='GUI definition, Tkinter toolkit, and the Simple GUI example.'
           accent="var(--accent)"
         >
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18 }}>
             <SubTopicRecap
-              code="4.1a"
+              code="4.1"
               title="Core facts"
               color="var(--accent)"
               keyword="GUI + Tkinter"
@@ -441,7 +441,7 @@ export const class12Ch4RevisionDeck: Deck = {
               ]}
             />
             <SubTopicRecap
-              code="4.1a"
+              code="4.1"
               title="Code to remember"
               color="var(--sync)"
               keyword="Tk() + mainloop()"
@@ -460,16 +460,16 @@ export const class12Ch4RevisionDeck: Deck = {
     // 4. 4.1b recap
     {
       id: "recap-4-1b",
-      title: "Recap · 4.1b Widgets + Frames",
+      title: "Recap · 4.1 Tkinter Components and Widgets",
       render: (
         <SlideLayout
-          title="Recap · 4.1b Widgets + Frames"
+          title="Recap · 4.1 Tkinter Components and Widgets"
           subtitle='Core widgets + Frame as the container that groups them.'
           accent="var(--sync)"
         >
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18 }}>
             <SubTopicRecap
-              code="4.1b"
+              code="4.1"
               title="5 common widgets"
               color="var(--accent)"
               keyword="Label · Button · Entry · Menu · Listbox"
@@ -482,7 +482,7 @@ export const class12Ch4RevisionDeck: Deck = {
               ]}
             />
             <SubTopicRecap
-              code="4.1b"
+              code="4.1"
               title="Frames + layout"
               color="var(--sync)"
               keyword="Frame = container"
@@ -501,10 +501,10 @@ export const class12Ch4RevisionDeck: Deck = {
     // 5. 4.1c recap
     {
       id: "recap-4-1c",
-      title: "Recap · 4.1c Layout Management",
+      title: "Recap · 4.1 Layout Management",
       render: (
         <SlideLayout
-          title="Recap · 4.1c Layout Management (pack, grid, place)"
+          title="Recap · 4.1 Layout Management"
           subtitle='Three ways to arrange widgets. Pick the right one for the job.'
           accent="var(--microtask)"
         >
@@ -564,16 +564,16 @@ export const class12Ch4RevisionDeck: Deck = {
     // 6. 4.1d recap
     {
       id: "recap-4-1d",
-      title: "Recap · 4.1d Event Handling + Login Form",
+      title: "Recap · 4.1 Event Handling and Interactivity",
       render: (
         <SlideLayout
-          title="Recap · 4.1d Event Handling + Login Form"
+          title="Recap · 4.1 Event Handling and Interactivity"
           subtitle='Idle until an event. command= links widget to function.'
           accent="var(--task)"
         >
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18 }}>
             <SubTopicRecap
-              code="4.1d"
+              code="4.1"
               title="Event-driven programming"
               color="var(--accent)"
               keyword="idle → event → function"
@@ -585,7 +585,7 @@ export const class12Ch4RevisionDeck: Deck = {
               ]}
             />
             <SubTopicRecap
-              code="4.1d"
+              code="4.1"
               title="Login form must-knows"
               color="var(--sync)"
               keyword="command= + .get() + messagebox"
@@ -604,16 +604,16 @@ export const class12Ch4RevisionDeck: Deck = {
     // 7. 4.2a recap
     {
       id: "recap-4-2a",
-      title: "Recap · 4.2a Database Concepts + SQL",
+      title: "Recap · 4.2 Working with Databases in Python",
       render: (
         <SlideLayout
-          title="Recap · 4.2a Database Concepts + SQL"
+          title="Recap · 4.2 Working with Databases in Python"
           subtitle='Entity, Attribute, Relationship, Identifier. Primary Key, Foreign Key.'
           accent="var(--accent)"
         >
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18 }}>
             <SubTopicRecap
-              code="4.2a"
+              code="4.2"
               title="Data modelling"
               color="var(--accent)"
               keyword="E·A·R·I"
@@ -625,7 +625,7 @@ export const class12Ch4RevisionDeck: Deck = {
               ]}
             />
             <SubTopicRecap
-              code="4.2a"
+              code="4.2"
               title="Relational database"
               color="var(--sync)"
               keyword="Tables + keys"
@@ -645,16 +645,16 @@ export const class12Ch4RevisionDeck: Deck = {
     // 8. 4.2b recap
     {
       id: "recap-4-2b",
-      title: "Recap · 4.2b Python + DB",
+      title: "Recap · 4.2 Connecting Python to a Database",
       render: (
         <SlideLayout
-          title="Recap · 4.2b Connecting Python to a Database"
+          title="Recap · 4.2 Connecting Python to a Database"
           subtitle='sqlite3 built-in. Five-step pattern: connect, cursor, execute, fetch, close.'
           accent="var(--sync)"
         >
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18 }}>
             <SubTopicRecap
-              code="4.2b"
+              code="4.2"
               title="sqlite3 vs MySQL"
               color="var(--accent)"
               keyword="small file vs server"
@@ -665,7 +665,7 @@ export const class12Ch4RevisionDeck: Deck = {
               ]}
             />
             <SubTopicRecap
-              code="4.2b"
+              code="4.2"
               title="5-step pattern"
               color="var(--sync)"
               keyword="connect→cursor→execute→fetch→close"
@@ -685,10 +685,10 @@ export const class12Ch4RevisionDeck: Deck = {
     // 9. 4.2c recap
     {
       id: "recap-4-2c",
-      title: "Recap · 4.2c CRUD",
+      title: "Recap · 4.2 CRUD Operations",
       render: (
         <SlideLayout
-          title="Recap · 4.2c CRUD Operations"
+          title="Recap · 4.2 CRUD Operations"
           subtitle='Create, Read, Update, Delete. One SQL command each.'
           accent="var(--microtask)"
         >
@@ -981,7 +981,7 @@ export const class12Ch4RevisionDeck: Deck = {
                 color: "var(--sync)",
                 icon: "mdi:format-list-bulleted-type",
                 label: "2. Do the Mixed MCQ bank · 30 Qs",
-                detail: "questions/mixed-mcqs.md · one hit per sub-topic",
+                detail: "questions/mixed-mcqs.md · one hit per lesson",
               },
               {
                 w: "50%",
@@ -1001,8 +1001,8 @@ export const class12Ch4RevisionDeck: Deck = {
                 w: "30%",
                 color: "var(--warn)",
                 icon: "mdi:alert-circle-outline",
-                label: "5. Review curveballs + weak sub-topics",
-                detail: "Re-watch the sub-topic deck where you missed questions",
+                label: "5. Review curveballs + weak lessons",
+                detail: "Re-watch the lesson where you missed questions",
               },
             ].map((row, i) => (
               <motion.div
